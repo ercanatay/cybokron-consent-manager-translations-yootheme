@@ -3,7 +3,7 @@ Contributors: ercanatay
 Tags: yootheme, consent-manager, gdpr, cookie-consent, translation
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -77,6 +77,12 @@ Use the Export button to download a JSON file of your current settings. You can 
 
 == Changelog ==
 
+= 1.2.2 =
+* Fixed: WordPress Plugin Check compliance - all warnings resolved
+* Added ytct_ prefix to all template variables
+* Improved input sanitization with wp_unslash()
+* Enhanced $_FILES validation
+
 = 1.2.1 =
 * Fixed: Admin settings page not appearing due to hook timing issue
 * The admin_init hook was running after admin_menu, preventing menu registration
@@ -106,6 +112,9 @@ Use the Export button to download a JSON file of your current settings. You can 
 * Tabbed admin interface
 
 == Upgrade Notice ==
+
+= 1.2.2 =
+Code quality improvements for WordPress.org compliance.
 
 = 1.2.1 =
 Bugfix release - fixes admin settings page not appearing issue.
