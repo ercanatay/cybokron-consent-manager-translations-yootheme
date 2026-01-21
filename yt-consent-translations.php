@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: YT Consent Translations
- * Plugin URI: https://www.ercanatay.com/en/
+ * Plugin URI: https://github.com/ercanatay/yt-consent-translations
  * Description: Easily translate YOOtheme Pro 5 Consent Manager texts from the WordPress admin panel. Supports multiple languages including English, Turkish, Hindi, Korean, Arabic, and German.
  * Version: 1.2.1
  * Author: Ercan ATAY
