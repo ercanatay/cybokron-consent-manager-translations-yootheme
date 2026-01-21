@@ -3,7 +3,7 @@ Contributors: ercanatay
 Tags: yootheme, consent manager, gdpr, cookie consent, translation, multilingual
 Requires at least: 5.0
 Tested up to: 6.4
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -77,6 +77,10 @@ Use the Export button to download a JSON file of your current settings. You can 
 
 == Changelog ==
 
+= 1.2.1 =
+* Fixed: Admin settings page not appearing due to hook timing issue
+* The admin_init hook was running after admin_menu, preventing menu registration
+
 = 1.2.0 =
 * Major refactoring: moved translations to external JSON files
 * Each language now has its own JSON file (36 files)
@@ -102,6 +106,9 @@ Use the Export button to download a JSON file of your current settings. You can 
 * Tabbed admin interface
 
 == Upgrade Notice ==
+
+= 1.2.1 =
+Bugfix release - fixes admin settings page not appearing issue.
 
 = 1.2.0 =
 Major performance improvement with lazy loading translations from JSON files.

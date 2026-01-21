@@ -1,6 +1,6 @@
 # YT Consent Translations
 
-[![WordPress Plugin Version](https://img.shields.io/badge/version-1.2.0-blue.svg)](https://github.com/ercanatay/yt-consent-translations)
+[![WordPress Plugin Version](https://img.shields.io/badge/version-1.2.1-blue.svg)](https://github.com/ercanatay/yt-consent-translations)
 [![WordPress Tested](https://img.shields.io/badge/WordPress-5.0%2B-green.svg)](https://wordpress.org)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://php.net)
 [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -173,6 +173,10 @@ To add a new language, edit `includes/class-strings.php`:
 ```
 
 ## 📝 Changelog
+
+### 1.2.1 (2026-01-21)
+- **Bugfix**: Fixed admin settings page not appearing
+- The `admin_init` hook was running after `admin_menu`, preventing menu registration
 
 ### 1.2.0 (2026-01-21)
 - **Major Refactoring**: Translations moved to external JSON files
