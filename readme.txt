@@ -17,7 +17,7 @@ YT Consent Translations allows you to customize all text strings in the YOOtheme
 **Features:**
 
 * Translate all 21 Consent Manager strings
-* 6 pre-configured language presets (English, Turkish, Hindi, Korean, Arabic, German)
+* 36 pre-configured language presets
 * Easy-to-use tabbed interface
 * Import/Export settings as JSON
 * No coding required
@@ -32,14 +32,9 @@ YT Consent Translations allows you to customize all text strings in the YOOtheme
 * Modal buttons (Accept all, Reject all, Save)
 * Show/Hide Services toggles
 
-**Pre-configured Languages:**
+**Pre-configured Languages (36):**
 
-* 🇺🇸 English (Default)
-* 🇹🇷 Turkish (Türkçe)
-* 🇮🇳 Hindi (हिन्दी)
-* 🇰🇷 Korean (한국어)
-* 🇸🇦 Arabic (العربية)
-* 🇩🇪 German (Deutsch)
+English, Chinese, Spanish, French, Portuguese, Russian, Japanese, Indonesian, Italian, Dutch, Polish, Vietnamese, Thai, Ukrainian, Czech, Greek, Romanian, Hungarian, Swedish, Danish, Finnish, Norwegian, Hebrew, Malay, Bengali, Persian, Tamil, Telugu, Marathi, Swahili, Filipino, Turkish, Hindi, Korean, Arabic, German
 
 == Installation ==
 
@@ -82,6 +77,16 @@ Use the Export button to download a JSON file of your current settings. You can 
 
 == Changelog ==
 
+= 1.1.0 =
+* Added 30 new language presets (36 total)
+* Chinese, Spanish, French, Portuguese, Russian, Japanese
+* Indonesian, Italian, Dutch, Polish, Vietnamese, Thai
+* Ukrainian, Czech, Greek, Romanian, Hungarian, Swedish
+* Danish, Finnish, Norwegian, Hebrew, Malay, Bengali
+* Persian, Tamil, Telugu, Marathi, Swahili, Filipino
+* Extended WordPress locale mapping for auto-detection
+* Total translations: 756 (36 languages × 21 strings)
+
 = 1.0.0 =
 * Initial release
 * 6 language presets included
@@ -90,6 +95,9 @@ Use the Export button to download a JSON file of your current settings. You can 
 * Tabbed admin interface
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+Added 30 new language presets for a total of 36 languages.
 
 = 1.0.0 =
 Initial release of YT Consent Translations.
