@@ -19,16 +19,28 @@ A lightweight WordPress plugin that allows you to customize all 21 text strings 
 - ✅ **No Coding Required** - Simple point-and-click interface
 - ✅ **WPML/Polylang Compatible** - Works with multilingual plugins
 
-## 🌐 Supported Languages
+## 🌐 Supported Languages (36 Languages)
 
-| Language | Code | Native Name |
-|----------|------|-------------|
-| English | `en` | English (Default) |
-| Turkish | `tr` | Türkçe |
-| Hindi | `hi` | हिन्दी |
-| Korean | `ko` | 한국어 |
-| Arabic | `ar` | العربية |
-| German | `de` | Deutsch |
+| Language | Code | Language | Code |
+|----------|------|----------|------|
+| English | `en` | Chinese | `zh` |
+| Spanish | `es` | French | `fr` |
+| Portuguese | `pt` | Russian | `ru` |
+| Japanese | `ja` | Indonesian | `id` |
+| Italian | `it` | Dutch | `nl` |
+| Polish | `pl` | Vietnamese | `vi` |
+| Thai | `th` | Ukrainian | `uk` |
+| Czech | `cs` | Greek | `el` |
+| Romanian | `ro` | Hungarian | `hu` |
+| Swedish | `sv` | Danish | `da` |
+| Finnish | `fi` | Norwegian | `nb` |
+| Hebrew | `he` | Malay | `ms` |
+| Bengali | `bn` | Persian | `fa` |
+| Tamil | `ta` | Telugu | `te` |
+| Marathi | `mr` | Swahili | `sw` |
+| Filipino | `tl` | Turkish | `tr` |
+| Hindi | `hi` | Korean | `ko` |
+| Arabic | `ar` | German | `de` |
 
 > **Auto Detection:** Set language to "Auto" and the plugin will automatically detect your WordPress site language!
 
