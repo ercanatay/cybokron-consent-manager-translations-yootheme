@@ -151,7 +151,8 @@ class YTCT_Admin {
         }
 
         // Get and sanitize data
-        $enabled = isset($_POST['enabled']) ? (bool) $_POST['enabled'] : true;
+        // Hidden input sends "0" when unchecked, checkbox sends "1" when checked
+        $enabled = !empty($_POST['enabled']) && $_POST['enabled'] !== '0';
         $language = isset($_POST['language']) ? sanitize_text_field($_POST['language']) : 'en';
         
         // Validate language

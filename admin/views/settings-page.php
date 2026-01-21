@@ -63,10 +63,9 @@ $original_strings = YTCT_Strings::get_string_keys();
                     <?php if ($current_language === 'auto') : ?>
                         <small style="display: block; margin-top: 5px; color: #666;">
                             <?php 
-                            printf(
-                                esc_html__('WordPress language: %s', 'yt-consent-translations'), 
-                                '<strong>' . get_locale() . '</strong>'
-                            ); 
+                            /* translators: %s is the WordPress locale code */
+                            echo esc_html__('WordPress language:', 'yt-consent-translations');
+                            echo ' <strong>' . esc_html(get_locale()) . '</strong>';
                             ?>
                         </small>
                     <?php endif; ?>
@@ -75,6 +74,8 @@ $original_strings = YTCT_Strings::get_string_keys();
                 <div class="ytct-toggle">
                     <label for="ytct-enabled"><?php esc_html_e('Enable Translations:', 'yt-consent-translations'); ?></label>
                     <label class="ytct-switch">
+                        <!-- Hidden input ensures "0" is sent when checkbox is unchecked -->
+                        <input type="hidden" name="enabled" value="0">
                         <input type="checkbox" id="ytct-enabled" name="enabled" value="1" <?php checked($enabled); ?>>
                         <span class="ytct-switch-slider"></span>
                     </label>
