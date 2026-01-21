@@ -100,9 +100,15 @@ final class YT_Consent_Translations {
     }
 
     /**
-     * Initialize translator
+     * Initialize translator (only if enabled)
      */
     public function init_translator() {
+        // Skip translator initialization if disabled (performance optimization)
+        $options = get_option(YTCT_OPTION_NAME, []);
+        if (empty($options['enabled'])) {
+            return;
+        }
+        
         YTCT_Translator::get_instance();
     }
 

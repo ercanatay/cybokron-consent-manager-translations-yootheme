@@ -10,6 +10,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+// Defense-in-depth: verify user capabilities
+if (!current_user_can('manage_options')) {
+    return;
+}
+
 // Get current options
 $options = get_option(YTCT_OPTION_NAME, [
     'enabled' => true,

@@ -138,27 +138,42 @@ class YTCT_Strings {
     }
 
     /**
+     * Base language code mapping (2-letter codes to plugin language codes)
+     * Used as fallback when exact locale is not found
+     */
+    private static $base_lang_map = [
+        'en' => 'en', 'zh' => 'zh', 'es' => 'es', 'fr' => 'fr',
+        'pt' => 'pt', 'ru' => 'ru', 'ja' => 'ja', 'id' => 'id',
+        'it' => 'it', 'nl' => 'nl', 'pl' => 'pl', 'vi' => 'vi',
+        'th' => 'th', 'uk' => 'uk', 'cs' => 'cs', 'el' => 'el',
+        'ro' => 'ro', 'hu' => 'hu', 'sv' => 'sv', 'da' => 'da',
+        'fi' => 'fi', 'nb' => 'nb', 'nn' => 'nb', 'no' => 'nb',
+        'he' => 'he', 'ms' => 'ms', 'bn' => 'bn', 'fa' => 'fa',
+        'ta' => 'ta', 'te' => 'te', 'mr' => 'mr', 'sw' => 'sw',
+        'tl' => 'tl', 'tr' => 'tr', 'hi' => 'hi', 'ko' => 'ko',
+        'ar' => 'ar', 'de' => 'de'
+    ];
+
+    /**
      * Detect language from WordPress locale
      *
-     * @return string Language code (en, tr, hi, ko, ar, de)
+     * @return string Language code
      */
     public static function detect_wp_language() {
         $locale = get_locale();
         
-        // Direct match
+        // 1. Direct match in locale_map (most specific)
         if (isset(self::$locale_map[$locale])) {
             return self::$locale_map[$locale];
         }
         
-        // Try base language (e.g., 'de' from 'de_DE')
+        // 2. Try base language from explicit mapping (deterministic)
         $base_lang = substr($locale, 0, 2);
-        foreach (self::$locale_map as $wp_locale => $lang_code) {
-            if (strpos($wp_locale, $base_lang) === 0) {
-                return $lang_code;
-            }
+        if (isset(self::$base_lang_map[$base_lang])) {
+            return self::$base_lang_map[$base_lang];
         }
         
-        // Default to English
+        // 3. Default to English
         return 'en';
     }
 
