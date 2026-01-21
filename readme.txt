@@ -1,6 +1,6 @@
 === YT Consent Translations ===
 Contributors: ercanatay
-Tags: yootheme, consent manager, gdpr, cookie consent, translation, multilingual
+Tags: yootheme, consent-manager, gdpr, cookie-consent, translation
 Requires at least: 5.0
 Tested up to: 6.9
 Stable tag: 1.2.1

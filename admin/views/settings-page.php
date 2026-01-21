@@ -59,7 +59,7 @@ $original_strings = YTCT_Strings::get_string_keys();
                                     $detected_name = isset($languages[$detected]) ? $languages[$detected] : 'English';
                                     printf('%s → %s', esc_html($name), esc_html($detected_name));
                                 } else {
-                                    echo esc_html($name) . ' (' . strtoupper(esc_html($code)) . ')';
+                                    echo esc_html($name) . ' (' . esc_html(strtoupper($code)) . ')';
                                 }
                                 ?>
                             </option>
@@ -108,7 +108,7 @@ $original_strings = YTCT_Strings::get_string_keys();
                                 'categories' => '📂',
                                 'buttons' => '🔘'
                             ];
-                            echo isset($icons[$group_id]) ? $icons[$group_id] : '📝';
+                            echo esc_html(isset($icons[$group_id]) ? $icons[$group_id] : '📝');
                             ?>
                         </span>
                         <h3><?php echo esc_html($group['label']); ?> <?php esc_html_e('Strings', 'yt-consent-translations'); ?></h3>

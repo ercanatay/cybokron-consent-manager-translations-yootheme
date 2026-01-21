@@ -141,7 +141,8 @@ class YTCT_Admin {
      */
     public function ajax_save_settings() {
         // Check nonce
-        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'ytct_admin_nonce')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
             wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations')]);
         }
 
@@ -152,8 +153,8 @@ class YTCT_Admin {
 
         // Get and sanitize data
         // Hidden input sends "0" when unchecked, checkbox sends "1" when checked
-        $enabled = !empty($_POST['enabled']) && $_POST['enabled'] !== '0';
-        $language = isset($_POST['language']) ? sanitize_text_field($_POST['language']) : 'en';
+        $enabled = !empty($_POST['enabled']) && sanitize_text_field(wp_unslash($_POST['enabled'])) !== '0';
+        $language = isset($_POST['language']) ? sanitize_text_field(wp_unslash($_POST['language'])) : 'en';
         
         // Validate language
         $valid_languages = array_keys(YTCT_Strings::get_languages());
@@ -168,7 +169,8 @@ class YTCT_Admin {
         foreach ($string_keys as $key) {
             if (isset($_POST['strings'][$key])) {
                 // Use strict sanitization - only allow <a> tags
-                $value = $this->sanitize_consent_string($_POST['strings'][$key]);
+                // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized by sanitize_consent_string
+                $value = $this->sanitize_consent_string(wp_unslash($_POST['strings'][$key]));
                 if (!empty($value)) {
                     $custom_strings[$key] = $value;
                 }
@@ -195,7 +197,8 @@ class YTCT_Admin {
      */
     public function ajax_reset_settings() {
         // Check nonce
-        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'ytct_admin_nonce')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
             wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations')]);
         }
 
@@ -227,7 +230,12 @@ class YTCT_Admin {
      */
     public function ajax_export_settings() {
         // Check nonce (support both GET and POST for backward compatibility)
-        $nonce = isset($_POST['nonce']) ? $_POST['nonce'] : (isset($_GET['nonce']) ? $_GET['nonce'] : '');
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- nonce is verified below
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if (empty($nonce) && isset($_GET['nonce'])) {
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- nonce is verified below
+            $nonce = sanitize_text_field(wp_unslash($_GET['nonce']));
+        }
         if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
             wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations')]);
         }
@@ -251,7 +259,8 @@ class YTCT_Admin {
      */
     public function ajax_import_settings() {
         // Check nonce
-        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'ytct_admin_nonce')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
             wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations')]);
         }
 
@@ -260,26 +269,39 @@ class YTCT_Admin {
             wp_send_json_error(['message' => __('Permission denied.', 'yt-consent-translations')]);
         }
 
-        // Check file exists
-        if (!isset($_FILES['import_file']) || $_FILES['import_file']['error'] !== UPLOAD_ERR_OK) {
+        // Check file exists and validate
+        if (!isset($_FILES['import_file'])) {
+            wp_send_json_error(['message' => __('No file uploaded.', 'yt-consent-translations')]);
+        }
+
+        $ytct_file = $_FILES['import_file'];
+
+        if (!isset($ytct_file['error']) || $ytct_file['error'] !== UPLOAD_ERR_OK) {
             wp_send_json_error(['message' => __('File upload failed.', 'yt-consent-translations')]);
         }
 
         // Validate file size (max 100KB)
         $max_size = 100 * 1024; // 100KB
-        if ($_FILES['import_file']['size'] > $max_size) {
+        if (!isset($ytct_file['size']) || $ytct_file['size'] > $max_size) {
             wp_send_json_error(['message' => __('File too large. Maximum size is 100KB.', 'yt-consent-translations')]);
         }
 
         // Validate file type
-        $file_info = wp_check_filetype($_FILES['import_file']['name']);
+        if (!isset($ytct_file['name'])) {
+            wp_send_json_error(['message' => __('Invalid file.', 'yt-consent-translations')]);
+        }
+        $file_info = wp_check_filetype(sanitize_file_name($ytct_file['name']));
         $allowed_extensions = ['json'];
-        if (!$file_info['ext'] || !in_array(strtolower($file_info['ext']), $allowed_extensions)) {
+        if (!$file_info['ext'] || !in_array(strtolower($file_info['ext']), $allowed_extensions, true)) {
             wp_send_json_error(['message' => __('Invalid file type. Only JSON files are allowed.', 'yt-consent-translations')]);
         }
 
-        // Read file
-        $content = file_get_contents($_FILES['import_file']['tmp_name']);
+        // Read file - tmp_name is a server path, not user input
+        if (!isset($ytct_file['tmp_name']) || !is_uploaded_file($ytct_file['tmp_name'])) {
+            wp_send_json_error(['message' => __('Invalid file upload.', 'yt-consent-translations')]);
+        }
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- reading uploaded temp file
+        $content = file_get_contents($ytct_file['tmp_name']);
         $data = json_decode($content, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -327,7 +349,8 @@ class YTCT_Admin {
      */
     public function ajax_load_language() {
         // Check nonce
-        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'ytct_admin_nonce')) {
+        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+        if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
             wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations')]);
         }
 
@@ -336,7 +359,7 @@ class YTCT_Admin {
             wp_send_json_error(['message' => __('Permission denied.', 'yt-consent-translations')]);
         }
 
-        $language = isset($_POST['language']) ? sanitize_text_field($_POST['language']) : 'en';
+        $language = isset($_POST['language']) ? sanitize_text_field(wp_unslash($_POST['language'])) : 'en';
 
         // Validate language
         $valid_languages = array_keys(YTCT_Strings::get_languages());
