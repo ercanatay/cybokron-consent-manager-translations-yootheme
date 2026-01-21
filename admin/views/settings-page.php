@@ -1,0 +1,201 @@
+<?php
+/**
+ * Admin Settings Page Template
+ *
+ * @package YT_Consent_Translations
+ */
+
+// Prevent direct access
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+// Get current options
+$options = get_option(YTCT_OPTION_NAME, [
+    'enabled' => true,
+    'language' => 'en',
+    'custom_strings' => []
+]);
+
+$enabled = isset($options['enabled']) ? (bool) $options['enabled'] : true;
+$current_language = isset($options['language']) ? $options['language'] : 'en';
+$custom_strings = isset($options['custom_strings']) ? $options['custom_strings'] : [];
+
+// Get available data
+$languages = YTCT_Strings::get_languages();
+$string_groups = YTCT_Strings::get_string_groups();
+$translations = YTCT_Strings::get_translations($current_language);
+$original_strings = YTCT_Strings::get_string_keys();
+?>
+
+<div class="ytct-wrap">
+    <!-- Header -->
+    <div class="ytct-header">
+        <h1><?php esc_html_e('YT Consent Translations', 'yt-consent-translations'); ?></h1>
+        <p><?php esc_html_e('Translate YOOtheme Pro 5 Consent Manager texts easily from your WordPress admin panel.', 'yt-consent-translations'); ?></p>
+    </div>
+
+    <!-- Message Area -->
+    <div id="ytct-message" class="ytct-message"></div>
+
+    <!-- Main Content -->
+    <div class="ytct-content">
+        <form id="ytct-settings-form" method="post">
+            <!-- Top Bar -->
+            <div class="ytct-top-bar">
+                <div class="ytct-language-select">
+                    <label for="ytct-language"><?php esc_html_e('Language Preset:', 'yt-consent-translations'); ?></label>
+                    <select id="ytct-language" name="language">
+                        <?php foreach ($languages as $code => $name) : ?>
+                            <option value="<?php echo esc_attr($code); ?>" <?php selected($current_language, $code); ?>>
+                                <?php 
+                                if ($code === 'auto') {
+                                    $detected = YTCT_Strings::detect_wp_language();
+                                    $detected_name = isset($languages[$detected]) ? $languages[$detected] : 'English';
+                                    printf('%s → %s', esc_html($name), esc_html($detected_name));
+                                } else {
+                                    echo esc_html($name) . ' (' . strtoupper(esc_html($code)) . ')';
+                                }
+                                ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                    <?php if ($current_language === 'auto') : ?>
+                        <small style="display: block; margin-top: 5px; color: #666;">
+                            <?php 
+                            printf(
+                                esc_html__('WordPress language: %s', 'yt-consent-translations'), 
+                                '<strong>' . get_locale() . '</strong>'
+                            ); 
+                            ?>
+                        </small>
+                    <?php endif; ?>
+                </div>
+
+                <div class="ytct-toggle">
+                    <label for="ytct-enabled"><?php esc_html_e('Enable Translations:', 'yt-consent-translations'); ?></label>
+                    <label class="ytct-switch">
+                        <input type="checkbox" id="ytct-enabled" name="enabled" value="1" <?php checked($enabled); ?>>
+                        <span class="ytct-switch-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="ytct-tabs">
+                <?php foreach ($string_groups as $group_id => $group) : ?>
+                    <button type="button" class="ytct-tab<?php echo $group_id === 'banner' ? ' active' : ''; ?>" data-tab="<?php echo esc_attr($group_id); ?>">
+                        <?php echo esc_html($group['label']); ?>
+                    </button>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Tab Contents -->
+            <?php foreach ($string_groups as $group_id => $group) : ?>
+                <div id="ytct-tab-<?php echo esc_attr($group_id); ?>" class="ytct-tab-content<?php echo $group_id === 'banner' ? ' active' : ''; ?>">
+                    <div class="ytct-category-header">
+                        <span class="ytct-category-icon">
+                            <?php
+                            $icons = [
+                                'banner' => '🍪',
+                                'modal' => '⚙️',
+                                'categories' => '📂',
+                                'buttons' => '🔘'
+                            ];
+                            echo isset($icons[$group_id]) ? $icons[$group_id] : '📝';
+                            ?>
+                        </span>
+                        <h3><?php echo esc_html($group['label']); ?> <?php esc_html_e('Strings', 'yt-consent-translations'); ?></h3>
+                    </div>
+
+                    <?php foreach ($group['keys'] as $key) : 
+                        $original = isset($original_strings[$key]) ? $original_strings[$key] : '';
+                        $value = isset($custom_strings[$key]) && !empty($custom_strings[$key]) 
+                            ? $custom_strings[$key] 
+                            : (isset($translations[$key]) ? $translations[$key] : '');
+                        $has_placeholder = YTCT_Strings::has_placeholder($key);
+                        $is_long = strlen($original) > 100;
+                    ?>
+                        <div class="ytct-string-group">
+                            <label class="ytct-string-label" for="ytct-string-<?php echo esc_attr($key); ?>">
+                                <?php echo esc_html(YTCT_Strings::get_key_label($key)); ?>
+                            </label>
+                            
+                            <div class="ytct-original">
+                                <strong><?php esc_html_e('Original:', 'yt-consent-translations'); ?></strong><br>
+                                <?php echo esc_html($original); ?>
+                            </div>
+
+                            <?php if ($is_long) : ?>
+                                <textarea 
+                                    id="ytct-string-<?php echo esc_attr($key); ?>"
+                                    name="strings[<?php echo esc_attr($key); ?>]"
+                                    class="ytct-input ytct-textarea"
+                                    placeholder="<?php esc_attr_e('Enter translation...', 'yt-consent-translations'); ?>"
+                                ><?php echo esc_textarea($value); ?></textarea>
+                            <?php else : ?>
+                                <input 
+                                    type="text"
+                                    id="ytct-string-<?php echo esc_attr($key); ?>"
+                                    name="strings[<?php echo esc_attr($key); ?>]"
+                                    class="ytct-input"
+                                    value="<?php echo esc_attr($value); ?>"
+                                    placeholder="<?php esc_attr_e('Enter translation...', 'yt-consent-translations'); ?>"
+                                >
+                            <?php endif; ?>
+
+                            <?php if ($has_placeholder) : ?>
+                                <span class="ytct-placeholder-note">
+                                    ⚠️ <?php esc_html_e('Keep', 'yt-consent-translations'); ?> <code>%s</code> <?php esc_html_e('in your translation - it will be replaced with the Privacy Policy URL.', 'yt-consent-translations'); ?>
+                                </span>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endforeach; ?>
+
+            <!-- Footer Actions -->
+            <div class="ytct-footer">
+                <div class="ytct-primary-actions">
+                    <button type="submit" id="ytct-save-btn" class="ytct-btn ytct-btn-primary">
+                        <?php esc_html_e('Save Changes', 'yt-consent-translations'); ?>
+                    </button>
+                    <button type="button" id="ytct-reset-btn" class="ytct-btn ytct-btn-danger">
+                        <?php esc_html_e('Reset to Default', 'yt-consent-translations'); ?>
+                    </button>
+                </div>
+                
+                <div class="ytct-secondary-actions">
+                    <button type="button" id="ytct-import-btn" class="ytct-btn ytct-btn-secondary">
+                        <?php esc_html_e('Import', 'yt-consent-translations'); ?>
+                    </button>
+                    <button type="button" id="ytct-export-btn" class="ytct-btn ytct-btn-secondary">
+                        <?php esc_html_e('Export', 'yt-consent-translations'); ?>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Import Modal -->
+<div id="ytct-import-modal" class="ytct-modal-overlay">
+    <div class="ytct-modal">
+        <h3><?php esc_html_e('Import Settings', 'yt-consent-translations'); ?></h3>
+        <form id="ytct-import-form" enctype="multipart/form-data">
+            <div class="ytct-file-input-wrapper">
+                <input type="file" id="ytct-import-file" accept=".json">
+                <p><?php esc_html_e('Click or drag a JSON file here', 'yt-consent-translations'); ?></p>
+                <p class="ytct-file-name" style="display: none;"></p>
+            </div>
+            <div class="ytct-modal-actions">
+                <button type="button" class="ytct-btn ytct-btn-secondary ytct-modal-close">
+                    <?php esc_html_e('Cancel', 'yt-consent-translations'); ?>
+                </button>
+                <button type="submit" id="ytct-import-submit" class="ytct-btn ytct-btn-primary">
+                    <?php esc_html_e('Import', 'yt-consent-translations'); ?>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

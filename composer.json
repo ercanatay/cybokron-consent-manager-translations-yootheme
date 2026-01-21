@@ -1,0 +1,36 @@
+{
+    "name": "ercanatay/yt-consent-translations",
+    "description": "Translate YOOtheme Pro 5 Consent Manager texts from WordPress admin panel",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Ercan ATAY",
+            "email": "info@ercanatay.com",
+            "homepage": "https://www.ercanatay.com/en/",
+            "role": "Developer"
+        }
+    ],
+    "keywords": [
+        "wordpress",
+        "plugin",
+        "yootheme",
+        "consent",
+        "gdpr",
+        "cookie",
+        "translation"
+    ],
+    "homepage": "https://github.com/ercanatay/yt-consent-translations",
+    "support": {
+        "issues": "https://github.com/ercanatay/yt-consent-translations/issues",
+        "source": "https://github.com/ercanatay/yt-consent-translations"
+    },
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "classmap": [
+            "includes/"
+        ]
+    }
+}
