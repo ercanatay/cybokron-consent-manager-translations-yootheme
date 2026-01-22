@@ -3,7 +3,7 @@ Contributors: ercanatay
 Tags: yootheme, consent-manager, gdpr, cookie-consent, translation
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -77,6 +77,11 @@ Use the Export button to download a JSON file of your current settings. You can 
 
 == Changelog ==
 
+= 1.2.3 =
+* Security: Enforced POST method for settings export (removed GET support)
+* Added JSON validation script for language files (scripts/validate_json.py)
+* Code quality: Added strict comparison to all in_array() calls
+
 = 1.2.2 =
 * Fixed: WordPress Plugin Check compliance - all warnings resolved
 * Added ytct_ prefix to all template variables
@@ -112,6 +117,9 @@ Use the Export button to download a JSON file of your current settings. You can 
 * Tabbed admin interface
 
 == Upgrade Notice ==
+
+= 1.2.3 =
+Security improvement: Export now uses POST method only.
 
 = 1.2.2 =
 Code quality improvements for WordPress.org compliance.
