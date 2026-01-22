@@ -3,7 +3,7 @@ Contributors: ercanatay
 Tags: yootheme, consent-manager, gdpr, cookie-consent, translation
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.2.4
+Stable tag: 1.2.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -77,6 +77,11 @@ Use the Export button to download a JSON file of your current settings. You can 
 
 == Changelog ==
 
+= 1.2.5 =
+* Code Style: Converted 4-space indentation to tabs in all PHP files
+* WordPress Coding Standards compliance
+* No functional changes, only whitespace formatting
+
 = 1.2.4 =
 * Bugfix: Fixed missing strict comparison in has_placeholder() method (class-strings.php:390)
 
@@ -120,6 +125,9 @@ Use the Export button to download a JSON file of your current settings. You can 
 * Tabbed admin interface
 
 == Upgrade Notice ==
+
+= 1.2.5 =
+Code style improvement - tabs instead of spaces for WordPress Coding Standards compliance.
 
 = 1.2.4 =
 Bugfix release - fixed missing strict comparison in has_placeholder() method.
