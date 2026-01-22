@@ -229,13 +229,8 @@ class YTCT_Admin {
      * AJAX: Export settings (returns JSON data for download)
      */
     public function ajax_export_settings() {
-        // Check nonce (support both GET and POST for backward compatibility)
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- nonce is verified below
+        // Check nonce (POST only for security)
         $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
-        if (empty($nonce) && isset($_GET['nonce'])) {
-            // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- nonce is verified below
-            $nonce = sanitize_text_field(wp_unslash($_GET['nonce']));
-        }
         if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
             wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations')]);
         }
