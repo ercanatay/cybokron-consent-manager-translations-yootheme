@@ -7,7 +7,7 @@
 
 // Prevent direct access
 if (!defined('ABSPATH')) {
-    exit;
+	exit;
 }
 
 /**
@@ -16,358 +16,358 @@ if (!defined('ABSPATH')) {
  */
 class YTCT_Admin {
 
-    /**
-     * Single instance
-     */
-    private static $instance = null;
+	/**
+	 * Single instance
+	 */
+	private static $instance = null;
 
-    /**
-     * Get single instance
-     */
-    public static function get_instance() {
-        if (null === self::$instance) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	/**
+	 * Get single instance
+	 */
+	public static function get_instance() {
+		if (null === self::$instance) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    /**
-     * Constructor
-     */
-    private function __construct() {
-        $this->init_hooks();
-    }
+	/**
+	 * Constructor
+	 */
+	private function __construct() {
+		$this->init_hooks();
+	}
 
-    /**
-     * Initialize hooks
-     */
-    private function init_hooks() {
-        add_action('admin_menu', [$this, 'add_menu_page']);
-        add_action('admin_enqueue_scripts', [$this, 'enqueue_assets']);
-        add_action('wp_ajax_ytct_save_settings', [$this, 'ajax_save_settings']);
-        add_action('wp_ajax_ytct_reset_settings', [$this, 'ajax_reset_settings']);
-        add_action('wp_ajax_ytct_export_settings', [$this, 'ajax_export_settings']);
-        add_action('wp_ajax_ytct_import_settings', [$this, 'ajax_import_settings']);
-        add_action('wp_ajax_ytct_load_language', [$this, 'ajax_load_language']);
-    }
+	/**
+	 * Initialize hooks
+	 */
+	private function init_hooks() {
+		add_action('admin_menu', [$this, 'add_menu_page']);
+		add_action('admin_enqueue_scripts', [$this, 'enqueue_assets']);
+		add_action('wp_ajax_ytct_save_settings', [$this, 'ajax_save_settings']);
+		add_action('wp_ajax_ytct_reset_settings', [$this, 'ajax_reset_settings']);
+		add_action('wp_ajax_ytct_export_settings', [$this, 'ajax_export_settings']);
+		add_action('wp_ajax_ytct_import_settings', [$this, 'ajax_import_settings']);
+		add_action('wp_ajax_ytct_load_language', [$this, 'ajax_load_language']);
+	}
 
-    /**
-     * Add menu page
-     */
-    public function add_menu_page() {
-        add_options_page(
-            __('YT Consent Translations', 'yt-consent-translations'),
-            __('YT Consent Translations', 'yt-consent-translations'),
-            'manage_options',
-            'yt-consent-translations',
-            [$this, 'render_settings_page']
-        );
-    }
+	/**
+	 * Add menu page
+	 */
+	public function add_menu_page() {
+		add_options_page(
+			__('YT Consent Translations', 'yt-consent-translations'),
+			__('YT Consent Translations', 'yt-consent-translations'),
+			'manage_options',
+			'yt-consent-translations',
+			[$this, 'render_settings_page']
+		);
+	}
 
-    /**
-     * Enqueue admin assets
-     */
-    public function enqueue_assets($hook) {
-        if ($hook !== 'settings_page_yt-consent-translations') {
-            return;
-        }
+	/**
+	 * Enqueue admin assets
+	 */
+	public function enqueue_assets($hook) {
+		if ($hook !== 'settings_page_yt-consent-translations') {
+			return;
+		}
 
-        wp_enqueue_style(
-            'ytct-admin-style',
-            YTCT_PLUGIN_URL . 'admin/css/admin-style.css',
-            [],
-            YTCT_VERSION
-        );
+		wp_enqueue_style(
+			'ytct-admin-style',
+			YTCT_PLUGIN_URL . 'admin/css/admin-style.css',
+			[],
+			YTCT_VERSION
+		);
 
-        wp_enqueue_script(
-            'ytct-admin-script',
-            YTCT_PLUGIN_URL . 'admin/js/admin-script.js',
-            ['jquery'],
-            YTCT_VERSION,
-            true
-        );
+		wp_enqueue_script(
+			'ytct-admin-script',
+			YTCT_PLUGIN_URL . 'admin/js/admin-script.js',
+			['jquery'],
+			YTCT_VERSION,
+			true
+		);
 
-        wp_localize_script('ytct-admin-script', 'ytctAdmin', [
-            'ajaxUrl' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce('ytct_admin_nonce'),
-            'strings' => [
-                'saving' => __('Saving...', 'yt-consent-translations'),
-                'saved' => __('Settings saved successfully!', 'yt-consent-translations'),
-                'error' => __('An error occurred. Please try again.', 'yt-consent-translations'),
-                'confirmReset' => __('Are you sure you want to reset all settings to default?', 'yt-consent-translations'),
-                'resetting' => __('Resetting...', 'yt-consent-translations'),
-                'resetSuccess' => __('Settings reset successfully!', 'yt-consent-translations'),
-                'importing' => __('Importing...', 'yt-consent-translations'),
-                'importSuccess' => __('Settings imported successfully!', 'yt-consent-translations'),
-                'invalidFile' => __('Please select a valid JSON file.', 'yt-consent-translations'),
-                'languageLoaded' => __('Language preset loaded!', 'yt-consent-translations')
-            ]
-        ]);
-    }
+		wp_localize_script('ytct-admin-script', 'ytctAdmin', [
+			'ajaxUrl' => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('ytct_admin_nonce'),
+			'strings' => [
+				'saving' => __('Saving...', 'yt-consent-translations'),
+				'saved' => __('Settings saved successfully!', 'yt-consent-translations'),
+				'error' => __('An error occurred. Please try again.', 'yt-consent-translations'),
+				'confirmReset' => __('Are you sure you want to reset all settings to default?', 'yt-consent-translations'),
+				'resetting' => __('Resetting...', 'yt-consent-translations'),
+				'resetSuccess' => __('Settings reset successfully!', 'yt-consent-translations'),
+				'importing' => __('Importing...', 'yt-consent-translations'),
+				'importSuccess' => __('Settings imported successfully!', 'yt-consent-translations'),
+				'invalidFile' => __('Please select a valid JSON file.', 'yt-consent-translations'),
+				'languageLoaded' => __('Language preset loaded!', 'yt-consent-translations')
+			]
+		]);
+	}
 
-    /**
-     * Render settings page
-     */
-    public function render_settings_page() {
-        // Check permissions
-        if (!current_user_can('manage_options')) {
-            return;
-        }
+	/**
+	 * Render settings page
+	 */
+	public function render_settings_page() {
+		// Check permissions
+		if (!current_user_can('manage_options')) {
+			return;
+		}
 
-        include YTCT_PLUGIN_DIR . 'admin/views/settings-page.php';
-    }
+		include YTCT_PLUGIN_DIR . 'admin/views/settings-page.php';
+	}
 
-    /**
-     * Sanitize consent string - allows only safe <a> tags
-     *
-     * @param string $value Input string
-     * @return string Sanitized string
-     */
-    private function sanitize_consent_string($value) {
-        // Only allow <a> tags with href attribute (for privacy policy links)
-        $allowed_html = [
-            'a' => [
-                'href' => true,
-                'title' => true,
-                'target' => true,
-                'rel' => true
-            ]
-        ];
-        return wp_kses($value, $allowed_html);
-    }
+	/**
+	 * Sanitize consent string - allows only safe <a> tags
+	 *
+	 * @param string $value Input string
+	 * @return string Sanitized string
+	 */
+	private function sanitize_consent_string($value) {
+		// Only allow <a> tags with href attribute (for privacy policy links)
+		$allowed_html = [
+			'a' => [
+				'href' => true,
+				'title' => true,
+				'target' => true,
+				'rel' => true
+			]
+		];
+		return wp_kses($value, $allowed_html);
+	}
 
-    /**
-     * AJAX: Save settings
-     */
-    public function ajax_save_settings() {
-        // Check nonce
-        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
-        if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
-            wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations')]);
-        }
+	/**
+	 * AJAX: Save settings
+	 */
+	public function ajax_save_settings() {
+		// Check nonce
+		$nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+		if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
+			wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations')]);
+		}
 
-        // Check permissions
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error(['message' => __('Permission denied.', 'yt-consent-translations')]);
-        }
+		// Check permissions
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(['message' => __('Permission denied.', 'yt-consent-translations')]);
+		}
 
-        // Get and sanitize data
-        // Hidden input sends "0" when unchecked, checkbox sends "1" when checked
-        $enabled = !empty($_POST['enabled']) && sanitize_text_field(wp_unslash($_POST['enabled'])) !== '0';
-        $language = isset($_POST['language']) ? sanitize_text_field(wp_unslash($_POST['language'])) : 'en';
-        
-        // Validate language
-        $valid_languages = array_keys(YTCT_Strings::get_languages());
-        if (!in_array($language, $valid_languages, true)) {
-            $language = 'en';
-        }
+		// Get and sanitize data
+		// Hidden input sends "0" when unchecked, checkbox sends "1" when checked
+		$enabled = !empty($_POST['enabled']) && sanitize_text_field(wp_unslash($_POST['enabled'])) !== '0';
+		$language = isset($_POST['language']) ? sanitize_text_field(wp_unslash($_POST['language'])) : 'en';
+		
+		// Validate language
+		$valid_languages = array_keys(YTCT_Strings::get_languages());
+		if (!in_array($language, $valid_languages, true)) {
+			$language = 'en';
+		}
 
-        // Process custom strings
-        $custom_strings = [];
-        $string_keys = array_keys(YTCT_Strings::get_string_keys());
-        
-        foreach ($string_keys as $key) {
-            if (isset($_POST['strings'][$key])) {
-                // Use strict sanitization - only allow <a> tags
-                // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized by sanitize_consent_string
-                $value = $this->sanitize_consent_string(wp_unslash($_POST['strings'][$key]));
-                if (!empty($value)) {
-                    $custom_strings[$key] = $value;
-                }
-            }
-        }
+		// Process custom strings
+		$custom_strings = [];
+		$string_keys = array_keys(YTCT_Strings::get_string_keys());
+		
+		foreach ($string_keys as $key) {
+			if (isset($_POST['strings'][$key])) {
+				// Use strict sanitization - only allow <a> tags
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized by sanitize_consent_string
+				$value = $this->sanitize_consent_string(wp_unslash($_POST['strings'][$key]));
+				if (!empty($value)) {
+					$custom_strings[$key] = $value;
+				}
+			}
+		}
 
-        // Save options
-        $options = [
-            'enabled' => $enabled,
-            'language' => $language,
-            'custom_strings' => $custom_strings
-        ];
+		// Save options
+		$options = [
+			'enabled' => $enabled,
+			'language' => $language,
+			'custom_strings' => $custom_strings
+		];
 
-        update_option(YTCT_OPTION_NAME, $options);
+		update_option(YTCT_OPTION_NAME, $options);
 
-        // Clear translator cache
-        YTCT_Translator::get_instance()->clear_cache();
+		// Clear translator cache
+		YTCT_Translator::get_instance()->clear_cache();
 
-        wp_send_json_success(['message' => __('Settings saved successfully!', 'yt-consent-translations')]);
-    }
+		wp_send_json_success(['message' => __('Settings saved successfully!', 'yt-consent-translations')]);
+	}
 
-    /**
-     * AJAX: Reset settings
-     */
-    public function ajax_reset_settings() {
-        // Check nonce
-        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
-        if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
-            wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations')]);
-        }
+	/**
+	 * AJAX: Reset settings
+	 */
+	public function ajax_reset_settings() {
+		// Check nonce
+		$nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+		if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
+			wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations')]);
+		}
 
-        // Check permissions
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error(['message' => __('Permission denied.', 'yt-consent-translations')]);
-        }
+		// Check permissions
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(['message' => __('Permission denied.', 'yt-consent-translations')]);
+		}
 
-        // Reset to defaults
-        $defaults = [
-            'enabled' => true,
-            'language' => 'en',
-            'custom_strings' => []
-        ];
+		// Reset to defaults
+		$defaults = [
+			'enabled' => true,
+			'language' => 'en',
+			'custom_strings' => []
+		];
 
-        update_option(YTCT_OPTION_NAME, $defaults);
+		update_option(YTCT_OPTION_NAME, $defaults);
 
-        // Clear translator cache
-        YTCT_Translator::get_instance()->clear_cache();
+		// Clear translator cache
+		YTCT_Translator::get_instance()->clear_cache();
 
-        wp_send_json_success([
-            'message' => __('Settings reset successfully!', 'yt-consent-translations'),
-            'options' => $defaults
-        ]);
-    }
+		wp_send_json_success([
+			'message' => __('Settings reset successfully!', 'yt-consent-translations'),
+			'options' => $defaults
+		]);
+	}
 
-    /**
-     * AJAX: Export settings (returns JSON data for download)
-     */
-    public function ajax_export_settings() {
-        // Check nonce (POST only for security - nonces should not be in URLs)
-        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
-        if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
-            wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations')]);
-        }
+	/**
+	 * AJAX: Export settings (returns JSON data for download)
+	 */
+	public function ajax_export_settings() {
+		// Check nonce (POST only for security - nonces should not be in URLs)
+		$nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+		if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
+			wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations')]);
+		}
 
-        // Check permissions
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error(['message' => __('Permission denied.', 'yt-consent-translations')]);
-        }
+		// Check permissions
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(['message' => __('Permission denied.', 'yt-consent-translations')]);
+		}
 
-        $options = get_option(YTCT_OPTION_NAME, []);
+		$options = get_option(YTCT_OPTION_NAME, []);
 
-        // Return JSON data for client-side download
-        wp_send_json_success([
-            'filename' => 'yt-consent-translations-export.json',
-            'data' => $options
-        ]);
-    }
+		// Return JSON data for client-side download
+		wp_send_json_success([
+			'filename' => 'yt-consent-translations-export.json',
+			'data' => $options
+		]);
+	}
 
-    /**
-     * AJAX: Import settings
-     */
-    public function ajax_import_settings() {
-        // Check nonce
-        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
-        if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
-            wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations')]);
-        }
+	/**
+	 * AJAX: Import settings
+	 */
+	public function ajax_import_settings() {
+		// Check nonce
+		$nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+		if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
+			wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations')]);
+		}
 
-        // Check permissions
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error(['message' => __('Permission denied.', 'yt-consent-translations')]);
-        }
+		// Check permissions
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(['message' => __('Permission denied.', 'yt-consent-translations')]);
+		}
 
-        // Check file exists and validate
-        if (!isset($_FILES['import_file'])) {
-            wp_send_json_error(['message' => __('No file uploaded.', 'yt-consent-translations')]);
-        }
+		// Check file exists and validate
+		if (!isset($_FILES['import_file'])) {
+			wp_send_json_error(['message' => __('No file uploaded.', 'yt-consent-translations')]);
+		}
 
-        // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- $_FILES array is validated below
-        $ytct_file = $_FILES['import_file'];
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- $_FILES array is validated below
+		$ytct_file = $_FILES['import_file'];
 
-        if (!isset($ytct_file['error']) || $ytct_file['error'] !== UPLOAD_ERR_OK) {
-            wp_send_json_error(['message' => __('File upload failed.', 'yt-consent-translations')]);
-        }
+		if (!isset($ytct_file['error']) || $ytct_file['error'] !== UPLOAD_ERR_OK) {
+			wp_send_json_error(['message' => __('File upload failed.', 'yt-consent-translations')]);
+		}
 
-        // Validate file size (max 100KB)
-        $max_size = 100 * 1024; // 100KB
-        if (!isset($ytct_file['size']) || $ytct_file['size'] > $max_size) {
-            wp_send_json_error(['message' => __('File too large. Maximum size is 100KB.', 'yt-consent-translations')]);
-        }
+		// Validate file size (max 100KB)
+		$max_size = 100 * 1024; // 100KB
+		if (!isset($ytct_file['size']) || $ytct_file['size'] > $max_size) {
+			wp_send_json_error(['message' => __('File too large. Maximum size is 100KB.', 'yt-consent-translations')]);
+		}
 
-        // Validate file type
-        if (!isset($ytct_file['name'])) {
-            wp_send_json_error(['message' => __('Invalid file.', 'yt-consent-translations')]);
-        }
-        $file_info = wp_check_filetype(sanitize_file_name($ytct_file['name']));
-        $allowed_extensions = ['json'];
-        if (!$file_info['ext'] || !in_array(strtolower($file_info['ext']), $allowed_extensions, true)) {
-            wp_send_json_error(['message' => __('Invalid file type. Only JSON files are allowed.', 'yt-consent-translations')]);
-        }
+		// Validate file type
+		if (!isset($ytct_file['name'])) {
+			wp_send_json_error(['message' => __('Invalid file.', 'yt-consent-translations')]);
+		}
+		$file_info = wp_check_filetype(sanitize_file_name($ytct_file['name']));
+		$allowed_extensions = ['json'];
+		if (!$file_info['ext'] || !in_array(strtolower($file_info['ext']), $allowed_extensions, true)) {
+			wp_send_json_error(['message' => __('Invalid file type. Only JSON files are allowed.', 'yt-consent-translations')]);
+		}
 
-        // Read file - tmp_name is a server path, not user input
-        if (!isset($ytct_file['tmp_name']) || !is_uploaded_file($ytct_file['tmp_name'])) {
-            wp_send_json_error(['message' => __('Invalid file upload.', 'yt-consent-translations')]);
-        }
-        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- reading uploaded temp file
-        $content = file_get_contents($ytct_file['tmp_name']);
-        $data = json_decode($content, true);
+		// Read file - tmp_name is a server path, not user input
+		if (!isset($ytct_file['tmp_name']) || !is_uploaded_file($ytct_file['tmp_name'])) {
+			wp_send_json_error(['message' => __('Invalid file upload.', 'yt-consent-translations')]);
+		}
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- reading uploaded temp file
+		$content = file_get_contents($ytct_file['tmp_name']);
+		$data = json_decode($content, true);
 
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            wp_send_json_error(['message' => __('Invalid JSON file.', 'yt-consent-translations')]);
-        }
+		if (json_last_error() !== JSON_ERROR_NONE) {
+			wp_send_json_error(['message' => __('Invalid JSON file.', 'yt-consent-translations')]);
+		}
 
-        // Validate and sanitize data
-        $options = [
-            'enabled' => isset($data['enabled']) ? (bool) $data['enabled'] : true,
-            'language' => 'en',
-            'custom_strings' => []
-        ];
+		// Validate and sanitize data
+		$options = [
+			'enabled' => isset($data['enabled']) ? (bool) $data['enabled'] : true,
+			'language' => 'en',
+			'custom_strings' => []
+		];
 
-        // Validate language
-        if (isset($data['language'])) {
-            $valid_languages = array_keys(YTCT_Strings::get_languages());
-            if (in_array($data['language'], $valid_languages, true)) {
-                $options['language'] = $data['language'];
-            }
-        }
+		// Validate language
+		if (isset($data['language'])) {
+			$valid_languages = array_keys(YTCT_Strings::get_languages());
+			if (in_array($data['language'], $valid_languages, true)) {
+				$options['language'] = $data['language'];
+			}
+		}
 
-        // Validate custom strings with strict sanitization
-        if (isset($data['custom_strings']) && is_array($data['custom_strings'])) {
-            $string_keys = array_keys(YTCT_Strings::get_string_keys());
-            foreach ($data['custom_strings'] as $key => $value) {
-                if (in_array($key, $string_keys, true)) {
-                    $options['custom_strings'][$key] = $this->sanitize_consent_string($value);
-                }
-            }
-        }
+		// Validate custom strings with strict sanitization
+		if (isset($data['custom_strings']) && is_array($data['custom_strings'])) {
+			$string_keys = array_keys(YTCT_Strings::get_string_keys());
+			foreach ($data['custom_strings'] as $key => $value) {
+				if (in_array($key, $string_keys, true)) {
+					$options['custom_strings'][$key] = $this->sanitize_consent_string($value);
+				}
+			}
+		}
 
-        update_option(YTCT_OPTION_NAME, $options);
+		update_option(YTCT_OPTION_NAME, $options);
 
-        // Clear translator cache
-        YTCT_Translator::get_instance()->clear_cache();
+		// Clear translator cache
+		YTCT_Translator::get_instance()->clear_cache();
 
-        wp_send_json_success([
-            'message' => __('Settings imported successfully!', 'yt-consent-translations'),
-            'options' => $options
-        ]);
-    }
+		wp_send_json_success([
+			'message' => __('Settings imported successfully!', 'yt-consent-translations'),
+			'options' => $options
+		]);
+	}
 
-    /**
-     * AJAX: Load language preset
-     */
-    public function ajax_load_language() {
-        // Check nonce
-        $nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
-        if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
-            wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations')]);
-        }
+	/**
+	 * AJAX: Load language preset
+	 */
+	public function ajax_load_language() {
+		// Check nonce
+		$nonce = isset($_POST['nonce']) ? sanitize_text_field(wp_unslash($_POST['nonce'])) : '';
+		if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
+			wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations')]);
+		}
 
-        // Check permissions
-        if (!current_user_can('manage_options')) {
-            wp_send_json_error(['message' => __('Permission denied.', 'yt-consent-translations')]);
-        }
+		// Check permissions
+		if (!current_user_can('manage_options')) {
+			wp_send_json_error(['message' => __('Permission denied.', 'yt-consent-translations')]);
+		}
 
-        $language = isset($_POST['language']) ? sanitize_text_field(wp_unslash($_POST['language'])) : 'en';
+		$language = isset($_POST['language']) ? sanitize_text_field(wp_unslash($_POST['language'])) : 'en';
 
-        // Validate language
-        $valid_languages = array_keys(YTCT_Strings::get_languages());
-        if (!in_array($language, $valid_languages, true)) {
-            $language = 'en';
-        }
+		// Validate language
+		$valid_languages = array_keys(YTCT_Strings::get_languages());
+		if (!in_array($language, $valid_languages, true)) {
+			$language = 'en';
+		}
 
-        $translations = YTCT_Strings::get_translations($language);
+		$translations = YTCT_Strings::get_translations($language);
 
-        wp_send_json_success([
-            'language' => $language,
-            'translations' => $translations
-        ]);
-    }
+		wp_send_json_success([
+			'language' => $language,
+			'translations' => $translations
+		]);
+	}
 }
