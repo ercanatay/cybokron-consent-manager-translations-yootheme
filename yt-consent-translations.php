@@ -16,7 +16,7 @@
 
 // Prevent direct access
 if (!defined('ABSPATH')) {
-    exit;
+	exit;
 }
 
 // Plugin constants
@@ -31,137 +31,137 @@ define('YTCT_OPTION_NAME', 'yt_consent_translations');
  */
 final class YT_Consent_Translations {
 
-    /**
-     * Single instance
-     */
-    private static $instance = null;
+	/**
+	 * Single instance
+	 */
+	private static $instance = null;
 
-    /**
-     * Get single instance
-     */
-    public static function get_instance() {
-        if (null === self::$instance) {
-            self::$instance = new self();
-        }
-        return self::$instance;
-    }
+	/**
+	 * Get single instance
+	 */
+	public static function get_instance() {
+		if (null === self::$instance) {
+			self::$instance = new self();
+		}
+		return self::$instance;
+	}
 
-    /**
-     * Constructor
-     */
-    private function __construct() {
-        $this->load_dependencies();
-        $this->init_hooks();
-    }
+	/**
+	 * Constructor
+	 */
+	private function __construct() {
+		$this->load_dependencies();
+		$this->init_hooks();
+	}
 
-    /**
-     * Load required files
-     */
-    private function load_dependencies() {
-        require_once YTCT_PLUGIN_DIR . 'includes/class-strings.php';
-        require_once YTCT_PLUGIN_DIR . 'includes/class-translator.php';
-        require_once YTCT_PLUGIN_DIR . 'includes/class-admin.php';
-    }
+	/**
+	 * Load required files
+	 */
+	private function load_dependencies() {
+		require_once YTCT_PLUGIN_DIR . 'includes/class-strings.php';
+		require_once YTCT_PLUGIN_DIR . 'includes/class-translator.php';
+		require_once YTCT_PLUGIN_DIR . 'includes/class-admin.php';
+	}
 
-    /**
-     * Initialize hooks
-     */
-    private function init_hooks() {
-        // Load text domain
-        add_action('plugins_loaded', [$this, 'load_textdomain']);
+	/**
+	 * Initialize hooks
+	 */
+	private function init_hooks() {
+		// Load text domain
+		add_action('plugins_loaded', [$this, 'load_textdomain']);
 
-        // Initialize translator on frontend and admin
-        add_action('init', [$this, 'init_translator']);
+		// Initialize translator on frontend and admin
+		add_action('init', [$this, 'init_translator']);
 
-        // Initialize admin - must run before admin_menu hook
-        if (is_admin()) {
-            $this->init_admin();
-        }
+		// Initialize admin - must run before admin_menu hook
+		if (is_admin()) {
+			$this->init_admin();
+		}
 
-        // Activation hook
-        register_activation_hook(__FILE__, [$this, 'activate']);
+		// Activation hook
+		register_activation_hook(__FILE__, [$this, 'activate']);
 
-        // Deactivation hook
-        register_deactivation_hook(__FILE__, [$this, 'deactivate']);
+		// Deactivation hook
+		register_deactivation_hook(__FILE__, [$this, 'deactivate']);
 
-        // Add settings link on plugins page
-        add_filter('plugin_action_links_' . YTCT_PLUGIN_BASENAME, [$this, 'add_settings_link']);
-    }
+		// Add settings link on plugins page
+		add_filter('plugin_action_links_' . YTCT_PLUGIN_BASENAME, [$this, 'add_settings_link']);
+	}
 
-    /**
-     * Load plugin text domain
-     * Note: Since WordPress 4.6, translations are automatically loaded from WordPress.org
-     * This method is kept for backward compatibility with self-hosted translations
-     */
-    public function load_textdomain() {
-        // Translations are automatically loaded by WordPress 4.6+ for plugins hosted on WordPress.org
-        // Manual loading only needed for custom translation files not on WordPress.org
-    }
+	/**
+	 * Load plugin text domain
+	 * Note: Since WordPress 4.6, translations are automatically loaded from WordPress.org
+	 * This method is kept for backward compatibility with self-hosted translations
+	 */
+	public function load_textdomain() {
+		// Translations are automatically loaded by WordPress 4.6+ for plugins hosted on WordPress.org
+		// Manual loading only needed for custom translation files not on WordPress.org
+	}
 
-    /**
-     * Initialize translator (only if enabled)
-     */
-    public function init_translator() {
-        // Skip translator initialization if disabled (performance optimization)
-        $options = get_option(YTCT_OPTION_NAME, []);
-        if (empty($options['enabled'])) {
-            return;
-        }
-        
-        YTCT_Translator::get_instance();
-    }
+	/**
+	 * Initialize translator (only if enabled)
+	 */
+	public function init_translator() {
+		// Skip translator initialization if disabled (performance optimization)
+		$options = get_option(YTCT_OPTION_NAME, []);
+		if (empty($options['enabled'])) {
+			return;
+		}
 
-    /**
-     * Initialize admin
-     */
-    public function init_admin() {
-        YTCT_Admin::get_instance();
-    }
+		YTCT_Translator::get_instance();
+	}
 
-    /**
-     * Plugin activation
-     */
-    public function activate() {
-        // Set default options if not exists
-        if (false === get_option(YTCT_OPTION_NAME)) {
-            $defaults = [
-                'enabled' => true,
-                'language' => 'en',
-                'custom_strings' => []
-            ];
-            add_option(YTCT_OPTION_NAME, $defaults);
-        }
+	/**
+	 * Initialize admin
+	 */
+	public function init_admin() {
+		YTCT_Admin::get_instance();
+	}
 
-        // Flush rewrite rules
-        flush_rewrite_rules();
-    }
+	/**
+	 * Plugin activation
+	 */
+	public function activate() {
+		// Set default options if not exists
+		if (false === get_option(YTCT_OPTION_NAME)) {
+			$defaults = [
+				'enabled' => true,
+				'language' => 'en',
+				'custom_strings' => []
+			];
+			add_option(YTCT_OPTION_NAME, $defaults);
+		}
 
-    /**
-     * Plugin deactivation
-     */
-    public function deactivate() {
-        flush_rewrite_rules();
-    }
+		// Flush rewrite rules
+		flush_rewrite_rules();
+	}
 
-    /**
-     * Add settings link to plugins page
-     */
-    public function add_settings_link($links) {
-        $settings_link = sprintf(
-            '<a href="%s">%s</a>',
-            admin_url('options-general.php?page=yt-consent-translations'),
-            __('Settings', 'yt-consent-translations')
-        );
-        array_unshift($links, $settings_link);
-        return $links;
-    }
+	/**
+	 * Plugin deactivation
+	 */
+	public function deactivate() {
+		flush_rewrite_rules();
+	}
+
+	/**
+	 * Add settings link to plugins page
+	 */
+	public function add_settings_link($links) {
+		$settings_link = sprintf(
+			'<a href="%s">%s</a>',
+			admin_url('options-general.php?page=yt-consent-translations'),
+			__('Settings', 'yt-consent-translations')
+		);
+		array_unshift($links, $settings_link);
+		return $links;
+	}
 }
 
 /**
  * Initialize plugin
  */
 function ytct_init() {
-    return YT_Consent_Translations::get_instance();
+	return YT_Consent_Translations::get_instance();
 }
 
 // Start the plugin
