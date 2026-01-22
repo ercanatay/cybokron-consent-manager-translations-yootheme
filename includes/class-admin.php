@@ -321,9 +321,9 @@ class YTCT_Admin {
 
 		// Validate custom strings with strict sanitization
 		if (isset($data['custom_strings']) && is_array($data['custom_strings'])) {
-			$string_keys = array_keys(YTCT_Strings::get_string_keys());
+			$string_keys = YTCT_Strings::get_string_keys();
 			foreach ($data['custom_strings'] as $key => $value) {
-				if (in_array($key, $string_keys, true)) {
+				if (isset($string_keys[$key])) {
 					$options['custom_strings'][$key] = $this->sanitize_consent_string($value);
 				}
 			}
