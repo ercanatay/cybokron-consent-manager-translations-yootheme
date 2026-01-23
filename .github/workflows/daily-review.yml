@@ -1,0 +1,49 @@
+name: Daily Code Quality & Security Review
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Daily at midnight
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Run Daily Review
+        run: |
+          python3 scripts/daily_report.py
+
+      - name: Commit and Push Fixes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+          # Check for changes
+          if [[ -n $(git status -s) ]]; then
+            git add .
+            git commit -m "fix(quality): automated daily fixes"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+
+      - name: Create Issue
+        uses: peter-evans/create-issue-from-file@v4
+        with:
+          title: Daily Report - ${{ steps.date.outputs.date }}
+          content-filepath: ./daily_report.md
+          labels: report, automated
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
