@@ -157,8 +157,7 @@ class YTCT_Admin {
 		$language = isset($_POST['language']) ? sanitize_text_field(wp_unslash($_POST['language'])) : 'en';
 		
 		// Validate language
-		$valid_languages = array_keys(YTCT_Strings::get_languages());
-		if (!in_array($language, $valid_languages, true)) {
+		if (!isset(YTCT_Strings::get_languages()[$language])) {
 			$language = 'en';
 		}
 
@@ -313,17 +312,16 @@ class YTCT_Admin {
 
 		// Validate language
 		if (isset($data['language'])) {
-			$valid_languages = array_keys(YTCT_Strings::get_languages());
-			if (in_array($data['language'], $valid_languages, true)) {
+			if (isset(YTCT_Strings::get_languages()[$data['language']])) {
 				$options['language'] = $data['language'];
 			}
 		}
 
 		// Validate custom strings with strict sanitization
 		if (isset($data['custom_strings']) && is_array($data['custom_strings'])) {
-			$string_keys = array_keys(YTCT_Strings::get_string_keys());
+			$string_keys = YTCT_Strings::get_string_keys();
 			foreach ($data['custom_strings'] as $key => $value) {
-				if (in_array($key, $string_keys, true)) {
+				if (isset($string_keys[$key])) {
 					$options['custom_strings'][$key] = $this->sanitize_consent_string($value);
 				}
 			}
@@ -358,8 +356,7 @@ class YTCT_Admin {
 		$language = isset($_POST['language']) ? sanitize_text_field(wp_unslash($_POST['language'])) : 'en';
 
 		// Validate language
-		$valid_languages = array_keys(YTCT_Strings::get_languages());
-		if (!in_array($language, $valid_languages, true)) {
+		if (!isset(YTCT_Strings::get_languages()[$language])) {
 			$language = 'en';
 		}
 
