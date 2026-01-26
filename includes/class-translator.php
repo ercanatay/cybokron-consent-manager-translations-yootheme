@@ -116,7 +116,7 @@ class YTCT_Translator {
 			if (!empty($custom_strings) && is_array($custom_strings)) {
 				foreach ($custom_strings as $key => $value) {
 					if (!empty($value)) {
-					    $this->translations[$key] = $value;
+						$this->translations[$key] = $value;
 					}
 				}
 			}
