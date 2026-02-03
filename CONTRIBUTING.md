@@ -20,7 +20,6 @@ Thank you for your interest in contributing! Here's how you can help.
 3. Add your language to:
    - `$languages` array
    - `$locale_map` array
-   - `get_all_translations()` method
 4. Submit a Pull Request
 
 ### Code Standards

@@ -386,7 +386,7 @@ class YTCT_Strings {
 	 * @return bool
 	 */
 	public static function has_placeholder($key) {
-		$placeholders = ['banner_link', 'modal_content_link'];
+		static $placeholders = ['banner_link', 'modal_content_link'];
 		return in_array($key, $placeholders, true);
 	}
 }
