@@ -16,12 +16,14 @@ Thank you for your interest in contributing! Here's how you can help.
 ### Adding New Languages
 
 1. Fork the repository
-2. Edit `includes/class-strings.php`
-3. Add your language to:
-   - `$languages` array
-   - `$locale_map` array
-   - `get_all_translations()` method
-4. Submit a Pull Request
+2. Edit `includes/class-strings.php`:
+   - Add your language to the `$languages` array
+   - Add your locale mapping to the `$locale_map` array
+3. Create a new JSON file in `languages/` (e.g., `fr.json` for French):
+   - Copy `languages/en.json` as a template
+   - Translate all values
+4. Run `python scripts/validate_json.py` to verify your JSON file
+5. Submit a Pull Request
 
 ### Code Standards
 
