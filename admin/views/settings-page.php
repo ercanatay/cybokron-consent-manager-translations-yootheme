@@ -28,8 +28,17 @@ $ytct_custom_strings = isset($ytct_options['custom_strings']) ? $ytct_options['c
 
 // Get available data
 $ytct_languages = YTCT_Strings::get_languages();
+if (!isset($ytct_languages[$ytct_current_language])) {
+	$ytct_current_language = 'en';
+}
+
+$ytct_detected_language = YTCT_Strings::resolve_language_code('auto', true);
+$ytct_effective_language = $ytct_current_language === 'auto'
+	? $ytct_detected_language
+	: YTCT_Strings::resolve_language_code($ytct_current_language, false);
+$ytct_detected_name = isset($ytct_languages[$ytct_detected_language]) ? $ytct_languages[$ytct_detected_language] : 'English';
 $ytct_string_groups = YTCT_Strings::get_string_groups();
-$ytct_translations = YTCT_Strings::get_translations($ytct_current_language);
+$ytct_translations = YTCT_Strings::get_translations($ytct_effective_language);
 $ytct_original_strings = YTCT_Strings::get_string_keys();
 ?>
 
@@ -50,17 +59,15 @@ $ytct_original_strings = YTCT_Strings::get_string_keys();
 			<div class="ytct-top-bar">
 				<div class="ytct-language-select">
 					<label for="ytct-language"><?php esc_html_e('Language Preset:', 'yt-consent-translations'); ?></label>
-					<select id="ytct-language" name="language">
-					    <?php foreach ($ytct_languages as $ytct_code => $ytct_name) : ?>
-					        <option value="<?php echo esc_attr($ytct_code); ?>" <?php selected($ytct_current_language, $ytct_code); ?>>
-					            <?php 
-					            if ($ytct_code === 'auto') {
-					                $ytct_detected = YTCT_Strings::detect_wp_language();
-					                $ytct_detected_name = isset($ytct_languages[$ytct_detected]) ? $ytct_languages[$ytct_detected] : 'English';
-					                printf('%s → %s', esc_html($ytct_name), esc_html($ytct_detected_name));
-					            } else {
-					                echo esc_html($ytct_name) . ' (' . esc_html(strtoupper($ytct_code)) . ')';
-					            }
+						<select id="ytct-language" name="language">
+						    <?php foreach ($ytct_languages as $ytct_code => $ytct_name) : ?>
+						        <option value="<?php echo esc_attr($ytct_code); ?>" <?php selected($ytct_current_language, $ytct_code); ?>>
+						            <?php 
+						            if ($ytct_code === 'auto') {
+						                printf('%s → %s', esc_html($ytct_name), esc_html($ytct_detected_name));
+						            } else {
+						                echo esc_html($ytct_name) . ' (' . esc_html(strtoupper($ytct_code)) . ')';
+						            }
 					            ?>
 					        </option>
 					    <?php endforeach; ?>

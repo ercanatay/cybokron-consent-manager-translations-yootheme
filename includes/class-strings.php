@@ -184,6 +184,30 @@ class YTCT_Strings {
 	}
 
 	/**
+	 * Resolve requested language code to a supported concrete language
+	 *
+	 * @param string $lang Requested language code
+	 * @param bool   $resolve_auto Whether to resolve "auto" using WordPress locale
+	 * @return string
+	 */
+	public static function resolve_language_code($lang, $resolve_auto = false) {
+		if (!is_string($lang) || $lang === '') {
+			return 'en';
+		}
+
+		if ($lang === 'auto') {
+			if ($resolve_auto) {
+				$detected = self::detect_wp_language();
+				return isset(self::$languages[$detected]) ? $detected : 'en';
+			}
+
+			return 'en';
+		}
+
+		return isset(self::$languages[$lang]) ? $lang : 'en';
+	}
+
+	/**
 	 * Get locale map
 	 *
 	 * @return array
@@ -251,13 +275,11 @@ class YTCT_Strings {
 	 * Get translations for a specific language (lazy loading)
 	 *
 	 * @param string $lang Language code
+	 * @param bool   $resolve_auto Whether to resolve "auto" using WordPress locale
 	 * @return array
 	 */
-	public static function get_translations($lang = 'en') {
-		// Validate language code
-		if (!isset(self::$languages[$lang]) || $lang === 'auto') {
-			$lang = 'en';
-		}
+	public static function get_translations($lang = 'en', $resolve_auto = false) {
+		$lang = self::resolve_language_code($lang, $resolve_auto);
 		
 		// Return from cache if available
 		if (isset(self::$translations_cache[$lang])) {

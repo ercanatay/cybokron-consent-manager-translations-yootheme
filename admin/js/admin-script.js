@@ -175,7 +175,7 @@
                     // Reset form fields
                     $languageSelect.val('en');
                     $form.find('input[type="text"], textarea').val('');
-                    $form.find('input[name="enabled"]').prop('checked', true);
+                    $('#ytct-enabled').prop('checked', true);
                     
                     // Load English preset
                     loadLanguagePreset('en');
@@ -339,7 +339,7 @@
      */
     function updateFormWithOptions(options) {
         if (options.enabled !== undefined) {
-            $form.find('input[name="enabled"]').prop('checked', options.enabled);
+            $('#ytct-enabled').prop('checked', !!options.enabled);
         }
 
         if (options.language) {

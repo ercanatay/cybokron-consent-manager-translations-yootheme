@@ -137,6 +137,73 @@ class YTCT_Admin {
 	}
 
 	/**
+	 * Validate selected language against supported list
+	 *
+	 * @param string $language Selected language code
+	 * @return string
+	 */
+	private function get_valid_language($language) {
+		$valid_languages = array_keys(YTCT_Strings::get_languages());
+		return in_array($language, $valid_languages, true) ? $language : 'en';
+	}
+
+	/**
+	 * Check whether a value contains required policy URL placeholder
+	 *
+	 * @param string $value String value
+	 * @return bool
+	 */
+	private function has_policy_url_placeholder($value) {
+		return strpos($value, '%s') !== false || strpos($value, '%1$s') !== false;
+	}
+
+	/**
+	 * Get labels for fields missing required placeholders
+	 *
+	 * @param array $strings Sanitized string values by key
+	 * @return array
+	 */
+	private function get_invalid_placeholder_fields($strings) {
+		$invalid_fields = [];
+		$placeholder_keys = ['banner_link', 'modal_content_link'];
+
+		foreach ($placeholder_keys as $key) {
+			if (isset($strings[$key]) && $strings[$key] !== '' && !$this->has_policy_url_placeholder($strings[$key])) {
+				$invalid_fields[] = YTCT_Strings::get_key_label($key);
+			}
+		}
+
+		return $invalid_fields;
+	}
+
+	/**
+	 * Build diff-based custom string set against preset values
+	 *
+	 * @param array $strings Submitted sanitized strings
+	 * @param array $preset_translations Preset translations for selected language
+	 * @return array
+	 */
+	private function build_custom_string_diff($strings, $preset_translations) {
+		$custom_strings = [];
+		$string_keys = array_keys(YTCT_Strings::get_string_keys());
+
+		foreach ($string_keys as $key) {
+			if (!isset($strings[$key]) || $strings[$key] === '') {
+				continue;
+			}
+
+			$value = (string) $strings[$key];
+			$preset_value = isset($preset_translations[$key]) ? (string) $preset_translations[$key] : '';
+
+			if ($value !== $preset_value) {
+				$custom_strings[$key] = $value;
+			}
+		}
+
+		return $custom_strings;
+	}
+
+	/**
 	 * AJAX: Save settings
 	 */
 	public function ajax_save_settings() {
@@ -155,27 +222,46 @@ class YTCT_Admin {
 		// Hidden input sends "0" when unchecked, checkbox sends "1" when checked
 		$enabled = !empty($_POST['enabled']) && sanitize_text_field(wp_unslash($_POST['enabled'])) !== '0';
 		$language = isset($_POST['language']) ? sanitize_text_field(wp_unslash($_POST['language'])) : 'en';
-		
-		// Validate language
-		$valid_languages = array_keys(YTCT_Strings::get_languages());
-		if (!in_array($language, $valid_languages, true)) {
-			$language = 'en';
-		}
+		$language = $this->get_valid_language($language);
 
-		// Process custom strings
-		$custom_strings = [];
+		$resolved_language = YTCT_Strings::resolve_language_code($language, true);
+		$preset_translations = YTCT_Strings::get_translations($resolved_language);
+		$submitted_strings = [];
 		$string_keys = array_keys(YTCT_Strings::get_string_keys());
 		
-		foreach ($string_keys as $key) {
-			if (isset($_POST['strings'][$key])) {
+		if (isset($_POST['strings']) && is_array($_POST['strings'])) {
+			foreach ($string_keys as $key) {
+				if (!isset($_POST['strings'][$key])) {
+					continue;
+				}
+
 				// Use strict sanitization - only allow <a> tags
 				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized by sanitize_consent_string
-				$value = $this->sanitize_consent_string(wp_unslash($_POST['strings'][$key]));
+				$raw_value = wp_unslash($_POST['strings'][$key]);
+				if (!is_scalar($raw_value)) {
+					continue;
+				}
+
+				$value = $this->sanitize_consent_string((string) $raw_value);
 				if (!empty($value)) {
-					$custom_strings[$key] = $value;
+					$submitted_strings[$key] = $value;
 				}
 			}
 		}
+
+		$invalid_placeholder_fields = $this->get_invalid_placeholder_fields($submitted_strings);
+		if (!empty($invalid_placeholder_fields)) {
+			// translators: 1: %s placeholder, 2: %1$s placeholder, 3: field labels.
+			$message = sprintf(
+				__('The following fields must include %1$s or %2$s: %3$s', 'yt-consent-translations'),
+				'%s',
+				'%1$s',
+				implode(', ', $invalid_placeholder_fields)
+			);
+			wp_send_json_error(['message' => $message]);
+		}
+
+		$custom_strings = $this->build_custom_string_diff($submitted_strings, $preset_translations);
 
 		// Save options
 		$options = [
@@ -300,7 +386,7 @@ class YTCT_Admin {
 		$content = file_get_contents($ytct_file['tmp_name']);
 		$data = json_decode($content, true);
 
-		if (json_last_error() !== JSON_ERROR_NONE) {
+		if (json_last_error() !== JSON_ERROR_NONE || !is_array($data)) {
 			wp_send_json_error(['message' => __('Invalid JSON file.', 'yt-consent-translations')]);
 		}
 
@@ -312,22 +398,40 @@ class YTCT_Admin {
 		];
 
 		// Validate language
-		if (isset($data['language'])) {
-			$valid_languages = array_keys(YTCT_Strings::get_languages());
-			if (in_array($data['language'], $valid_languages, true)) {
-				$options['language'] = $data['language'];
-			}
+		if (isset($data['language']) && is_scalar($data['language'])) {
+			$options['language'] = $this->get_valid_language(sanitize_text_field((string) $data['language']));
 		}
+
+		$resolved_language = YTCT_Strings::resolve_language_code($options['language'], true);
+		$preset_translations = YTCT_Strings::get_translations($resolved_language);
+		$submitted_strings = [];
 
 		// Validate custom strings with strict sanitization
 		if (isset($data['custom_strings']) && is_array($data['custom_strings'])) {
 			$string_keys = array_keys(YTCT_Strings::get_string_keys());
 			foreach ($data['custom_strings'] as $key => $value) {
-				if (in_array($key, $string_keys, true)) {
-					$options['custom_strings'][$key] = $this->sanitize_consent_string($value);
+				if (in_array($key, $string_keys, true) && is_scalar($value)) {
+					$sanitized_value = $this->sanitize_consent_string((string) $value);
+					if ($sanitized_value !== '') {
+						$submitted_strings[$key] = $sanitized_value;
+					}
 				}
 			}
 		}
+
+		$invalid_placeholder_fields = $this->get_invalid_placeholder_fields($submitted_strings);
+		if (!empty($invalid_placeholder_fields)) {
+			// translators: 1: %s placeholder, 2: %1$s placeholder, 3: field labels.
+			$message = sprintf(
+				__('The following fields must include %1$s or %2$s: %3$s', 'yt-consent-translations'),
+				'%s',
+				'%1$s',
+				implode(', ', $invalid_placeholder_fields)
+			);
+			wp_send_json_error(['message' => $message]);
+		}
+
+		$options['custom_strings'] = $this->build_custom_string_diff($submitted_strings, $preset_translations);
 
 		update_option(YTCT_OPTION_NAME, $options);
 
@@ -356,17 +460,13 @@ class YTCT_Admin {
 		}
 
 		$language = isset($_POST['language']) ? sanitize_text_field(wp_unslash($_POST['language'])) : 'en';
-
-		// Validate language
-		$valid_languages = array_keys(YTCT_Strings::get_languages());
-		if (!in_array($language, $valid_languages, true)) {
-			$language = 'en';
-		}
-
-		$translations = YTCT_Strings::get_translations($language);
+		$language = $this->get_valid_language($language);
+		$resolved_language = YTCT_Strings::resolve_language_code($language, true);
+		$translations = YTCT_Strings::get_translations($resolved_language);
 
 		wp_send_json_success([
 			'language' => $language,
+			'resolvedLanguage' => $resolved_language,
 			'translations' => $translations
 		]);
 	}

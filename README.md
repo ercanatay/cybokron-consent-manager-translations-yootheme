@@ -1,6 +1,6 @@
 # YT Consent Translations
 
-[![WordPress Plugin Version](https://img.shields.io/badge/version-1.2.5-blue.svg)](https://github.com/ercanatay/yt-consent-translations)
+[![WordPress Plugin Version](https://img.shields.io/badge/version-1.2.6-blue.svg)](https://github.com/ercanatay/yt-consent-translations)
 [![WordPress Tested](https://img.shields.io/badge/WordPress-5.0--6.9-green.svg)](https://wordpress.org)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://php.net)
 [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -190,6 +190,12 @@ To add a new language, edit `includes/class-strings.php`:
 ```
 
 ## 📝 Changelog
+
+### 1.2.6 (2026-02-06)
+- **Auto Language**: Fixed admin preset preview for `auto` mode to use the detected WordPress language instead of defaulting to English
+- **Behavior**: `custom_strings` now stores only values different from the selected preset (diff-based save/import normalization)
+- **Validation**: Added blocking backend validation for required `%s`/`%1$s` placeholders in privacy policy link fields
+- **AJAX**: Updated language preset loading flow to resolve `auto` to the effective language without changing the selected value
 
 ### 1.2.5 (2026-01-22)
 - **Code Style**: Converted 4-space indentation to tabs in all PHP files
