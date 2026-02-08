@@ -593,7 +593,7 @@
         $select.empty();
         $select.append($('<option>', {
             value: '',
-            text: 'Select a snapshot'
+            text: ytctAdmin.strings.selectSnapshot
         }));
 
         if (!Array.isArray(snapshots)) {
@@ -616,7 +616,7 @@
     function restoreSnapshot() {
         var snapshotId = $('#ytct-snapshot-select').val();
         if (!snapshotId) {
-            showMessage('Select a snapshot first.', 'error');
+            showMessage(ytctAdmin.strings.selectSnapshotFirst, 'error');
             return;
         }
 
@@ -665,7 +665,7 @@
                     if (response.data.quality.status === 'ok') {
                         showMessage(ytctAdmin.strings.qualityCheckOk, 'success');
                     } else {
-                        showMessage('Quality check reported issues/warnings.', 'error');
+                        showMessage(ytctAdmin.strings.qualityCheckFailed, 'error');
                     }
                 } else {
                     showMessage((response.data && response.data.message) || ytctAdmin.strings.error, 'error');

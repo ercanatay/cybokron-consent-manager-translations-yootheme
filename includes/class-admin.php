@@ -122,7 +122,10 @@ class YTCT_Admin {
 				'healthCheckRunning' => __('Running compatibility health check...', 'yt-consent-translations'),
 				'healthCheckOk' => __('Compatibility check completed.', 'yt-consent-translations'),
 				'restored' => __('Snapshot restored successfully.', 'yt-consent-translations'),
-				'unsavedChanges' => __('You have unsaved changes. Leave without saving?', 'yt-consent-translations')
+				'unsavedChanges' => __('You have unsaved changes. Leave without saving?', 'yt-consent-translations'),
+				'selectSnapshot' => __('Select a snapshot', 'yt-consent-translations'),
+				'selectSnapshotFirst' => __('Select a snapshot first.', 'yt-consent-translations'),
+				'qualityCheckFailed' => __('Quality check reported issues/warnings.', 'yt-consent-translations')
 			]
 		]);
 	}

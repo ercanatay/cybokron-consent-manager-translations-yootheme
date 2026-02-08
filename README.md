@@ -188,7 +188,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ### Adding New Languages
 
-To add a new language, edit `includes/class-strings.php`:
+1. Edit `includes/class-strings.php` to register the language:
 
 ```php
 // Add to $languages array
@@ -196,12 +196,34 @@ To add a new language, edit `includes/class-strings.php`:
 
 // Add to $locale_map array
 'fr_FR' => 'fr',
+```
 
-// Add translations in get_all_translations()
-'fr' => [
-    'banner_text' => 'Nous utilisons des cookies...',
-    // ... other strings
-],
+2. Create a JSON file in the `languages/` directory (e.g., `languages/fr.json`) with all 21 string keys:
+
+```json
+{
+    "banner_text": "Nous utilisons des cookies...",
+    "banner_link": "Lisez notre <a href=\"%s\">Politique de confidentialité</a>.",
+    "button_accept": "Accepter",
+    "button_reject": "Refuser",
+    "button_settings": "Gérer les paramètres",
+    "modal_title": "Paramètres de confidentialité",
+    "modal_content": "...",
+    "modal_content_link": "En savoir plus dans notre <a href=\"%s\">Politique de confidentialité</a>.",
+    "functional_title": "Fonctionnel",
+    "preferences_title": "Préférences",
+    "statistics_title": "Statistiques",
+    "marketing_title": "Marketing",
+    "functional_content": "...",
+    "preferences_content": "...",
+    "statistics_content": "...",
+    "marketing_content": "...",
+    "show_services": "Afficher les services",
+    "hide_services": "Masquer les services",
+    "modal_accept": "Tout accepter",
+    "modal_reject": "Tout refuser",
+    "modal_save": "Enregistrer"
+}
 ```
 
 ## 📝 Changelog

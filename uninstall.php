@@ -55,12 +55,12 @@ ytct_delete_scoped_options();
 if (is_multisite()) {
 	// Using get_sites() for better compatibility with modern WordPress
 	$ytct_sites = get_sites(['fields' => 'ids']);
-	
-		foreach ($ytct_sites as $ytct_blog_id) {
-			switch_to_blog($ytct_blog_id);
-			delete_option('yt_consent_translations');
-			delete_option('ytct_health_report');
-			ytct_delete_scoped_options();
-			restore_current_blog();
-		}
+
+	foreach ($ytct_sites as $ytct_blog_id) {
+		switch_to_blog($ytct_blog_id);
+		delete_option('yt_consent_translations');
+		delete_option('ytct_health_report');
+		ytct_delete_scoped_options();
+		restore_current_blog();
 	}
+}

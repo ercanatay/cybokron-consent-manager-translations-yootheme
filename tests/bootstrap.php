@@ -124,10 +124,3 @@ if (!function_exists('wp_get_theme')) {
 		};
 	}
 }
-
-if (!function_exists('gmdate')) {
-	function gmdate($format, $timestamp = null) {
-		$timestamp = $timestamp ?? time();
-		return date($format, $timestamp);
-	}
-}
