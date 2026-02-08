@@ -391,15 +391,15 @@ class YTCT_Strings {
 	public static function get_string_groups() {
 		return [
 			'banner' => [
-				'label' => __('Banner', 'yt-consent-translations-1.3.2'),
+				'label' => __('Banner', 'yt-consent-translations-1.3.3'),
 				'keys' => ['banner_text', 'banner_link', 'button_accept', 'button_reject', 'button_settings']
 			],
 			'modal' => [
-				'label' => __('Modal', 'yt-consent-translations-1.3.2'),
+				'label' => __('Modal', 'yt-consent-translations-1.3.3'),
 				'keys' => ['modal_title', 'modal_content', 'modal_content_link']
 			],
 			'categories' => [
-				'label' => __('Categories', 'yt-consent-translations-1.3.2'),
+				'label' => __('Categories', 'yt-consent-translations-1.3.3'),
 				'keys' => [
 					'functional_title', 'functional_content',
 					'preferences_title', 'preferences_content',
@@ -408,7 +408,7 @@ class YTCT_Strings {
 				]
 			],
 			'buttons' => [
-				'label' => __('Buttons', 'yt-consent-translations-1.3.2'),
+				'label' => __('Buttons', 'yt-consent-translations-1.3.3'),
 				'keys' => ['show_services', 'hide_services', 'modal_accept', 'modal_reject', 'modal_save']
 			]
 		];
@@ -422,27 +422,27 @@ class YTCT_Strings {
 	 */
 	public static function get_key_label($key) {
 		$labels = [
-			'banner_text' => __('Banner Text', 'yt-consent-translations-1.3.2'),
-			'banner_link' => __('Privacy Policy Link', 'yt-consent-translations-1.3.2'),
-			'button_accept' => __('Accept Button', 'yt-consent-translations-1.3.2'),
-			'button_reject' => __('Reject Button', 'yt-consent-translations-1.3.2'),
-			'button_settings' => __('Settings Button', 'yt-consent-translations-1.3.2'),
-			'modal_title' => __('Modal Title', 'yt-consent-translations-1.3.2'),
-			'modal_content' => __('Modal Content', 'yt-consent-translations-1.3.2'),
-			'modal_content_link' => __('Modal Privacy Link', 'yt-consent-translations-1.3.2'),
-			'functional_title' => __('Functional Title', 'yt-consent-translations-1.3.2'),
-			'preferences_title' => __('Preferences Title', 'yt-consent-translations-1.3.2'),
-			'statistics_title' => __('Statistics Title', 'yt-consent-translations-1.3.2'),
-			'marketing_title' => __('Marketing Title', 'yt-consent-translations-1.3.2'),
-			'functional_content' => __('Functional Description', 'yt-consent-translations-1.3.2'),
-			'preferences_content' => __('Preferences Description', 'yt-consent-translations-1.3.2'),
-			'statistics_content' => __('Statistics Description', 'yt-consent-translations-1.3.2'),
-			'marketing_content' => __('Marketing Description', 'yt-consent-translations-1.3.2'),
-			'show_services' => __('Show Services', 'yt-consent-translations-1.3.2'),
-			'hide_services' => __('Hide Services', 'yt-consent-translations-1.3.2'),
-			'modal_accept' => __('Accept All Button', 'yt-consent-translations-1.3.2'),
-			'modal_reject' => __('Reject All Button', 'yt-consent-translations-1.3.2'),
-			'modal_save' => __('Save Button', 'yt-consent-translations-1.3.2')
+			'banner_text' => __('Banner Text', 'yt-consent-translations-1.3.3'),
+			'banner_link' => __('Privacy Policy Link', 'yt-consent-translations-1.3.3'),
+			'button_accept' => __('Accept Button', 'yt-consent-translations-1.3.3'),
+			'button_reject' => __('Reject Button', 'yt-consent-translations-1.3.3'),
+			'button_settings' => __('Settings Button', 'yt-consent-translations-1.3.3'),
+			'modal_title' => __('Modal Title', 'yt-consent-translations-1.3.3'),
+			'modal_content' => __('Modal Content', 'yt-consent-translations-1.3.3'),
+			'modal_content_link' => __('Modal Privacy Link', 'yt-consent-translations-1.3.3'),
+			'functional_title' => __('Functional Title', 'yt-consent-translations-1.3.3'),
+			'preferences_title' => __('Preferences Title', 'yt-consent-translations-1.3.3'),
+			'statistics_title' => __('Statistics Title', 'yt-consent-translations-1.3.3'),
+			'marketing_title' => __('Marketing Title', 'yt-consent-translations-1.3.3'),
+			'functional_content' => __('Functional Description', 'yt-consent-translations-1.3.3'),
+			'preferences_content' => __('Preferences Description', 'yt-consent-translations-1.3.3'),
+			'statistics_content' => __('Statistics Description', 'yt-consent-translations-1.3.3'),
+			'marketing_content' => __('Marketing Description', 'yt-consent-translations-1.3.3'),
+			'show_services' => __('Show Services', 'yt-consent-translations-1.3.3'),
+			'hide_services' => __('Hide Services', 'yt-consent-translations-1.3.3'),
+			'modal_accept' => __('Accept All Button', 'yt-consent-translations-1.3.3'),
+			'modal_reject' => __('Reject All Button', 'yt-consent-translations-1.3.3'),
+			'modal_save' => __('Save Button', 'yt-consent-translations-1.3.3')
 		];
 
 		return isset($labels[$key]) ? $labels[$key] : $key;

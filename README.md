@@ -1,6 +1,6 @@
 # YT Consent Translations
 
-[![WordPress Plugin Version](https://img.shields.io/badge/version-1.3.2-blue.svg)](https://github.com/ercanatay/yt-consent-translations)
+[![WordPress Plugin Version](https://img.shields.io/badge/version-1.3.3-blue.svg)](https://github.com/ercanatay/yt-consent-translations)
 [![WordPress Tested](https://img.shields.io/badge/WordPress-5.0--6.9-green.svg)](https://wordpress.org)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://php.net)
 [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -244,6 +244,10 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ```
 
 ## 📝 Changelog
+
+### 1.3.3 (2026-02-08)
+- **Double-Check Release**: Re-ran full syntax/tests/JSON/security validation sweep across the plugin with clean results
+- **Release Sync**: Updated version/text-domain metadata for the current release package
 
 ### 1.3.2 (2026-02-08)
 - **Plugin Check**: Hardened admin request parsing with sanitized `filter_input()` paths and explicit nonce-context handling for upload payload access

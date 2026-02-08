@@ -3,7 +3,7 @@ Contributors: ercanatay
 Tags: yootheme, consent-manager, gdpr, cookie-consent, translation
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -79,6 +79,10 @@ Use the Export button to download a JSON file of your current settings. You can 
 5. Import/Export functionality
 
 == Changelog ==
+
+= 1.3.3 =
+* Full double-check release: reran syntax/tests/JSON/security scans across the plugin and validated clean results.
+* Maintenance: version/text-domain sync for current release packaging.
 
 = 1.3.2 =
 * Plugin Check hardening: added sanitized `filter_input()` request handling in admin flows and clarified nonce handling for upload endpoints.
@@ -160,6 +164,9 @@ Use the Export button to download a JSON file of your current settings. You can 
 * Tabbed admin interface
 
 == Upgrade Notice ==
+
+= 1.3.3 =
+Maintenance verification release with full project re-check and synchronized version metadata.
 
 = 1.3.2 =
 Plugin Check compliance release focused on admin request hardening, i18n placeholder/domain fixes, and production package cleanup.

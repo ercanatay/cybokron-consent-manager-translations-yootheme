@@ -58,8 +58,8 @@ $ytct_snapshots = YTCT_Options::get_snapshots($ytct_scope_locale);
 
 <div class="ytct-wrap">
 	<div class="ytct-header">
-		<h1><?php esc_html_e('YT Consent Translations', 'yt-consent-translations-1.3.2'); ?></h1>
-		<p><?php esc_html_e('Locale-aware consent translation management with live preview, health checks, and rollback snapshots.', 'yt-consent-translations-1.3.2'); ?></p>
+		<h1><?php esc_html_e('YT Consent Translations', 'yt-consent-translations-1.3.3'); ?></h1>
+		<p><?php esc_html_e('Locale-aware consent translation management with live preview, health checks, and rollback snapshots.', 'yt-consent-translations-1.3.3'); ?></p>
 	</div>
 
 	<div id="ytct-message" class="ytct-message" aria-live="polite"></div>
@@ -71,7 +71,7 @@ $ytct_snapshots = YTCT_Options::get_snapshots($ytct_scope_locale);
 			<div class="ytct-top-bar">
 				<div class="ytct-select-grid">
 					<div class="ytct-language-select">
-						<label for="ytct-scope-locale"><?php esc_html_e('Settings Locale Scope:', 'yt-consent-translations-1.3.2'); ?></label>
+						<label for="ytct-scope-locale"><?php esc_html_e('Settings Locale Scope:', 'yt-consent-translations-1.3.3'); ?></label>
 						<select id="ytct-scope-locale" name="scope_locale">
 							<?php foreach ($ytct_scope_locales as $ytct_locale_option) : ?>
 								<option value="<?php echo esc_attr($ytct_locale_option); ?>" <?php selected($ytct_scope_locale, $ytct_locale_option); ?>>
@@ -82,7 +82,7 @@ $ytct_snapshots = YTCT_Options::get_snapshots($ytct_scope_locale);
 					</div>
 
 					<div class="ytct-language-select">
-						<label for="ytct-language"><?php esc_html_e('Language Preset:', 'yt-consent-translations-1.3.2'); ?></label>
+						<label for="ytct-language"><?php esc_html_e('Language Preset:', 'yt-consent-translations-1.3.3'); ?></label>
 						<select id="ytct-language" name="language">
 							<?php foreach ($ytct_languages as $ytct_code => $ytct_name) : ?>
 								<option value="<?php echo esc_attr($ytct_code); ?>" <?php selected($ytct_current_language, $ytct_code); ?>>
@@ -99,14 +99,14 @@ $ytct_snapshots = YTCT_Options::get_snapshots($ytct_scope_locale);
 						<small class="ytct-help-text">
 							<?php
 							/* translators: %s WordPress locale code */
-							printf(esc_html__('Scope locale: %s', 'yt-consent-translations-1.3.2'), '<strong>' . esc_html($ytct_scope_locale) . '</strong>');
+							printf(esc_html__('Scope locale: %s', 'yt-consent-translations-1.3.3'), '<strong>' . esc_html($ytct_scope_locale) . '</strong>');
 							?>
 						</small>
 					</div>
 				</div>
 
 				<div class="ytct-toggle">
-					<label for="ytct-enabled"><?php esc_html_e('Enable Translations:', 'yt-consent-translations-1.3.2'); ?></label>
+					<label for="ytct-enabled"><?php esc_html_e('Enable Translations:', 'yt-consent-translations-1.3.3'); ?></label>
 					<label class="ytct-switch">
 						<input type="hidden" name="enabled" value="0">
 						<input type="checkbox" id="ytct-enabled" name="enabled" value="1" <?php checked($ytct_enabled); ?>>
@@ -116,8 +116,8 @@ $ytct_snapshots = YTCT_Options::get_snapshots($ytct_scope_locale);
 			</div>
 
 			<div id="ytct-health-panel" class="ytct-health ytct-health-<?php echo esc_attr($ytct_health['status']); ?>">
-				<h3><?php esc_html_e('Compatibility Health', 'yt-consent-translations-1.3.2'); ?></h3>
-				<p><?php esc_html_e('Monitors compatibility with YOOtheme consent source strings.', 'yt-consent-translations-1.3.2'); ?></p>
+				<h3><?php esc_html_e('Compatibility Health', 'yt-consent-translations-1.3.3'); ?></h3>
+				<p><?php esc_html_e('Monitors compatibility with YOOtheme consent source strings.', 'yt-consent-translations-1.3.3'); ?></p>
 				<ul class="ytct-health-list" id="ytct-health-list">
 					<?php if (!empty($ytct_health['issues'])) : ?>
 						<?php foreach ($ytct_health['issues'] as $ytct_issue) : ?>
@@ -128,7 +128,7 @@ $ytct_snapshots = YTCT_Options::get_snapshots($ytct_scope_locale);
 							<li class="ytct-health-warning"><?php echo esc_html($ytct_warning); ?></li>
 						<?php endforeach; ?>
 					<?php else : ?>
-						<li class="ytct-health-ok"><?php esc_html_e('No compatibility issues reported.', 'yt-consent-translations-1.3.2'); ?></li>
+						<li class="ytct-health-ok"><?php esc_html_e('No compatibility issues reported.', 'yt-consent-translations-1.3.3'); ?></li>
 					<?php endif; ?>
 				</ul>
 			</div>
@@ -145,7 +145,7 @@ $ytct_snapshots = YTCT_Options::get_snapshots($ytct_scope_locale);
 				<div id="ytct-tab-<?php echo esc_attr($ytct_group_id); ?>" class="ytct-tab-content<?php echo $ytct_group_id === 'banner' ? ' active' : ''; ?>">
 					<div class="ytct-category-header">
 						<span class="ytct-category-icon"><?php echo esc_html(strtoupper(substr($ytct_group_id, 0, 1))); ?></span>
-						<h3><?php echo esc_html($ytct_group['label']); ?> <?php esc_html_e('Strings', 'yt-consent-translations-1.3.2'); ?></h3>
+						<h3><?php echo esc_html($ytct_group['label']); ?> <?php esc_html_e('Strings', 'yt-consent-translations-1.3.3'); ?></h3>
 					</div>
 
 					<?php foreach ($ytct_group['keys'] as $ytct_key) :
@@ -161,7 +161,7 @@ $ytct_snapshots = YTCT_Options::get_snapshots($ytct_scope_locale);
 							</label>
 
 							<div class="ytct-original">
-								<strong><?php esc_html_e('Original:', 'yt-consent-translations-1.3.2'); ?></strong><br>
+								<strong><?php esc_html_e('Original:', 'yt-consent-translations-1.3.3'); ?></strong><br>
 								<?php echo esc_html($ytct_original); ?>
 							</div>
 
@@ -173,7 +173,7 @@ $ytct_snapshots = YTCT_Options::get_snapshots($ytct_scope_locale);
 									data-key="<?php echo esc_attr($ytct_key); ?>"
 									data-original-length="<?php echo esc_attr(strlen($ytct_original)); ?>"
 									data-preset="<?php echo esc_attr($ytct_preset); ?>"
-									placeholder="<?php esc_attr_e('Enter translation...', 'yt-consent-translations-1.3.2'); ?>"
+									placeholder="<?php esc_attr_e('Enter translation...', 'yt-consent-translations-1.3.3'); ?>"
 								><?php echo esc_textarea($ytct_value); ?></textarea>
 							<?php else : ?>
 								<input
@@ -185,13 +185,13 @@ $ytct_snapshots = YTCT_Options::get_snapshots($ytct_scope_locale);
 									data-key="<?php echo esc_attr($ytct_key); ?>"
 									data-original-length="<?php echo esc_attr(strlen($ytct_original)); ?>"
 									data-preset="<?php echo esc_attr($ytct_preset); ?>"
-									placeholder="<?php esc_attr_e('Enter translation...', 'yt-consent-translations-1.3.2'); ?>"
+									placeholder="<?php esc_attr_e('Enter translation...', 'yt-consent-translations-1.3.3'); ?>"
 								>
 							<?php endif; ?>
 
 							<div class="ytct-field-tools">
 								<button type="button" class="ytct-btn ytct-btn-link ytct-reset-field" data-key="<?php echo esc_attr($ytct_key); ?>">
-									<?php esc_html_e('Reset Field', 'yt-consent-translations-1.3.2'); ?>
+									<?php esc_html_e('Reset Field', 'yt-consent-translations-1.3.3'); ?>
 								</button>
 								<span class="ytct-field-metrics" data-key="<?php echo esc_attr($ytct_key); ?>"></span>
 							</div>
@@ -201,7 +201,7 @@ $ytct_snapshots = YTCT_Options::get_snapshots($ytct_scope_locale);
 									<?php
 									/* translators: 1: %s placeholder token, 2: %1$s placeholder token. */
 									printf(
-										esc_html__('Keep %1$s or %2$s in your translation. It will be replaced with the Privacy Policy URL.', 'yt-consent-translations-1.3.2'),
+										esc_html__('Keep %1$s or %2$s in your translation. It will be replaced with the Privacy Policy URL.', 'yt-consent-translations-1.3.3'),
 										'%s',
 										'%1$s'
 									);
@@ -216,7 +216,7 @@ $ytct_snapshots = YTCT_Options::get_snapshots($ytct_scope_locale);
 			<?php endforeach; ?>
 
 			<div class="ytct-preview-panel" id="ytct-preview-panel">
-				<h3><?php esc_html_e('Live Preview', 'yt-consent-translations-1.3.2'); ?></h3>
+				<h3><?php esc_html_e('Live Preview', 'yt-consent-translations-1.3.3'); ?></h3>
 				<div class="ytct-preview-banner">
 					<p class="ytct-preview-text" data-preview-key="banner_text"><?php echo esc_html(isset($ytct_effective_strings['banner_text']) ? $ytct_effective_strings['banner_text'] : ''); ?></p>
 					<p class="ytct-preview-link" data-preview-key="banner_link"><?php echo wp_kses_post(isset($ytct_effective_strings['banner_link']) ? str_replace('%s', '#', $ytct_effective_strings['banner_link']) : ''); ?></p>
@@ -241,33 +241,33 @@ $ytct_snapshots = YTCT_Options::get_snapshots($ytct_scope_locale);
 			<div class="ytct-footer">
 				<div class="ytct-primary-actions">
 					<button type="submit" id="ytct-save-btn" class="ytct-btn ytct-btn-primary">
-						<?php esc_html_e('Save Changes', 'yt-consent-translations-1.3.2'); ?>
+						<?php esc_html_e('Save Changes', 'yt-consent-translations-1.3.3'); ?>
 					</button>
 					<button type="button" id="ytct-reset-btn" class="ytct-btn ytct-btn-danger">
-						<?php esc_html_e('Reset to Default', 'yt-consent-translations-1.3.2'); ?>
+						<?php esc_html_e('Reset to Default', 'yt-consent-translations-1.3.3'); ?>
 					</button>
 				</div>
 
 				<div class="ytct-secondary-actions">
 					<button type="button" id="ytct-quality-btn" class="ytct-btn ytct-btn-secondary">
-						<?php esc_html_e('Run QA Check', 'yt-consent-translations-1.3.2'); ?>
+						<?php esc_html_e('Run QA Check', 'yt-consent-translations-1.3.3'); ?>
 					</button>
 					<button type="button" id="ytct-health-btn" class="ytct-btn ytct-btn-secondary">
-						<?php esc_html_e('Run Health Check', 'yt-consent-translations-1.3.2'); ?>
+						<?php esc_html_e('Run Health Check', 'yt-consent-translations-1.3.3'); ?>
 					</button>
 					<button type="button" id="ytct-import-btn" class="ytct-btn ytct-btn-secondary">
-						<?php esc_html_e('Import', 'yt-consent-translations-1.3.2'); ?>
+						<?php esc_html_e('Import', 'yt-consent-translations-1.3.3'); ?>
 					</button>
 					<button type="button" id="ytct-export-btn" class="ytct-btn ytct-btn-secondary">
-						<?php esc_html_e('Export', 'yt-consent-translations-1.3.2'); ?>
+						<?php esc_html_e('Export', 'yt-consent-translations-1.3.3'); ?>
 					</button>
 				</div>
 			</div>
 
 			<div class="ytct-snapshot-tools">
-				<label for="ytct-snapshot-select"><?php esc_html_e('Snapshots:', 'yt-consent-translations-1.3.2'); ?></label>
+				<label for="ytct-snapshot-select"><?php esc_html_e('Snapshots:', 'yt-consent-translations-1.3.3'); ?></label>
 				<select id="ytct-snapshot-select">
-					<option value=""><?php esc_html_e('Select a snapshot', 'yt-consent-translations-1.3.2'); ?></option>
+					<option value=""><?php esc_html_e('Select a snapshot', 'yt-consent-translations-1.3.3'); ?></option>
 					<?php foreach ($ytct_snapshots as $ytct_snapshot) : ?>
 						<option value="<?php echo esc_attr($ytct_snapshot['id']); ?>">
 							<?php
@@ -283,7 +283,7 @@ $ytct_snapshots = YTCT_Options::get_snapshots($ytct_scope_locale);
 					<?php endforeach; ?>
 				</select>
 				<button type="button" id="ytct-restore-btn" class="ytct-btn ytct-btn-secondary">
-					<?php esc_html_e('Restore Snapshot', 'yt-consent-translations-1.3.2'); ?>
+					<?php esc_html_e('Restore Snapshot', 'yt-consent-translations-1.3.3'); ?>
 				</button>
 			</div>
 
@@ -294,19 +294,19 @@ $ytct_snapshots = YTCT_Options::get_snapshots($ytct_scope_locale);
 
 <div id="ytct-import-modal" class="ytct-modal-overlay">
 	<div class="ytct-modal">
-		<h3><?php esc_html_e('Import Settings', 'yt-consent-translations-1.3.2'); ?></h3>
+		<h3><?php esc_html_e('Import Settings', 'yt-consent-translations-1.3.3'); ?></h3>
 		<form id="ytct-import-form" enctype="multipart/form-data">
 			<div class="ytct-file-input-wrapper">
 				<input type="file" id="ytct-import-file" accept=".json">
-				<p><?php esc_html_e('Click or drag a JSON file here', 'yt-consent-translations-1.3.2'); ?></p>
+				<p><?php esc_html_e('Click or drag a JSON file here', 'yt-consent-translations-1.3.3'); ?></p>
 				<p class="ytct-file-name" style="display: none;"></p>
 			</div>
 			<div class="ytct-modal-actions">
 				<button type="button" class="ytct-btn ytct-btn-secondary ytct-modal-close">
-					<?php esc_html_e('Cancel', 'yt-consent-translations-1.3.2'); ?>
+					<?php esc_html_e('Cancel', 'yt-consent-translations-1.3.3'); ?>
 				</button>
 				<button type="submit" id="ytct-import-submit" class="ytct-btn ytct-btn-primary">
-					<?php esc_html_e('Import', 'yt-consent-translations-1.3.2'); ?>
+					<?php esc_html_e('Import', 'yt-consent-translations-1.3.3'); ?>
 				</button>
 			</div>
 		</form>
