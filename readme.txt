@@ -3,7 +3,7 @@ Contributors: ercanatay
 Tags: yootheme, consent-manager, gdpr, cookie-consent, translation
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -77,6 +77,13 @@ Use the Export button to download a JSON file of your current settings. You can 
 
 == Changelog ==
 
+= 1.2.7 =
+* Performance: Replaced repeated array scans with constant-time lookup maps (`isset`) in language/placeholder validation paths
+* Improved: Added `YTCT_Strings::is_valid_language()` helper and reused it in admin validation flow
+* Quality: Minor internal cleanups and formatting consistency updates for admin/settings rendering
+* Tooling: Added security policy, daily review workflow, and maintenance scripts for code scanning/reporting
+* Docs: Updated contributor workflow and compatibility notes in repository documentation
+
 = 1.2.6 =
 * Fixed: Auto language preset now resolves to detected WordPress locale in admin preview/load flows
 * Improved: custom_strings are now stored as diff-only values against selected preset (save/import normalization)
@@ -130,6 +137,9 @@ Use the Export button to download a JSON file of your current settings. You can 
 * Tabbed admin interface
 
 == Upgrade Notice ==
+
+= 1.2.7 =
+Maintenance release with performance optimizations, validation hardening, and documentation/tooling updates.
 
 = 1.2.6 =
 Behavioral bugfix release for auto mode preview, diff-based custom string storage, and placeholder safety validation.

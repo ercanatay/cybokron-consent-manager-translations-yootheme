@@ -1,6 +1,6 @@
 # YT Consent Translations
 
-[![WordPress Plugin Version](https://img.shields.io/badge/version-1.2.6-blue.svg)](https://github.com/ercanatay/yt-consent-translations)
+[![WordPress Plugin Version](https://img.shields.io/badge/version-1.2.7-blue.svg)](https://github.com/ercanatay/yt-consent-translations)
 [![WordPress Tested](https://img.shields.io/badge/WordPress-5.0--6.9-green.svg)](https://wordpress.org)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://php.net)
 [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -190,6 +190,13 @@ To add a new language, edit `includes/class-strings.php`:
 ```
 
 ## 📝 Changelog
+
+### 1.2.7 (2026-02-08)
+- **Performance**: Replaced repeated `in_array()` scans with constant-time lookup maps (`isset`) in import/language/placeholder validation paths
+- **Validation**: Added and adopted `YTCT_Strings::is_valid_language()` to centralize language whitelist checks
+- **Code Quality**: Cleaned up internal iteration logic in translation loading and normalized admin/settings indentation consistency
+- **Tooling**: Added security policy, daily review GitHub Action, and maintenance scripts (`scan_code.py`, `daily_report.py`, `fix_indentation.py`)
+- **Docs**: Updated contributing workflow and compatibility/readme details
 
 ### 1.2.6 (2026-02-06)
 - **Auto Language**: Fixed admin preset preview for `auto` mode to use the detected WordPress language instead of defaulting to English

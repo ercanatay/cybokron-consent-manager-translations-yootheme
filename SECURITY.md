@@ -1,7 +1,7 @@
 # Security Policy
 
 ## Supported Versions
-Current supported version: **1.2.6**
+Current supported version: **1.2.7**
 
 ## Reporting a Vulnerability
 Please report any security vulnerabilities to the plugin author via the [GitHub Issues page](https://github.com/ercanatay/yt-consent-translations/issues).
