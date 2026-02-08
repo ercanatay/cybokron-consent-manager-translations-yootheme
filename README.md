@@ -1,6 +1,6 @@
 # YT Consent Translations
 
-[![WordPress Plugin Version](https://img.shields.io/badge/version-1.3.0-blue.svg)](https://github.com/ercanatay/yt-consent-translations)
+[![WordPress Plugin Version](https://img.shields.io/badge/version-1.3.1-blue.svg)](https://github.com/ercanatay/yt-consent-translations)
 [![WordPress Tested](https://img.shields.io/badge/WordPress-5.0--6.9-green.svg)](https://wordpress.org)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://php.net)
 [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -227,6 +227,12 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ```
 
 ## 📝 Changelog
+
+### 1.3.1 (2026-02-08)
+- **i18n Fix**: Replaced hardcoded snapshot/quality-check admin messages in JavaScript with localized strings from PHP
+- **Uninstall Fix**: Corrected multisite uninstall block structure so scoped option cleanup always runs in the intended loop
+- **Test Cleanup**: Removed redundant `gmdate()` shim from test bootstrap to avoid dead-code shadowing
+- **Docs**: Clarified the new-language contribution flow with explicit JSON file requirements
 
 ### 1.3.0 (2026-02-08)
 - **Per-Locale Overrides**: Added locale-scoped settings storage to support different translation overrides by WordPress locale

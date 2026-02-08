@@ -3,7 +3,7 @@ Contributors: ercanatay
 Tags: yootheme, consent-manager, gdpr, cookie-consent, translation
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -80,6 +80,12 @@ Use the Export button to download a JSON file of your current settings. You can 
 
 == Changelog ==
 
+= 1.3.1 =
+* Fixed i18n coverage for snapshot/quality-check admin messages by replacing hardcoded JavaScript text with localized strings
+* Fixed uninstall script block structure for multisite cleanup flow
+* Removed redundant `gmdate()` test bootstrap shim to avoid dead-code shadowing in PHP environments
+* Docs: Clarified "add new language" workflow with explicit JSON-file requirements
+
 = 1.3.0 =
 * Added locale-scoped settings storage for multilingual workflows (WPML/Polylang friendly)
 * Added compatibility health reporting for potential YOOtheme source string drift
@@ -148,6 +154,9 @@ Use the Export button to download a JSON file of your current settings. You can 
 * Tabbed admin interface
 
 == Upgrade Notice ==
+
+= 1.3.1 =
+Maintenance bugfix release with localized admin UI messages, multisite uninstall cleanup fix, and test bootstrap cleanup.
 
 = 1.3.0 =
 Feature release with locale-scoped overrides, live preview, compatibility monitoring, rollback snapshots, and release gate tests.
