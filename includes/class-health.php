@@ -184,15 +184,15 @@ class YTCT_Health {
 		$is_yootheme = stripos($theme_name, 'yootheme') !== false || stripos($template, 'yootheme') !== false;
 
 		if (!$is_yootheme) {
-			$warnings[] = __('Active theme does not appear to be YOOtheme. Translation interception may stay inactive.', 'yt-consent-translations-1.3.4');
+			$warnings[] = __('Active theme does not appear to be YOOtheme. Translation interception may stay inactive.', 'yt-consent-translations-1.3.5');
 		}
 
 		if ($enabled && (int) $report['matched_count'] === 0) {
-			$warnings[] = __('No matching consent strings have been intercepted yet. Open a frontend page with the consent banner to verify compatibility.', 'yt-consent-translations-1.3.4');
+			$warnings[] = __('No matching consent strings have been intercepted yet. Open a frontend page with the consent banner to verify compatibility.', 'yt-consent-translations-1.3.5');
 		}
 
 		if (!empty($report['unmatched_strings'])) {
-			$issues[] = __('Potential consent-related YOOtheme source strings were detected but not matched by this plugin. YOOtheme may have changed wording.', 'yt-consent-translations-1.3.4');
+			$issues[] = __('Potential consent-related YOOtheme source strings were detected but not matched by this plugin. YOOtheme may have changed wording.', 'yt-consent-translations-1.3.5');
 		}
 
 		$status = 'healthy';

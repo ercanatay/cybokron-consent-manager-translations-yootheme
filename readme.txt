@@ -3,7 +3,7 @@ Contributors: ercanatay
 Tags: yootheme, consent-manager, gdpr, cookie-consent, translation
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.3.4
+Stable tag: 1.3.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -84,6 +84,10 @@ Enable the "GitHub Stable Auto Update" toggle from plugin settings. The plugin c
 5. Import/Export functionality
 
 == Changelog ==
+
+= 1.3.5 =
+* Completed Romanian preset translation gap: updated `button_accept` from `Accept` to `Acceptă`.
+* Synced plugin metadata/versioning and text-domain references to `1.3.5`.
 
 = 1.3.4 =
 * Added GitHub stable auto-update channel using WordPress Upgrader with `releases/latest` + `zipball_url` fallback.
@@ -176,6 +180,9 @@ Enable the "GitHub Stable Auto Update" toggle from plugin settings. The plugin c
 * Tabbed admin interface
 
 == Upgrade Notice ==
+
+= 1.3.5 =
+Language completeness maintenance release for Romanian preset correction and release metadata sync.
 
 = 1.3.4 =
 Feature release with GitHub stable auto-update channel, scheduled background checks, manual check action, and updater observability in admin settings.

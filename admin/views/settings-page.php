@@ -60,8 +60,8 @@ $ytct_update_channel_enabled = isset($ytct_updater['enabled']) ? (bool) $ytct_up
 
 <div class="ytct-wrap">
 	<div class="ytct-header">
-		<h1><?php esc_html_e('YT Consent Translations', 'yt-consent-translations-1.3.4'); ?></h1>
-		<p><?php esc_html_e('Locale-aware consent translation management with live preview, health checks, and rollback snapshots.', 'yt-consent-translations-1.3.4'); ?></p>
+		<h1><?php esc_html_e('YT Consent Translations', 'yt-consent-translations-1.3.5'); ?></h1>
+		<p><?php esc_html_e('Locale-aware consent translation management with live preview, health checks, and rollback snapshots.', 'yt-consent-translations-1.3.5'); ?></p>
 	</div>
 
 	<div id="ytct-message" class="ytct-message" aria-live="polite"></div>
@@ -73,7 +73,7 @@ $ytct_update_channel_enabled = isset($ytct_updater['enabled']) ? (bool) $ytct_up
 			<div class="ytct-top-bar">
 				<div class="ytct-select-grid">
 					<div class="ytct-language-select">
-						<label for="ytct-scope-locale"><?php esc_html_e('Settings Locale Scope:', 'yt-consent-translations-1.3.4'); ?></label>
+						<label for="ytct-scope-locale"><?php esc_html_e('Settings Locale Scope:', 'yt-consent-translations-1.3.5'); ?></label>
 						<select id="ytct-scope-locale" name="scope_locale">
 							<?php foreach ($ytct_scope_locales as $ytct_locale_option) : ?>
 								<option value="<?php echo esc_attr($ytct_locale_option); ?>" <?php selected($ytct_scope_locale, $ytct_locale_option); ?>>
@@ -84,7 +84,7 @@ $ytct_update_channel_enabled = isset($ytct_updater['enabled']) ? (bool) $ytct_up
 					</div>
 
 					<div class="ytct-language-select">
-						<label for="ytct-language"><?php esc_html_e('Language Preset:', 'yt-consent-translations-1.3.4'); ?></label>
+						<label for="ytct-language"><?php esc_html_e('Language Preset:', 'yt-consent-translations-1.3.5'); ?></label>
 						<select id="ytct-language" name="language">
 							<?php foreach ($ytct_languages as $ytct_code => $ytct_name) : ?>
 								<option value="<?php echo esc_attr($ytct_code); ?>" <?php selected($ytct_current_language, $ytct_code); ?>>
@@ -101,14 +101,14 @@ $ytct_update_channel_enabled = isset($ytct_updater['enabled']) ? (bool) $ytct_up
 						<small class="ytct-help-text">
 							<?php
 							/* translators: %s WordPress locale code */
-							printf(esc_html__('Scope locale: %s', 'yt-consent-translations-1.3.4'), '<strong>' . esc_html($ytct_scope_locale) . '</strong>');
+							printf(esc_html__('Scope locale: %s', 'yt-consent-translations-1.3.5'), '<strong>' . esc_html($ytct_scope_locale) . '</strong>');
 							?>
 						</small>
 					</div>
 				</div>
 
 				<div class="ytct-toggle">
-					<label for="ytct-enabled"><?php esc_html_e('Enable Translations:', 'yt-consent-translations-1.3.4'); ?></label>
+					<label for="ytct-enabled"><?php esc_html_e('Enable Translations:', 'yt-consent-translations-1.3.5'); ?></label>
 					<label class="ytct-switch">
 						<input type="hidden" name="enabled" value="0">
 						<input type="checkbox" id="ytct-enabled" name="enabled" value="1" <?php checked($ytct_enabled); ?>>
@@ -119,9 +119,9 @@ $ytct_update_channel_enabled = isset($ytct_updater['enabled']) ? (bool) $ytct_up
 
 			<div id="ytct-updater-panel" class="ytct-updater-panel">
 				<div class="ytct-updater-head">
-					<h3><?php esc_html_e('GitHub Stable Auto Update', 'yt-consent-translations-1.3.4'); ?></h3>
+					<h3><?php esc_html_e('GitHub Stable Auto Update', 'yt-consent-translations-1.3.5'); ?></h3>
 					<div class="ytct-toggle">
-						<label for="ytct-update-channel-enabled"><?php esc_html_e('Enable Channel:', 'yt-consent-translations-1.3.4'); ?></label>
+						<label for="ytct-update-channel-enabled"><?php esc_html_e('Enable Channel:', 'yt-consent-translations-1.3.5'); ?></label>
 						<label class="ytct-switch">
 							<input type="hidden" name="update_channel_enabled" value="0">
 							<input type="checkbox" id="ytct-update-channel-enabled" name="update_channel_enabled" value="1" <?php checked($ytct_update_channel_enabled); ?>>
@@ -130,44 +130,44 @@ $ytct_update_channel_enabled = isset($ytct_updater['enabled']) ? (bool) $ytct_up
 					</div>
 				</div>
 				<p class="ytct-help-text">
-					<?php esc_html_e('This updater setting is site-wide (not locale scoped). Channel: stable, interval: every 12 hours.', 'yt-consent-translations-1.3.4'); ?>
+					<?php esc_html_e('This updater setting is site-wide (not locale scoped). Channel: stable, interval: every 12 hours.', 'yt-consent-translations-1.3.5'); ?>
 				</p>
 				<div class="ytct-updater-grid">
 					<div class="ytct-updater-item">
-						<span class="ytct-updater-label"><?php esc_html_e('Current Version:', 'yt-consent-translations-1.3.4'); ?></span>
+						<span class="ytct-updater-label"><?php esc_html_e('Current Version:', 'yt-consent-translations-1.3.5'); ?></span>
 						<strong id="ytct-updater-current-version"><?php echo esc_html(isset($ytct_updater['currentVersion']) ? $ytct_updater['currentVersion'] : YTCT_VERSION); ?></strong>
 					</div>
 					<div class="ytct-updater-item">
-						<span class="ytct-updater-label"><?php esc_html_e('Latest Version:', 'yt-consent-translations-1.3.4'); ?></span>
-						<strong id="ytct-updater-latest-version"><?php echo esc_html(!empty($ytct_updater['latestVersion']) ? $ytct_updater['latestVersion'] : __('Unknown', 'yt-consent-translations-1.3.4')); ?></strong>
+						<span class="ytct-updater-label"><?php esc_html_e('Latest Version:', 'yt-consent-translations-1.3.5'); ?></span>
+						<strong id="ytct-updater-latest-version"><?php echo esc_html(!empty($ytct_updater['latestVersion']) ? $ytct_updater['latestVersion'] : __('Unknown', 'yt-consent-translations-1.3.5')); ?></strong>
 					</div>
 					<div class="ytct-updater-item">
-						<span class="ytct-updater-label"><?php esc_html_e('Last Check:', 'yt-consent-translations-1.3.4'); ?></span>
-						<strong id="ytct-updater-last-check"><?php echo esc_html(!empty($ytct_updater['lastCheckedAt']) ? $ytct_updater['lastCheckedAt'] : __('Never', 'yt-consent-translations-1.3.4')); ?></strong>
+						<span class="ytct-updater-label"><?php esc_html_e('Last Check:', 'yt-consent-translations-1.3.5'); ?></span>
+						<strong id="ytct-updater-last-check"><?php echo esc_html(!empty($ytct_updater['lastCheckedAt']) ? $ytct_updater['lastCheckedAt'] : __('Never', 'yt-consent-translations-1.3.5')); ?></strong>
 					</div>
 					<div class="ytct-updater-item">
-						<span class="ytct-updater-label"><?php esc_html_e('Last Status:', 'yt-consent-translations-1.3.4'); ?></span>
-						<strong id="ytct-updater-status"><?php echo esc_html(!empty($ytct_updater['status']) ? $ytct_updater['status'] : __('idle', 'yt-consent-translations-1.3.4')); ?></strong>
+						<span class="ytct-updater-label"><?php esc_html_e('Last Status:', 'yt-consent-translations-1.3.5'); ?></span>
+						<strong id="ytct-updater-status"><?php echo esc_html(!empty($ytct_updater['status']) ? $ytct_updater['status'] : __('idle', 'yt-consent-translations-1.3.5')); ?></strong>
 					</div>
 					<div class="ytct-updater-item">
-						<span class="ytct-updater-label"><?php esc_html_e('Last Install:', 'yt-consent-translations-1.3.4'); ?></span>
-						<strong id="ytct-updater-last-install"><?php echo esc_html(!empty($ytct_updater['lastInstallAt']) ? $ytct_updater['lastInstallAt'] : __('Never', 'yt-consent-translations-1.3.4')); ?></strong>
+						<span class="ytct-updater-label"><?php esc_html_e('Last Install:', 'yt-consent-translations-1.3.5'); ?></span>
+						<strong id="ytct-updater-last-install"><?php echo esc_html(!empty($ytct_updater['lastInstallAt']) ? $ytct_updater['lastInstallAt'] : __('Never', 'yt-consent-translations-1.3.5')); ?></strong>
 					</div>
 					<div class="ytct-updater-item">
-						<span class="ytct-updater-label"><?php esc_html_e('Last Error:', 'yt-consent-translations-1.3.4'); ?></span>
-						<strong id="ytct-updater-last-error"><?php echo esc_html(!empty($ytct_updater['lastError']) ? $ytct_updater['lastError'] : __('None', 'yt-consent-translations-1.3.4')); ?></strong>
+						<span class="ytct-updater-label"><?php esc_html_e('Last Error:', 'yt-consent-translations-1.3.5'); ?></span>
+						<strong id="ytct-updater-last-error"><?php echo esc_html(!empty($ytct_updater['lastError']) ? $ytct_updater['lastError'] : __('None', 'yt-consent-translations-1.3.5')); ?></strong>
 					</div>
 				</div>
 				<div class="ytct-updater-actions">
 					<button type="button" id="ytct-check-update-btn" class="ytct-btn ytct-btn-secondary">
-						<?php esc_html_e('Check Now', 'yt-consent-translations-1.3.4'); ?>
+						<?php esc_html_e('Check Now', 'yt-consent-translations-1.3.5'); ?>
 					</button>
 				</div>
 			</div>
 
 			<div id="ytct-health-panel" class="ytct-health ytct-health-<?php echo esc_attr($ytct_health['status']); ?>">
-				<h3><?php esc_html_e('Compatibility Health', 'yt-consent-translations-1.3.4'); ?></h3>
-				<p><?php esc_html_e('Monitors compatibility with YOOtheme consent source strings.', 'yt-consent-translations-1.3.4'); ?></p>
+				<h3><?php esc_html_e('Compatibility Health', 'yt-consent-translations-1.3.5'); ?></h3>
+				<p><?php esc_html_e('Monitors compatibility with YOOtheme consent source strings.', 'yt-consent-translations-1.3.5'); ?></p>
 				<ul class="ytct-health-list" id="ytct-health-list">
 					<?php if (!empty($ytct_health['issues'])) : ?>
 						<?php foreach ($ytct_health['issues'] as $ytct_issue) : ?>
@@ -178,7 +178,7 @@ $ytct_update_channel_enabled = isset($ytct_updater['enabled']) ? (bool) $ytct_up
 							<li class="ytct-health-warning"><?php echo esc_html($ytct_warning); ?></li>
 						<?php endforeach; ?>
 					<?php else : ?>
-						<li class="ytct-health-ok"><?php esc_html_e('No compatibility issues reported.', 'yt-consent-translations-1.3.4'); ?></li>
+						<li class="ytct-health-ok"><?php esc_html_e('No compatibility issues reported.', 'yt-consent-translations-1.3.5'); ?></li>
 					<?php endif; ?>
 				</ul>
 			</div>
@@ -195,7 +195,7 @@ $ytct_update_channel_enabled = isset($ytct_updater['enabled']) ? (bool) $ytct_up
 				<div id="ytct-tab-<?php echo esc_attr($ytct_group_id); ?>" class="ytct-tab-content<?php echo $ytct_group_id === 'banner' ? ' active' : ''; ?>">
 					<div class="ytct-category-header">
 						<span class="ytct-category-icon"><?php echo esc_html(strtoupper(substr($ytct_group_id, 0, 1))); ?></span>
-						<h3><?php echo esc_html($ytct_group['label']); ?> <?php esc_html_e('Strings', 'yt-consent-translations-1.3.4'); ?></h3>
+						<h3><?php echo esc_html($ytct_group['label']); ?> <?php esc_html_e('Strings', 'yt-consent-translations-1.3.5'); ?></h3>
 					</div>
 
 					<?php foreach ($ytct_group['keys'] as $ytct_key) :
@@ -211,7 +211,7 @@ $ytct_update_channel_enabled = isset($ytct_updater['enabled']) ? (bool) $ytct_up
 							</label>
 
 							<div class="ytct-original">
-								<strong><?php esc_html_e('Original:', 'yt-consent-translations-1.3.4'); ?></strong><br>
+								<strong><?php esc_html_e('Original:', 'yt-consent-translations-1.3.5'); ?></strong><br>
 								<?php echo esc_html($ytct_original); ?>
 							</div>
 
@@ -223,7 +223,7 @@ $ytct_update_channel_enabled = isset($ytct_updater['enabled']) ? (bool) $ytct_up
 									data-key="<?php echo esc_attr($ytct_key); ?>"
 									data-original-length="<?php echo esc_attr(strlen($ytct_original)); ?>"
 									data-preset="<?php echo esc_attr($ytct_preset); ?>"
-									placeholder="<?php esc_attr_e('Enter translation...', 'yt-consent-translations-1.3.4'); ?>"
+									placeholder="<?php esc_attr_e('Enter translation...', 'yt-consent-translations-1.3.5'); ?>"
 								><?php echo esc_textarea($ytct_value); ?></textarea>
 							<?php else : ?>
 								<input
@@ -235,13 +235,13 @@ $ytct_update_channel_enabled = isset($ytct_updater['enabled']) ? (bool) $ytct_up
 									data-key="<?php echo esc_attr($ytct_key); ?>"
 									data-original-length="<?php echo esc_attr(strlen($ytct_original)); ?>"
 									data-preset="<?php echo esc_attr($ytct_preset); ?>"
-									placeholder="<?php esc_attr_e('Enter translation...', 'yt-consent-translations-1.3.4'); ?>"
+									placeholder="<?php esc_attr_e('Enter translation...', 'yt-consent-translations-1.3.5'); ?>"
 								>
 							<?php endif; ?>
 
 							<div class="ytct-field-tools">
 								<button type="button" class="ytct-btn ytct-btn-link ytct-reset-field" data-key="<?php echo esc_attr($ytct_key); ?>">
-									<?php esc_html_e('Reset Field', 'yt-consent-translations-1.3.4'); ?>
+									<?php esc_html_e('Reset Field', 'yt-consent-translations-1.3.5'); ?>
 								</button>
 								<span class="ytct-field-metrics" data-key="<?php echo esc_attr($ytct_key); ?>"></span>
 							</div>
@@ -251,7 +251,7 @@ $ytct_update_channel_enabled = isset($ytct_updater['enabled']) ? (bool) $ytct_up
 									<?php
 									/* translators: 1: %s placeholder token, 2: %1$s placeholder token. */
 									printf(
-										esc_html__('Keep %1$s or %2$s in your translation. It will be replaced with the Privacy Policy URL.', 'yt-consent-translations-1.3.4'),
+										esc_html__('Keep %1$s or %2$s in your translation. It will be replaced with the Privacy Policy URL.', 'yt-consent-translations-1.3.5'),
 										'%s',
 										'%1$s'
 									);
@@ -266,7 +266,7 @@ $ytct_update_channel_enabled = isset($ytct_updater['enabled']) ? (bool) $ytct_up
 			<?php endforeach; ?>
 
 			<div class="ytct-preview-panel" id="ytct-preview-panel">
-				<h3><?php esc_html_e('Live Preview', 'yt-consent-translations-1.3.4'); ?></h3>
+				<h3><?php esc_html_e('Live Preview', 'yt-consent-translations-1.3.5'); ?></h3>
 				<div class="ytct-preview-banner">
 					<p class="ytct-preview-text" data-preview-key="banner_text"><?php echo esc_html(isset($ytct_effective_strings['banner_text']) ? $ytct_effective_strings['banner_text'] : ''); ?></p>
 					<p class="ytct-preview-link" data-preview-key="banner_link"><?php echo wp_kses_post(isset($ytct_effective_strings['banner_link']) ? str_replace('%s', '#', $ytct_effective_strings['banner_link']) : ''); ?></p>
@@ -291,33 +291,33 @@ $ytct_update_channel_enabled = isset($ytct_updater['enabled']) ? (bool) $ytct_up
 			<div class="ytct-footer">
 				<div class="ytct-primary-actions">
 					<button type="submit" id="ytct-save-btn" class="ytct-btn ytct-btn-primary">
-						<?php esc_html_e('Save Changes', 'yt-consent-translations-1.3.4'); ?>
+						<?php esc_html_e('Save Changes', 'yt-consent-translations-1.3.5'); ?>
 					</button>
 					<button type="button" id="ytct-reset-btn" class="ytct-btn ytct-btn-danger">
-						<?php esc_html_e('Reset to Default', 'yt-consent-translations-1.3.4'); ?>
+						<?php esc_html_e('Reset to Default', 'yt-consent-translations-1.3.5'); ?>
 					</button>
 				</div>
 
 				<div class="ytct-secondary-actions">
 					<button type="button" id="ytct-quality-btn" class="ytct-btn ytct-btn-secondary">
-						<?php esc_html_e('Run QA Check', 'yt-consent-translations-1.3.4'); ?>
+						<?php esc_html_e('Run QA Check', 'yt-consent-translations-1.3.5'); ?>
 					</button>
 					<button type="button" id="ytct-health-btn" class="ytct-btn ytct-btn-secondary">
-						<?php esc_html_e('Run Health Check', 'yt-consent-translations-1.3.4'); ?>
+						<?php esc_html_e('Run Health Check', 'yt-consent-translations-1.3.5'); ?>
 					</button>
 					<button type="button" id="ytct-import-btn" class="ytct-btn ytct-btn-secondary">
-						<?php esc_html_e('Import', 'yt-consent-translations-1.3.4'); ?>
+						<?php esc_html_e('Import', 'yt-consent-translations-1.3.5'); ?>
 					</button>
 					<button type="button" id="ytct-export-btn" class="ytct-btn ytct-btn-secondary">
-						<?php esc_html_e('Export', 'yt-consent-translations-1.3.4'); ?>
+						<?php esc_html_e('Export', 'yt-consent-translations-1.3.5'); ?>
 					</button>
 				</div>
 			</div>
 
 			<div class="ytct-snapshot-tools">
-				<label for="ytct-snapshot-select"><?php esc_html_e('Snapshots:', 'yt-consent-translations-1.3.4'); ?></label>
+				<label for="ytct-snapshot-select"><?php esc_html_e('Snapshots:', 'yt-consent-translations-1.3.5'); ?></label>
 				<select id="ytct-snapshot-select">
-					<option value=""><?php esc_html_e('Select a snapshot', 'yt-consent-translations-1.3.4'); ?></option>
+					<option value=""><?php esc_html_e('Select a snapshot', 'yt-consent-translations-1.3.5'); ?></option>
 					<?php foreach ($ytct_snapshots as $ytct_snapshot) : ?>
 						<option value="<?php echo esc_attr($ytct_snapshot['id']); ?>">
 							<?php
@@ -333,7 +333,7 @@ $ytct_update_channel_enabled = isset($ytct_updater['enabled']) ? (bool) $ytct_up
 					<?php endforeach; ?>
 				</select>
 				<button type="button" id="ytct-restore-btn" class="ytct-btn ytct-btn-secondary">
-					<?php esc_html_e('Restore Snapshot', 'yt-consent-translations-1.3.4'); ?>
+					<?php esc_html_e('Restore Snapshot', 'yt-consent-translations-1.3.5'); ?>
 				</button>
 			</div>
 
@@ -344,19 +344,19 @@ $ytct_update_channel_enabled = isset($ytct_updater['enabled']) ? (bool) $ytct_up
 
 <div id="ytct-import-modal" class="ytct-modal-overlay">
 	<div class="ytct-modal">
-		<h3><?php esc_html_e('Import Settings', 'yt-consent-translations-1.3.4'); ?></h3>
+		<h3><?php esc_html_e('Import Settings', 'yt-consent-translations-1.3.5'); ?></h3>
 		<form id="ytct-import-form" enctype="multipart/form-data">
 			<div class="ytct-file-input-wrapper">
 				<input type="file" id="ytct-import-file" accept=".json">
-				<p><?php esc_html_e('Click or drag a JSON file here', 'yt-consent-translations-1.3.4'); ?></p>
+				<p><?php esc_html_e('Click or drag a JSON file here', 'yt-consent-translations-1.3.5'); ?></p>
 				<p class="ytct-file-name" style="display: none;"></p>
 			</div>
 			<div class="ytct-modal-actions">
 				<button type="button" class="ytct-btn ytct-btn-secondary ytct-modal-close">
-					<?php esc_html_e('Cancel', 'yt-consent-translations-1.3.4'); ?>
+					<?php esc_html_e('Cancel', 'yt-consent-translations-1.3.5'); ?>
 				</button>
 				<button type="submit" id="ytct-import-submit" class="ytct-btn ytct-btn-primary">
-					<?php esc_html_e('Import', 'yt-consent-translations-1.3.4'); ?>
+					<?php esc_html_e('Import', 'yt-consent-translations-1.3.5'); ?>
 				</button>
 			</div>
 		</form>

@@ -393,7 +393,7 @@ class YTCT_Updater {
 		if (!is_array($data)) {
 			self::update_state([
 				'status' => 'error',
-				'last_error' => __('Invalid response from GitHub releases API.', 'yt-consent-translations-1.3.4'),
+				'last_error' => __('Invalid response from GitHub releases API.', 'yt-consent-translations-1.3.5'),
 				'last_error_at' => gmdate('c')
 			]);
 			return null;
@@ -403,7 +403,7 @@ class YTCT_Updater {
 		if (!is_array($release)) {
 			self::update_state([
 				'status' => 'error',
-				'last_error' => __('No valid stable release found in GitHub response.', 'yt-consent-translations-1.3.4'),
+				'last_error' => __('No valid stable release found in GitHub response.', 'yt-consent-translations-1.3.5'),
 				'last_error_at' => gmdate('c')
 			]);
 			return null;
@@ -547,7 +547,7 @@ class YTCT_Updater {
 			'download_link' => $release_package,
 			'last_updated' => is_array($release) && !empty($release['published_at']) ? (string) $release['published_at'] : '',
 			'sections' => [
-				'description' => __('GitHub stable update channel is enabled for this plugin.', 'yt-consent-translations-1.3.4'),
+				'description' => __('GitHub stable update channel is enabled for this plugin.', 'yt-consent-translations-1.3.5'),
 				'changelog' => $release_body,
 				'homepage' => $release_url
 			],
@@ -608,7 +608,7 @@ class YTCT_Updater {
 
 		if (!$moved) {
 			if (class_exists('WP_Error')) {
-				return new WP_Error('ytct_updater_source_rename_failed', __('Could not normalize update package directory.', 'yt-consent-translations-1.3.4'));
+				return new WP_Error('ytct_updater_source_rename_failed', __('Could not normalize update package directory.', 'yt-consent-translations-1.3.5'));
 			}
 			return $source;
 		}
@@ -703,7 +703,7 @@ class YTCT_Updater {
 		if (!class_exists('Plugin_Upgrader') || !class_exists('Automatic_Upgrader_Skin')) {
 			self::update_state([
 				'status' => 'update_failed',
-				'last_error' => __('WordPress upgrader classes are not available.', 'yt-consent-translations-1.3.4'),
+				'last_error' => __('WordPress upgrader classes are not available.', 'yt-consent-translations-1.3.5'),
 				'last_error_at' => gmdate('c')
 			]);
 			return false;
@@ -979,7 +979,7 @@ class YTCT_Updater {
 			return $error;
 		}
 
-		return __('Plugin update operation failed.', 'yt-consent-translations-1.3.4');
+		return __('Plugin update operation failed.', 'yt-consent-translations-1.3.5');
 	}
 
 	/**
