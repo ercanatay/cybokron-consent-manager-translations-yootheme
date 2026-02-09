@@ -172,8 +172,8 @@ class YTCT_Admin {
 	 */
 	private function verify_ajax_request() {
 		if (!headers_sent()) {
-			header('X-Content-Type-Options: nosniff');
-			header('X-Frame-Options: SAMEORIGIN');
+			send_nosniff_header();
+			send_frame_options_header();
 		}
 
 		$nonce = $this->get_post_scalar('nonce');
