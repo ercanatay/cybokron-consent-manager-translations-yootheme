@@ -171,6 +171,11 @@ class YTCT_Admin {
 	 * @return void
 	 */
 	private function verify_ajax_request() {
+		if (!headers_sent()) {
+			header('X-Content-Type-Options: nosniff');
+			header('X-Frame-Options: SAMEORIGIN');
+		}
+
 		$nonce = $this->get_post_scalar('nonce');
 		if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
 			wp_send_json_error(['message' => __('Security check failed.', 'yt-consent-translations-1.3.5')]);
