@@ -204,7 +204,7 @@ class YTCT_Options {
 		array_unshift($snapshots, $entry);
 		$snapshots = array_slice($snapshots, 0, self::MAX_SNAPSHOTS);
 
-		update_option($snapshot_name, $snapshots);
+		update_option($snapshot_name, $snapshots, false);
 	}
 
 	/**
@@ -279,7 +279,7 @@ class YTCT_Options {
 
 		$results = [];
 		$base = YTCT_OPTION_NAME . '__';
-		$escaped = esc_sql($wpdb->esc_like($base)) . '%';
+		$escaped = $wpdb->esc_like($base) . '%';
 
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Wildcard lookup across locale-scoped option names requires a direct query.
 		$rows = $wpdb->get_results(

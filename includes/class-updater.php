@@ -114,7 +114,7 @@ class YTCT_Updater {
 		$settings = self::sanitize_settings($raw);
 
 		if (!is_array($raw) || $settings !== $raw) {
-			update_option(self::SETTINGS_OPTION, $settings);
+			update_option(self::SETTINGS_OPTION, $settings, false);
 		}
 
 		return $settings;
@@ -130,7 +130,7 @@ class YTCT_Updater {
 		$current = self::get_settings();
 		$settings = is_array($settings) ? $settings : [];
 		$next = self::sanitize_settings(array_merge($current, $settings));
-		update_option(self::SETTINGS_OPTION, $next);
+		update_option(self::SETTINGS_OPTION, $next, false);
 		self::sync_schedule();
 		return $next;
 	}
@@ -214,7 +214,7 @@ class YTCT_Updater {
 		$state = self::sanitize_state($raw);
 
 		if (!is_array($raw) || $state !== $raw) {
-			update_option(self::STATE_OPTION, $state);
+			update_option(self::STATE_OPTION, $state, false);
 		}
 
 		return $state;
@@ -230,7 +230,7 @@ class YTCT_Updater {
 		$current = self::get_state();
 		$changes = is_array($changes) ? $changes : [];
 		$next = self::sanitize_state(array_merge($current, $changes));
-		update_option(self::STATE_OPTION, $next);
+		update_option(self::STATE_OPTION, $next, false);
 		return $next;
 	}
 

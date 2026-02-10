@@ -205,6 +205,7 @@ class YTCT_Translator {
 	public function clear_cache() {
 		$this->options = null;
 		$this->translations = null;
+		$this->original_to_key = null;
 	}
 
 	/**

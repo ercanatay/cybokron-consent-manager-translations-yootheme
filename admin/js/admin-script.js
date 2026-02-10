@@ -275,11 +275,37 @@
 
         if (key === 'banner_link' || key === 'modal_content_link') {
             var htmlValue = (value || '').replace(/%1\$s|%s/g, '#');
-            $targets.html(htmlValue);
+            $targets.html(sanitizeAnchorHtml(htmlValue));
             return;
         }
 
         $targets.text(value || '');
+    }
+
+    function sanitizeAnchorHtml(html) {
+        var $container = $('<div>');
+        var $temp = $('<div>').html(html);
+
+        $temp.contents().each(function() {
+            if (this.nodeType === 3) {
+                $container.append(document.createTextNode(this.nodeValue));
+            } else if (this.nodeType === 1 && this.nodeName === 'A') {
+                var $a = $('<a>');
+                var href = $(this).attr('href');
+                if (href) {
+                    $a.attr('href', href);
+                }
+                var title = $(this).attr('title');
+                if (title) {
+                    $a.attr('title', title);
+                }
+                $a.attr('rel', 'noopener noreferrer');
+                $a.text($(this).text());
+                $container.append($a);
+            }
+        });
+
+        return $container.html();
     }
 
     function validateAllFields() {

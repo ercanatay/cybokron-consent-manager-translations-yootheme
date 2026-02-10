@@ -13,6 +13,18 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
 	exit;
 }
 
+// Clear scheduled cron events
+$ytct_cron_hook = 'ytct_updater_cron_check';
+if (function_exists('wp_unschedule_hook')) {
+	wp_unschedule_hook($ytct_cron_hook);
+} else {
+	$ytct_cron_ts = wp_next_scheduled($ytct_cron_hook);
+	while ($ytct_cron_ts) {
+		wp_unschedule_event($ytct_cron_ts, $ytct_cron_hook);
+		$ytct_cron_ts = wp_next_scheduled($ytct_cron_hook);
+	}
+}
+
 // Delete legacy plugin option
 delete_option('yt_consent_translations');
 delete_option('ytct_health_report');
@@ -33,7 +45,7 @@ function ytct_delete_scoped_options() {
 	];
 
 	foreach ($patterns as $pattern) {
-		$escaped = esc_sql($wpdb->esc_like(str_replace('%', '', $pattern))) . '%';
+		$escaped = $wpdb->esc_like(str_replace('%', '', $pattern)) . '%';
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching -- One-time uninstall cleanup of wildcard option names.
 		$rows = $wpdb->get_col(
 			$wpdb->prepare(
@@ -61,6 +73,15 @@ if (is_multisite()) {
 
 	foreach ($ytct_sites as $ytct_blog_id) {
 		switch_to_blog($ytct_blog_id);
+		if (function_exists('wp_unschedule_hook')) {
+			wp_unschedule_hook($ytct_cron_hook);
+		} else {
+			$ytct_cron_ts = wp_next_scheduled($ytct_cron_hook);
+			while ($ytct_cron_ts) {
+				wp_unschedule_event($ytct_cron_ts, $ytct_cron_hook);
+				$ytct_cron_ts = wp_next_scheduled($ytct_cron_hook);
+			}
+		}
 		delete_option('yt_consent_translations');
 		delete_option('ytct_health_report');
 		delete_option('ytct_updater_settings');

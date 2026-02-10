@@ -103,7 +103,7 @@ if (!function_exists('get_option')) {
 }
 
 if (!function_exists('update_option')) {
-	function update_option($option, $value) {
+	function update_option($option, $value, $autoload = null) {
 		$GLOBALS['ytct_option_store'][$option] = $value;
 		return true;
 	}

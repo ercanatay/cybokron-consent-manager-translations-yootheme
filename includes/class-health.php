@@ -222,7 +222,7 @@ class YTCT_Health {
 			return;
 		}
 
-		update_option(self::OPTION_NAME, self::$report);
+		update_option(self::OPTION_NAME, self::$report, false);
 		self::$dirty = false;
 	}
 
