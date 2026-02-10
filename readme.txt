@@ -3,7 +3,7 @@ Contributors: ercanatay
 Tags: yootheme, consent-manager, gdpr, cookie-consent, translation
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.3.7
+Stable tag: 1.3.8
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -84,6 +84,13 @@ Enable periodic checks from plugin settings. The plugin reads WordPress core upd
 5. Import/Export functionality
 
 == Changelog ==
+
+= 1.3.8 =
+* Accessibility: added semantic ARIA roles/attributes for admin translation tabs (`tablist`, `tab`, `tabpanel`) with deterministic roving `tabindex`.
+* Keyboard UX: added Left/Right plus Home/End navigation support for tab controls.
+* Accessibility state sync: tab panels now consistently toggle both `hidden` and `aria-hidden`.
+* Packaging: removed accidental `.Jules` development artifact from release tree.
+* Synced plugin metadata/versioning to `1.3.8`.
 
 = 1.3.7 =
 * WordPress.org compliance: removed custom updater hooks that altered core update routines.
@@ -195,6 +202,9 @@ Enable periodic checks from plugin settings. The plugin reads WordPress core upd
 * Tabbed admin interface
 
 == Upgrade Notice ==
+
+= 1.3.8 =
+Accessibility-focused maintenance release that improves admin settings tab semantics/keyboard support and removes a non-production development artifact from release packaging.
 
 = 1.3.7 =
 Compliance and updater-flow alignment release: moves updater status tracking to WordPress.org metadata, fixes admin status labels, standardizes text domain usage, and removes deprecated updater/sanitization paths.

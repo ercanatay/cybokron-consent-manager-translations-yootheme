@@ -186,7 +186,12 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 				</ul>
 			</div>
 
-			<div class="ytct-tabs" role="tablist">
+			<div
+				class="ytct-tabs"
+				role="tablist"
+				aria-orientation="horizontal"
+				aria-label="<?php esc_attr_e('Translation sections', 'yt-consent-translations-main'); ?>"
+			>
 				<?php foreach ($ytct_string_groups as $ytct_group_id => $ytct_group) :
 					$ytct_is_active = $ytct_group_id === 'banner';
 				?>
@@ -198,7 +203,7 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 						role="tab"
 						aria-selected="<?php echo $ytct_is_active ? 'true' : 'false'; ?>"
 						aria-controls="ytct-tab-<?php echo esc_attr($ytct_group_id); ?>"
-						<?php echo $ytct_is_active ? '' : 'tabindex="-1"'; ?>
+						tabindex="<?php echo esc_attr($ytct_is_active ? '0' : '-1'); ?>"
 					>
 						<?php echo esc_html($ytct_group['label']); ?>
 					</button>
@@ -213,7 +218,10 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 					class="ytct-tab-content<?php echo $ytct_is_active ? ' active' : ''; ?>"
 					role="tabpanel"
 					aria-labelledby="ytct-tab-btn-<?php echo esc_attr($ytct_group_id); ?>"
-					<?php echo $ytct_is_active ? '' : 'hidden'; ?>
+					aria-hidden="<?php echo esc_attr($ytct_is_active ? 'false' : 'true'); ?>"
+					<?php if (!$ytct_is_active) : ?>
+						hidden
+					<?php endif; ?>
 				>
 					<div class="ytct-category-header">
 						<span class="ytct-category-icon"><?php echo esc_html(strtoupper(substr($ytct_group_id, 0, 1))); ?></span>

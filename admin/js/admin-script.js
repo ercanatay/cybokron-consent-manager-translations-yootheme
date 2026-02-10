@@ -95,19 +95,41 @@
         });
 
         $tabs.on('keydown', function(e) {
-            var key = e.which || e.keyCode;
-            // Left (37) or Right (39)
-            if (key === 37 || key === 39) {
-                e.preventDefault();
-                var index = $tabs.index(this);
-                var nextIndex = key === 39 ? index + 1 : index - 1;
-
-                if (nextIndex >= $tabs.length) nextIndex = 0;
-                if (nextIndex < 0) nextIndex = $tabs.length - 1;
-
-                var $nextTab = $tabs.eq(nextIndex);
-                $nextTab.focus().trigger('click');
+            if (e.altKey || e.ctrlKey || e.metaKey) {
+                return;
             }
+
+            var key = e.key || e.which || e.keyCode;
+            var index = $tabs.index(this);
+            var nextIndex = index;
+
+            if (key === 'ArrowRight' || key === 39) {
+                nextIndex = index + 1;
+            } else if (key === 'ArrowLeft' || key === 37) {
+                nextIndex = index - 1;
+            } else if (key === 'Home' || key === 36) {
+                nextIndex = 0;
+            } else if (key === 'End' || key === 35) {
+                nextIndex = $tabs.length - 1;
+            } else {
+                return;
+            }
+
+            e.preventDefault();
+
+            if (nextIndex >= $tabs.length) {
+                nextIndex = 0;
+            } else if (nextIndex < 0) {
+                nextIndex = $tabs.length - 1;
+            }
+
+            var $nextTab = $tabs.eq(nextIndex);
+            if (!$nextTab.length) {
+                return;
+            }
+
+            switchTab($nextTab.data('tab'));
+            $nextTab.focus();
         });
 
         $('.ytct-modal-close, .ytct-modal-overlay').on('click', function(e) {
@@ -186,14 +208,16 @@
         $tabs.filter('[data-tab="' + tabId + '"]')
             .addClass('active')
             .attr('aria-selected', 'true')
-            .removeAttr('tabindex');
+            .attr('tabindex', '0');
 
         $tabContents.removeClass('active')
-            .prop('hidden', true);
+            .prop('hidden', true)
+            .attr('aria-hidden', 'true');
 
         $('#ytct-tab-' + tabId)
             .addClass('active')
-            .prop('hidden', false);
+            .prop('hidden', false)
+            .attr('aria-hidden', 'false');
     }
 
     function getScopeLocale() {

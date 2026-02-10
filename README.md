@@ -1,6 +1,6 @@
 # YT Consent Translations
 
-[![WordPress Plugin Version](https://img.shields.io/badge/version-1.3.7-blue.svg)](https://github.com/ercanatay/yt-consent-translations)
+[![WordPress Plugin Version](https://img.shields.io/badge/version-1.3.8-blue.svg)](https://github.com/ercanatay/yt-consent-translations)
 [![WordPress Tested](https://img.shields.io/badge/WordPress-5.0--6.9-green.svg)](https://wordpress.org)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://php.net)
 [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -255,6 +255,12 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ```
 
 ## 📝 Changelog
+
+### 1.3.8 (2026-02-10)
+- **Accessibility**: Added semantic ARIA tab patterns to settings tabs (`tablist`, `tab`, `tabpanel`) and synchronized visibility state (`hidden` + `aria-hidden`)
+- **Keyboard Navigation**: Added Left/Right and Home/End support for tab switching with focus management
+- **UX Consistency**: Standardized active tab roving `tabindex` handling (`0` for active, `-1` for inactive)
+- **Packaging**: Removed accidental `.Jules` development artifact from release contents
 
 ### 1.3.7 (2026-02-10)
 - **WordPress.org Compliance**: Removed custom updater hooks that modify WordPress update routines (`site_transient_update_plugins`, `pre_set_site_transient_update_plugins`, `auto_update_plugin`)
