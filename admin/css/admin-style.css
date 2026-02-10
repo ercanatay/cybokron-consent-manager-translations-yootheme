@@ -747,6 +747,126 @@ li.ytct-health-warning {
     }
 }
 
+.ytct-search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 25px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.ytct-search-wrapper {
+    position: relative;
+    flex: 1;
+    max-width: 400px;
+}
+
+.ytct-search-input {
+    width: 100%;
+    padding: 8px 32px 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ytct-search-input:focus {
+    border-color: #145374;
+    box-shadow: 0 0 0 3px rgba(20, 83, 116, 0.14);
+    outline: none;
+}
+
+.ytct-search-clear {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #999;
+    cursor: pointer;
+    padding: 2px 6px;
+    line-height: 1;
+}
+
+.ytct-search-clear:hover {
+    color: #333;
+}
+
+.ytct-stats-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ytct-stats-bar {
+    width: 120px;
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.ytct-stats-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #1f6f8b, #145374);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+.ytct-stats-text {
+    font-size: 12px;
+    color: #666;
+    white-space: nowrap;
+}
+
+.ytct-no-results {
+    padding: 40px 25px;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+}
+
+.ytct-copy-locale-select {
+    margin-bottom: 16px;
+}
+
+.ytct-copy-locale-select label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.ytct-copy-locale-select select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+@media (max-width: 782px) {
+    .ytct-search-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 12px 15px;
+    }
+
+    .ytct-search-wrapper {
+        max-width: 100%;
+    }
+
+    .ytct-stats-info {
+        justify-content: flex-start;
+    }
+}
+
 [dir="rtl"] .ytct-original {
     border-left: none;
     border-right: 3px solid #ddd;

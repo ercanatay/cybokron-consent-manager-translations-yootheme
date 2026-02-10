@@ -23,11 +23,17 @@
     var $tabs = $('.ytct-tab');
     var $tabContents = $('.ytct-tab-content');
     var $modal = $('#ytct-import-modal');
+    var $copyLocaleModal = $('#ytct-copy-locale-modal');
     var $qualityReport = $('#ytct-quality-report');
+    var $searchInput = $('#ytct-search-strings');
+    var $searchClear = $('#ytct-search-clear');
+    var $noResults = $('#ytct-no-results');
+    var $copyLocaleBtn = $('#ytct-copy-locale-btn');
 
     var state = {
         initialHash: '',
-        isDirty: false
+        isDirty: false,
+        isSearching: false
     };
 
     function init() {
@@ -135,6 +141,7 @@
         $('.ytct-modal-close, .ytct-modal-overlay').on('click', function(e) {
             if (e.target === this) {
                 hideImportModal();
+                hideCopyLocaleModal();
             }
         });
 
@@ -150,12 +157,42 @@
             }
         });
 
+        $searchInput.on('input', function() {
+            filterStrings($(this).val());
+        });
+
+        $searchClear.on('click', function() {
+            $searchInput.val('');
+            filterStrings('');
+            $searchInput.focus();
+        });
+
+        $(document).on('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.keyCode === 83)) {
+                e.preventDefault();
+                if (!$saveBtn.prop('disabled')) {
+                    saveSettings();
+                }
+            }
+        });
+
+        $copyLocaleBtn.on('click', function(e) {
+            e.preventDefault();
+            showCopyLocaleModal();
+        });
+
+        $('#ytct-copy-locale-form').on('submit', function(e) {
+            e.preventDefault();
+            copyLocale();
+        });
+
         $form.on('input', 'input[name^="strings["], textarea[name^="strings["]', function() {
             var $input = $(this);
             var key = $input.data('key');
             validateField(key, $input);
             updatePreviewForKey(key, $input.val());
             updateFieldMetrics(key, $input);
+            updateStatisticsBar();
             markDirtyIfNeeded();
         });
 
@@ -254,6 +291,7 @@
         validateAllFields();
         refreshPreview();
         refreshFieldMetrics();
+        updateStatisticsBar();
     }
 
     function refreshPreview() {
@@ -948,6 +986,122 @@
         }
 
         $list.html(items.join(''));
+    }
+
+    function filterStrings(query) {
+        query = (query || '').toLowerCase().trim();
+
+        if (!query) {
+            state.isSearching = false;
+            $searchClear.hide();
+            $noResults.hide();
+            $tabContents.find('.ytct-string-group').show();
+            var activeTab = $tabs.filter('.active').data('tab') || 'banner';
+            switchTab(activeTab);
+            return;
+        }
+
+        state.isSearching = true;
+        $searchClear.show();
+
+        $tabContents
+            .addClass('active')
+            .prop('hidden', false)
+            .attr('aria-hidden', 'false');
+
+        var visibleCount = 0;
+        $tabContents.find('.ytct-string-group').each(function() {
+            var $group = $(this);
+            var label = ($group.find('.ytct-string-label').text() || '').toLowerCase();
+            var original = ($group.find('.ytct-original').text() || '').toLowerCase();
+            var value = ($group.find('.ytct-input').val() || '').toLowerCase();
+
+            if (label.indexOf(query) !== -1 || original.indexOf(query) !== -1 || value.indexOf(query) !== -1) {
+                $group.show();
+                visibleCount++;
+            } else {
+                $group.hide();
+            }
+        });
+
+        if (visibleCount === 0) {
+            $noResults.show();
+        } else {
+            $noResults.hide();
+        }
+    }
+
+    function showCopyLocaleModal() {
+        $copyLocaleModal.addClass('show');
+        $('body').css('overflow', 'hidden');
+    }
+
+    function hideCopyLocaleModal() {
+        $copyLocaleModal.removeClass('show');
+        $('body').css('overflow', '');
+        $('#ytct-copy-source-locale').val('');
+    }
+
+    function copyLocale() {
+        var sourceLocale = $('#ytct-copy-source-locale').val();
+        if (!sourceLocale) {
+            showMessage(ytctAdmin.strings.selectSourceLocale, 'error');
+            return;
+        }
+
+        if (!window.confirm(ytctAdmin.strings.confirmCopyLocale)) {
+            return;
+        }
+
+        var $btn = $('#ytct-copy-locale-submit');
+        var originalText = $btn.html();
+
+        $btn.prop('disabled', true).html('<span class="ytct-spinner"></span> ' + ytctAdmin.strings.copyLocaleRunning);
+
+        $.ajax({
+            url: ytctAdmin.ajaxUrl,
+            type: 'POST',
+            data: {
+                action: 'ytct_copy_locale',
+                nonce: ytctAdmin.nonce,
+                settings_locale: getScopeLocale(),
+                source_locale: sourceLocale
+            },
+            success: function(response) {
+                if (response.success && response.data && response.data.scope) {
+                    hideCopyLocaleModal();
+                    applyScopePayload(response.data.scope, false);
+                    showMessage(response.data.message, 'success');
+                    captureInitialState();
+                } else {
+                    showMessage((response.data && response.data.message) || ytctAdmin.strings.error, 'error');
+                }
+            },
+            error: function() {
+                showMessage(ytctAdmin.strings.error, 'error');
+            },
+            complete: function() {
+                $btn.prop('disabled', false).html(originalText);
+            }
+        });
+    }
+
+    function updateStatisticsBar() {
+        var total = 0;
+        var customized = 0;
+
+        $form.find('input[name^="strings["], textarea[name^="strings["]').each(function() {
+            total++;
+            var value = $(this).val() || '';
+            var preset = $(this).attr('data-preset') || '';
+            if (value !== '' && value !== preset) {
+                customized++;
+            }
+        });
+
+        var percent = total > 0 ? Math.round((customized / total) * 100) : 0;
+        $('#ytct-stats-bar-fill').css('width', percent + '%');
+        $('#ytct-stats-text').text(customized + '/' + total + ' customized (' + percent + '%)');
     }
 
     function escapeHtml(text) {

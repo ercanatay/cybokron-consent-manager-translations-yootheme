@@ -60,6 +60,7 @@ class YTCT_Admin {
 		add_action('wp_ajax_ytct_health_check', [$this, 'ajax_health_check']);
 		add_action('wp_ajax_ytct_quality_check', [$this, 'ajax_quality_check']);
 		add_action('wp_ajax_ytct_check_update_now', [$this, 'ajax_check_update_now']);
+		add_action('wp_ajax_ytct_copy_locale', [$this, 'ajax_copy_locale']);
 	}
 
 	/**
@@ -131,7 +132,10 @@ class YTCT_Admin {
 				'checkUpdateNoChange' => __('No new version found. Plugin is up to date.', 'yt-consent-translations-main'),
 				'checkUpdateFound' => __('A new version is available. Update it from the Plugins screen.', 'yt-consent-translations-main'),
 				'checkUpdateInstalled' => __('Plugin updates are managed by WordPress.', 'yt-consent-translations-main'),
-				'checkUpdateInstallFailed' => __('Update check completed with an error. Check updater status.', 'yt-consent-translations-main')
+				'checkUpdateInstallFailed' => __('Update check completed with an error. Check updater status.', 'yt-consent-translations-main'),
+				'copyLocaleRunning' => __('Copying...', 'yt-consent-translations-main'),
+				'confirmCopyLocale' => __('Copy all settings from the selected locale? This will overwrite current settings for this scope.', 'yt-consent-translations-main'),
+				'selectSourceLocale' => __('Select a source locale first.', 'yt-consent-translations-main')
 			]
 		]);
 	}
@@ -869,6 +873,37 @@ class YTCT_Admin {
 		wp_send_json_success([
 			'message' => $message,
 			'updater' => YTCT_Updater::get_admin_payload()
+		]);
+	}
+
+	/**
+	 * AJAX: Copy settings from one locale scope to another.
+	 *
+	 * @return void
+	 */
+	public function ajax_copy_locale() {
+		$this->verify_ajax_request();
+
+		$source_locale = $this->get_scope_locale($this->get_post_scalar('source_locale'));
+		$target_locale = $this->get_scope_locale();
+
+		if ($source_locale === $target_locale) {
+			wp_send_json_error(['message' => __('Source and target locales are the same.', 'yt-consent-translations-main')]);
+		}
+
+		$source_options = YTCT_Options::get_options($source_locale);
+		$stored = YTCT_Options::update_options($source_options, $target_locale, 'copy_locale');
+
+		YTCT_Translator::get_instance()->clear_cache();
+		YTCT_Strings::clear_cache();
+
+		wp_send_json_success([
+			'message' => sprintf(
+				/* translators: %s source locale code */
+				__('Settings copied from %s successfully!', 'yt-consent-translations-main'),
+				$source_locale
+			),
+			'scope' => $this->build_scope_payload($target_locale)
 		]);
 	}
 }

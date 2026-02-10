@@ -210,6 +210,23 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 				<?php endforeach; ?>
 			</div>
 
+			<div class="ytct-search-bar">
+				<div class="ytct-search-wrapper">
+					<input type="text" id="ytct-search-strings" class="ytct-search-input" placeholder="<?php esc_attr_e('Search translation strings...', 'yt-consent-translations-main'); ?>">
+					<button type="button" id="ytct-search-clear" class="ytct-search-clear" style="display:none;" aria-label="<?php esc_attr_e('Clear search', 'yt-consent-translations-main'); ?>">&times;</button>
+				</div>
+				<div class="ytct-stats-info">
+					<div class="ytct-stats-bar">
+						<div class="ytct-stats-fill" id="ytct-stats-bar-fill"></div>
+					</div>
+					<span class="ytct-stats-text" id="ytct-stats-text"></span>
+				</div>
+			</div>
+
+			<div id="ytct-no-results" class="ytct-no-results" style="display:none;">
+				<?php esc_html_e('No matching strings found.', 'yt-consent-translations-main'); ?>
+			</div>
+
 			<?php foreach ($ytct_string_groups as $ytct_group_id => $ytct_group) :
 				$ytct_is_active = $ytct_group_id === 'banner';
 			?>
@@ -341,6 +358,9 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 					<button type="button" id="ytct-export-btn" class="ytct-btn ytct-btn-secondary">
 						<?php esc_html_e('Export', 'yt-consent-translations-main'); ?>
 					</button>
+					<button type="button" id="ytct-copy-locale-btn" class="ytct-btn ytct-btn-secondary">
+						<?php esc_html_e('Copy From Locale', 'yt-consent-translations-main'); ?>
+					</button>
 				</div>
 			</div>
 
@@ -387,6 +407,34 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 				</button>
 				<button type="submit" id="ytct-import-submit" class="ytct-btn ytct-btn-primary">
 					<?php esc_html_e('Import', 'yt-consent-translations-main'); ?>
+				</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div id="ytct-copy-locale-modal" class="ytct-modal-overlay">
+	<div class="ytct-modal">
+		<h3><?php esc_html_e('Copy Settings From Another Locale', 'yt-consent-translations-main'); ?></h3>
+		<p class="ytct-help-text"><?php esc_html_e('Select a source locale to copy all translation settings from. This will overwrite the current locale scope settings.', 'yt-consent-translations-main'); ?></p>
+		<form id="ytct-copy-locale-form">
+			<div class="ytct-copy-locale-select">
+				<label for="ytct-copy-source-locale"><?php esc_html_e('Source Locale:', 'yt-consent-translations-main'); ?></label>
+				<select id="ytct-copy-source-locale">
+					<option value=""><?php esc_html_e('Select a locale...', 'yt-consent-translations-main'); ?></option>
+					<?php foreach ($ytct_scope_locales as $ytct_locale_option) : ?>
+						<option value="<?php echo esc_attr($ytct_locale_option); ?>">
+							<?php echo esc_html(YTCT_Strings::get_locale_label($ytct_locale_option)); ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+			</div>
+			<div class="ytct-modal-actions">
+				<button type="button" class="ytct-btn ytct-btn-secondary ytct-modal-close">
+					<?php esc_html_e('Cancel', 'yt-consent-translations-main'); ?>
+				</button>
+				<button type="submit" id="ytct-copy-locale-submit" class="ytct-btn ytct-btn-primary">
+					<?php esc_html_e('Copy Settings', 'yt-consent-translations-main'); ?>
 				</button>
 			</div>
 		</form>
