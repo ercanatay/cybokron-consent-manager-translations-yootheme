@@ -186,16 +186,35 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 				</ul>
 			</div>
 
-			<div class="ytct-tabs">
-				<?php foreach ($ytct_string_groups as $ytct_group_id => $ytct_group) : ?>
-					<button type="button" class="ytct-tab<?php echo $ytct_group_id === 'banner' ? ' active' : ''; ?>" data-tab="<?php echo esc_attr($ytct_group_id); ?>">
+			<div class="ytct-tabs" role="tablist">
+				<?php foreach ($ytct_string_groups as $ytct_group_id => $ytct_group) :
+					$ytct_is_active = $ytct_group_id === 'banner';
+				?>
+					<button
+						type="button"
+						id="ytct-tab-btn-<?php echo esc_attr($ytct_group_id); ?>"
+						class="ytct-tab<?php echo $ytct_is_active ? ' active' : ''; ?>"
+						data-tab="<?php echo esc_attr($ytct_group_id); ?>"
+						role="tab"
+						aria-selected="<?php echo $ytct_is_active ? 'true' : 'false'; ?>"
+						aria-controls="ytct-tab-<?php echo esc_attr($ytct_group_id); ?>"
+						<?php echo $ytct_is_active ? '' : 'tabindex="-1"'; ?>
+					>
 						<?php echo esc_html($ytct_group['label']); ?>
 					</button>
 				<?php endforeach; ?>
 			</div>
 
-			<?php foreach ($ytct_string_groups as $ytct_group_id => $ytct_group) : ?>
-				<div id="ytct-tab-<?php echo esc_attr($ytct_group_id); ?>" class="ytct-tab-content<?php echo $ytct_group_id === 'banner' ? ' active' : ''; ?>">
+			<?php foreach ($ytct_string_groups as $ytct_group_id => $ytct_group) :
+				$ytct_is_active = $ytct_group_id === 'banner';
+			?>
+				<div
+					id="ytct-tab-<?php echo esc_attr($ytct_group_id); ?>"
+					class="ytct-tab-content<?php echo $ytct_is_active ? ' active' : ''; ?>"
+					role="tabpanel"
+					aria-labelledby="ytct-tab-btn-<?php echo esc_attr($ytct_group_id); ?>"
+					<?php echo $ytct_is_active ? '' : 'hidden'; ?>
+				>
 					<div class="ytct-category-header">
 						<span class="ytct-category-icon"><?php echo esc_html(strtoupper(substr($ytct_group_id, 0, 1))); ?></span>
 						<h3><?php echo esc_html($ytct_group['label']); ?> <?php esc_html_e('Strings', 'yt-consent-translations-main'); ?></h3>

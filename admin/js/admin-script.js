@@ -94,6 +94,22 @@
             switchTab($(this).data('tab'));
         });
 
+        $tabs.on('keydown', function(e) {
+            var key = e.which || e.keyCode;
+            // Left (37) or Right (39)
+            if (key === 37 || key === 39) {
+                e.preventDefault();
+                var index = $tabs.index(this);
+                var nextIndex = key === 39 ? index + 1 : index - 1;
+
+                if (nextIndex >= $tabs.length) nextIndex = 0;
+                if (nextIndex < 0) nextIndex = $tabs.length - 1;
+
+                var $nextTab = $tabs.eq(nextIndex);
+                $nextTab.focus().trigger('click');
+            }
+        });
+
         $('.ytct-modal-close, .ytct-modal-overlay').on('click', function(e) {
             if (e.target === this) {
                 hideImportModal();
@@ -163,11 +179,21 @@
             tabId = 'banner';
         }
 
-        $tabs.removeClass('active');
-        $tabs.filter('[data-tab="' + tabId + '"]').addClass('active');
+        $tabs.removeClass('active')
+            .attr('aria-selected', 'false')
+            .attr('tabindex', '-1');
 
-        $tabContents.removeClass('active');
-        $('#ytct-tab-' + tabId).addClass('active');
+        $tabs.filter('[data-tab="' + tabId + '"]')
+            .addClass('active')
+            .attr('aria-selected', 'true')
+            .removeAttr('tabindex');
+
+        $tabContents.removeClass('active')
+            .prop('hidden', true);
+
+        $('#ytct-tab-' + tabId)
+            .addClass('active')
+            .prop('hidden', false);
     }
 
     function getScopeLocale() {
