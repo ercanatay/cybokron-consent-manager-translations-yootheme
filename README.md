@@ -256,10 +256,12 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📝 Changelog
 
-### 1.3.10 (2026-02-10)
+### 1.3.10 (2026-02-11)
 - **Bugfix (i18n)**: Localized admin statistics summary text generated in JavaScript (`{customized}/{total} customized ({percent}%)`) via `wp_localize_script`
+- **PR Review**: Reviewed merged PR scope for `#28`, `#29`, and `#30` before release cut
 - **QA**: Re-ran test suite, PHP syntax checks, JSON validation, and static scan with clean results
 - **Release Sync**: Updated plugin/readme/composer metadata to `1.3.10`
+- **Release**: Published package/tag `v1.3.10` on GitHub Releases
 
 ### 1.3.9 (2026-02-10)
 - **Security**: Sanitized admin live-preview link HTML to allow only safe anchor output (text + `<a href title>`) with enforced `rel="noopener noreferrer"`
