@@ -63,8 +63,8 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 
 <div class="ytct-wrap">
 	<div class="ytct-header">
-		<h1><?php esc_html_e('Cybokron Consent Manager Translations for YOOtheme Pro', 'cybokron-consent-manager-translations-yootheme'); ?></h1>
-		<p><?php esc_html_e('Locale-aware consent translation management with live preview, health checks, and rollback snapshots.', 'cybokron-consent-manager-translations-yootheme'); ?></p>
+		<h1><?php esc_html_e('Cybokron Consent Manager Translations for YOOtheme Pro', 'cybokron-consent-manager-translations-yootheme-main'); ?></h1>
+		<p><?php esc_html_e('Locale-aware consent translation management with live preview, health checks, and rollback snapshots.', 'cybokron-consent-manager-translations-yootheme-main'); ?></p>
 	</div>
 
 	<div id="ytct-message" class="ytct-message" aria-live="polite"></div>
@@ -76,7 +76,7 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 			<div class="ytct-top-bar">
 				<div class="ytct-select-grid">
 					<div class="ytct-language-select">
-						<label for="ytct-scope-locale"><?php esc_html_e('Settings Locale Scope:', 'cybokron-consent-manager-translations-yootheme'); ?></label>
+						<label for="ytct-scope-locale"><?php esc_html_e('Settings Locale Scope:', 'cybokron-consent-manager-translations-yootheme-main'); ?></label>
 						<select id="ytct-scope-locale" name="scope_locale">
 							<?php foreach ($ytct_scope_locales as $ytct_locale_option) : ?>
 								<option value="<?php echo esc_attr($ytct_locale_option); ?>" <?php selected($ytct_scope_locale, $ytct_locale_option); ?>>
@@ -87,7 +87,7 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 					</div>
 
 					<div class="ytct-language-select">
-						<label for="ytct-language"><?php esc_html_e('Language Preset:', 'cybokron-consent-manager-translations-yootheme'); ?></label>
+						<label for="ytct-language"><?php esc_html_e('Language Preset:', 'cybokron-consent-manager-translations-yootheme-main'); ?></label>
 						<select id="ytct-language" name="language">
 							<?php foreach ($ytct_languages as $ytct_code => $ytct_name) : ?>
 								<option value="<?php echo esc_attr($ytct_code); ?>" <?php selected($ytct_current_language, $ytct_code); ?>>
@@ -104,14 +104,14 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 						<small class="ytct-help-text">
 							<?php
 							/* translators: %s WordPress locale code */
-							printf(esc_html__('Scope locale: %s', 'cybokron-consent-manager-translations-yootheme'), '<strong>' . esc_html($ytct_scope_locale) . '</strong>');
+							printf(esc_html__('Scope locale: %s', 'cybokron-consent-manager-translations-yootheme-main'), '<strong>' . esc_html($ytct_scope_locale) . '</strong>');
 							?>
 						</small>
 					</div>
 				</div>
 
 				<div class="ytct-toggle">
-					<label for="ytct-enabled"><?php esc_html_e('Enable Translations:', 'cybokron-consent-manager-translations-yootheme'); ?></label>
+					<label for="ytct-enabled"><?php esc_html_e('Enable Translations:', 'cybokron-consent-manager-translations-yootheme-main'); ?></label>
 					<label class="ytct-switch">
 						<input type="hidden" name="enabled" value="0">
 						<input type="checkbox" id="ytct-enabled" name="enabled" value="1" <?php checked($ytct_enabled); ?>>
@@ -122,9 +122,9 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 
 			<div id="ytct-updater-panel" class="ytct-updater-panel">
 				<div class="ytct-updater-head">
-					<h3><?php esc_html_e('WordPress.org Update Status', 'cybokron-consent-manager-translations-yootheme'); ?></h3>
+					<h3><?php esc_html_e('WordPress.org Update Status', 'cybokron-consent-manager-translations-yootheme-main'); ?></h3>
 					<div class="ytct-toggle">
-						<label for="ytct-update-channel-enabled"><?php esc_html_e('Enable Periodic Checks:', 'cybokron-consent-manager-translations-yootheme'); ?></label>
+						<label for="ytct-update-channel-enabled"><?php esc_html_e('Enable Periodic Checks:', 'cybokron-consent-manager-translations-yootheme-main'); ?></label>
 						<label class="ytct-switch">
 							<input type="hidden" name="update_channel_enabled" value="0">
 							<input type="checkbox" id="ytct-update-channel-enabled" name="update_channel_enabled" value="1" <?php checked($ytct_update_channel_enabled); ?>>
@@ -133,44 +133,44 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 					</div>
 				</div>
 				<p class="ytct-help-text">
-					<?php esc_html_e('This setting is site-wide (not locale scoped). It refreshes WordPress.org update metadata every 12 hours.', 'cybokron-consent-manager-translations-yootheme'); ?>
+					<?php esc_html_e('This setting is site-wide (not locale scoped). It refreshes WordPress.org update metadata every 12 hours.', 'cybokron-consent-manager-translations-yootheme-main'); ?>
 				</p>
 				<div class="ytct-updater-grid">
 					<div class="ytct-updater-item">
-						<span class="ytct-updater-label"><?php esc_html_e('Current Version:', 'cybokron-consent-manager-translations-yootheme'); ?></span>
+						<span class="ytct-updater-label"><?php esc_html_e('Current Version:', 'cybokron-consent-manager-translations-yootheme-main'); ?></span>
 						<strong id="ytct-updater-current-version"><?php echo esc_html(isset($ytct_updater['currentVersion']) ? $ytct_updater['currentVersion'] : YTCT_VERSION); ?></strong>
 					</div>
 					<div class="ytct-updater-item">
-						<span class="ytct-updater-label"><?php esc_html_e('Latest Version:', 'cybokron-consent-manager-translations-yootheme'); ?></span>
-						<strong id="ytct-updater-latest-version"><?php echo esc_html(!empty($ytct_updater['latestVersion']) ? $ytct_updater['latestVersion'] : __('Unknown', 'cybokron-consent-manager-translations-yootheme')); ?></strong>
+						<span class="ytct-updater-label"><?php esc_html_e('Latest Version:', 'cybokron-consent-manager-translations-yootheme-main'); ?></span>
+						<strong id="ytct-updater-latest-version"><?php echo esc_html(!empty($ytct_updater['latestVersion']) ? $ytct_updater['latestVersion'] : __('Unknown', 'cybokron-consent-manager-translations-yootheme-main')); ?></strong>
 					</div>
 					<div class="ytct-updater-item">
-						<span class="ytct-updater-label"><?php esc_html_e('Last Check:', 'cybokron-consent-manager-translations-yootheme'); ?></span>
-						<strong id="ytct-updater-last-check"><?php echo esc_html(!empty($ytct_updater['lastCheckedAt']) ? $ytct_updater['lastCheckedAt'] : __('Never', 'cybokron-consent-manager-translations-yootheme')); ?></strong>
+						<span class="ytct-updater-label"><?php esc_html_e('Last Check:', 'cybokron-consent-manager-translations-yootheme-main'); ?></span>
+						<strong id="ytct-updater-last-check"><?php echo esc_html(!empty($ytct_updater['lastCheckedAt']) ? $ytct_updater['lastCheckedAt'] : __('Never', 'cybokron-consent-manager-translations-yootheme-main')); ?></strong>
 					</div>
 					<div class="ytct-updater-item">
-						<span class="ytct-updater-label"><?php esc_html_e('Last Status:', 'cybokron-consent-manager-translations-yootheme'); ?></span>
+						<span class="ytct-updater-label"><?php esc_html_e('Last Status:', 'cybokron-consent-manager-translations-yootheme-main'); ?></span>
 						<strong id="ytct-updater-status"><?php echo esc_html($ytct_updater_status_label); ?></strong>
 					</div>
 					<div class="ytct-updater-item">
-						<span class="ytct-updater-label"><?php esc_html_e('Last Install:', 'cybokron-consent-manager-translations-yootheme'); ?></span>
-						<strong id="ytct-updater-last-install"><?php echo esc_html(!empty($ytct_updater['lastInstallAt']) ? $ytct_updater['lastInstallAt'] : __('Never', 'cybokron-consent-manager-translations-yootheme')); ?></strong>
+						<span class="ytct-updater-label"><?php esc_html_e('Last Install:', 'cybokron-consent-manager-translations-yootheme-main'); ?></span>
+						<strong id="ytct-updater-last-install"><?php echo esc_html(!empty($ytct_updater['lastInstallAt']) ? $ytct_updater['lastInstallAt'] : __('Never', 'cybokron-consent-manager-translations-yootheme-main')); ?></strong>
 					</div>
 					<div class="ytct-updater-item">
-						<span class="ytct-updater-label"><?php esc_html_e('Last Error:', 'cybokron-consent-manager-translations-yootheme'); ?></span>
-						<strong id="ytct-updater-last-error"><?php echo esc_html(!empty($ytct_updater['lastError']) ? $ytct_updater['lastError'] : __('None', 'cybokron-consent-manager-translations-yootheme')); ?></strong>
+						<span class="ytct-updater-label"><?php esc_html_e('Last Error:', 'cybokron-consent-manager-translations-yootheme-main'); ?></span>
+						<strong id="ytct-updater-last-error"><?php echo esc_html(!empty($ytct_updater['lastError']) ? $ytct_updater['lastError'] : __('None', 'cybokron-consent-manager-translations-yootheme-main')); ?></strong>
 					</div>
 				</div>
 				<div class="ytct-updater-actions">
 					<button type="button" id="ytct-check-update-btn" class="ytct-btn ytct-btn-secondary">
-						<?php esc_html_e('Check Now', 'cybokron-consent-manager-translations-yootheme'); ?>
+						<?php esc_html_e('Check Now', 'cybokron-consent-manager-translations-yootheme-main'); ?>
 					</button>
 				</div>
 			</div>
 
 			<div id="ytct-health-panel" class="ytct-health ytct-health-<?php echo esc_attr($ytct_health['status']); ?>">
-				<h3><?php esc_html_e('Compatibility Health', 'cybokron-consent-manager-translations-yootheme'); ?></h3>
-				<p><?php esc_html_e('Monitors compatibility with YOOtheme consent source strings.', 'cybokron-consent-manager-translations-yootheme'); ?></p>
+				<h3><?php esc_html_e('Compatibility Health', 'cybokron-consent-manager-translations-yootheme-main'); ?></h3>
+				<p><?php esc_html_e('Monitors compatibility with YOOtheme consent source strings.', 'cybokron-consent-manager-translations-yootheme-main'); ?></p>
 				<ul class="ytct-health-list" id="ytct-health-list">
 					<?php if (!empty($ytct_health['issues'])) : ?>
 						<?php foreach ($ytct_health['issues'] as $ytct_issue) : ?>
@@ -181,7 +181,7 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 							<li class="ytct-health-warning"><?php echo esc_html($ytct_warning); ?></li>
 						<?php endforeach; ?>
 					<?php else : ?>
-						<li class="ytct-health-ok"><?php esc_html_e('No compatibility issues reported.', 'cybokron-consent-manager-translations-yootheme'); ?></li>
+						<li class="ytct-health-ok"><?php esc_html_e('No compatibility issues reported.', 'cybokron-consent-manager-translations-yootheme-main'); ?></li>
 					<?php endif; ?>
 				</ul>
 			</div>
@@ -190,7 +190,7 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 				class="ytct-tabs"
 				role="tablist"
 				aria-orientation="horizontal"
-				aria-label="<?php esc_attr_e('Translation sections', 'cybokron-consent-manager-translations-yootheme'); ?>"
+				aria-label="<?php esc_attr_e('Translation sections', 'cybokron-consent-manager-translations-yootheme-main'); ?>"
 			>
 				<?php foreach ($ytct_string_groups as $ytct_group_id => $ytct_group) :
 					$ytct_is_active = $ytct_group_id === 'banner';
@@ -212,8 +212,8 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 
 			<div class="ytct-search-bar">
 				<div class="ytct-search-wrapper">
-					<input type="text" id="ytct-search-strings" class="ytct-search-input" placeholder="<?php esc_attr_e('Search translation strings...', 'cybokron-consent-manager-translations-yootheme'); ?>">
-					<button type="button" id="ytct-search-clear" class="ytct-search-clear" style="display:none;" aria-label="<?php esc_attr_e('Clear search', 'cybokron-consent-manager-translations-yootheme'); ?>">&times;</button>
+					<input type="text" id="ytct-search-strings" class="ytct-search-input" placeholder="<?php esc_attr_e('Search translation strings...', 'cybokron-consent-manager-translations-yootheme-main'); ?>">
+					<button type="button" id="ytct-search-clear" class="ytct-search-clear" style="display:none;" aria-label="<?php esc_attr_e('Clear search', 'cybokron-consent-manager-translations-yootheme-main'); ?>">&times;</button>
 				</div>
 				<div class="ytct-stats-info">
 					<div class="ytct-stats-bar">
@@ -224,7 +224,7 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 			</div>
 
 			<div id="ytct-no-results" class="ytct-no-results" style="display:none;">
-				<?php esc_html_e('No matching strings found.', 'cybokron-consent-manager-translations-yootheme'); ?>
+				<?php esc_html_e('No matching strings found.', 'cybokron-consent-manager-translations-yootheme-main'); ?>
 			</div>
 
 			<?php foreach ($ytct_string_groups as $ytct_group_id => $ytct_group) :
@@ -242,7 +242,7 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 				>
 					<div class="ytct-category-header">
 						<span class="ytct-category-icon"><?php echo esc_html(strtoupper(substr($ytct_group_id, 0, 1))); ?></span>
-						<h3><?php echo esc_html($ytct_group['label']); ?> <?php esc_html_e('Strings', 'cybokron-consent-manager-translations-yootheme'); ?></h3>
+						<h3><?php echo esc_html($ytct_group['label']); ?> <?php esc_html_e('Strings', 'cybokron-consent-manager-translations-yootheme-main'); ?></h3>
 					</div>
 
 					<?php foreach ($ytct_group['keys'] as $ytct_key) :
@@ -258,7 +258,7 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 							</label>
 
 							<div class="ytct-original">
-								<strong><?php esc_html_e('Original:', 'cybokron-consent-manager-translations-yootheme'); ?></strong><br>
+								<strong><?php esc_html_e('Original:', 'cybokron-consent-manager-translations-yootheme-main'); ?></strong><br>
 								<?php echo esc_html($ytct_original); ?>
 							</div>
 
@@ -270,7 +270,7 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 									data-key="<?php echo esc_attr($ytct_key); ?>"
 									data-original-length="<?php echo esc_attr(strlen($ytct_original)); ?>"
 									data-preset="<?php echo esc_attr($ytct_preset); ?>"
-									placeholder="<?php esc_attr_e('Enter translation...', 'cybokron-consent-manager-translations-yootheme'); ?>"
+									placeholder="<?php esc_attr_e('Enter translation...', 'cybokron-consent-manager-translations-yootheme-main'); ?>"
 								><?php echo esc_textarea($ytct_value); ?></textarea>
 							<?php else : ?>
 								<input
@@ -282,13 +282,13 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 									data-key="<?php echo esc_attr($ytct_key); ?>"
 									data-original-length="<?php echo esc_attr(strlen($ytct_original)); ?>"
 									data-preset="<?php echo esc_attr($ytct_preset); ?>"
-									placeholder="<?php esc_attr_e('Enter translation...', 'cybokron-consent-manager-translations-yootheme'); ?>"
+									placeholder="<?php esc_attr_e('Enter translation...', 'cybokron-consent-manager-translations-yootheme-main'); ?>"
 								>
 							<?php endif; ?>
 
 							<div class="ytct-field-tools">
 								<button type="button" class="ytct-btn ytct-btn-link ytct-reset-field" data-key="<?php echo esc_attr($ytct_key); ?>">
-									<?php esc_html_e('Reset Field', 'cybokron-consent-manager-translations-yootheme'); ?>
+									<?php esc_html_e('Reset Field', 'cybokron-consent-manager-translations-yootheme-main'); ?>
 								</button>
 								<span class="ytct-field-metrics" data-key="<?php echo esc_attr($ytct_key); ?>"></span>
 							</div>
@@ -298,7 +298,7 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 									<?php
 									printf(
 										/* translators: 1: %s placeholder token, 2: %1$s placeholder token. */
-										esc_html__('Keep %1$s or %2$s in your translation. It will be replaced with the Privacy Policy URL.', 'cybokron-consent-manager-translations-yootheme'),
+										esc_html__('Keep %1$s or %2$s in your translation. It will be replaced with the Privacy Policy URL.', 'cybokron-consent-manager-translations-yootheme-main'),
 										'%s',
 										'%1$s'
 									);
@@ -313,7 +313,7 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 			<?php endforeach; ?>
 
 			<div class="ytct-preview-panel" id="ytct-preview-panel">
-				<h3><?php esc_html_e('Live Preview', 'cybokron-consent-manager-translations-yootheme'); ?></h3>
+				<h3><?php esc_html_e('Live Preview', 'cybokron-consent-manager-translations-yootheme-main'); ?></h3>
 				<div class="ytct-preview-banner">
 					<p class="ytct-preview-text" data-preview-key="banner_text"><?php echo esc_html(isset($ytct_effective_strings['banner_text']) ? $ytct_effective_strings['banner_text'] : ''); ?></p>
 					<p class="ytct-preview-link" data-preview-key="banner_link"><?php echo wp_kses_post(isset($ytct_effective_strings['banner_link']) ? str_replace('%s', '#', $ytct_effective_strings['banner_link']) : ''); ?></p>
@@ -338,36 +338,36 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 			<div class="ytct-footer">
 				<div class="ytct-primary-actions">
 					<button type="submit" id="ytct-save-btn" class="ytct-btn ytct-btn-primary">
-						<?php esc_html_e('Save Changes', 'cybokron-consent-manager-translations-yootheme'); ?>
+						<?php esc_html_e('Save Changes', 'cybokron-consent-manager-translations-yootheme-main'); ?>
 					</button>
 					<button type="button" id="ytct-reset-btn" class="ytct-btn ytct-btn-danger">
-						<?php esc_html_e('Reset to Default', 'cybokron-consent-manager-translations-yootheme'); ?>
+						<?php esc_html_e('Reset to Default', 'cybokron-consent-manager-translations-yootheme-main'); ?>
 					</button>
 				</div>
 
 				<div class="ytct-secondary-actions">
 					<button type="button" id="ytct-quality-btn" class="ytct-btn ytct-btn-secondary">
-						<?php esc_html_e('Run QA Check', 'cybokron-consent-manager-translations-yootheme'); ?>
+						<?php esc_html_e('Run QA Check', 'cybokron-consent-manager-translations-yootheme-main'); ?>
 					</button>
 					<button type="button" id="ytct-health-btn" class="ytct-btn ytct-btn-secondary">
-						<?php esc_html_e('Run Health Check', 'cybokron-consent-manager-translations-yootheme'); ?>
+						<?php esc_html_e('Run Health Check', 'cybokron-consent-manager-translations-yootheme-main'); ?>
 					</button>
 					<button type="button" id="ytct-import-btn" class="ytct-btn ytct-btn-secondary">
-						<?php esc_html_e('Import', 'cybokron-consent-manager-translations-yootheme'); ?>
+						<?php esc_html_e('Import', 'cybokron-consent-manager-translations-yootheme-main'); ?>
 					</button>
 					<button type="button" id="ytct-export-btn" class="ytct-btn ytct-btn-secondary">
-						<?php esc_html_e('Export', 'cybokron-consent-manager-translations-yootheme'); ?>
+						<?php esc_html_e('Export', 'cybokron-consent-manager-translations-yootheme-main'); ?>
 					</button>
 					<button type="button" id="ytct-copy-locale-btn" class="ytct-btn ytct-btn-secondary">
-						<?php esc_html_e('Copy From Locale', 'cybokron-consent-manager-translations-yootheme'); ?>
+						<?php esc_html_e('Copy From Locale', 'cybokron-consent-manager-translations-yootheme-main'); ?>
 					</button>
 				</div>
 			</div>
 
 			<div class="ytct-snapshot-tools">
-				<label for="ytct-snapshot-select"><?php esc_html_e('Snapshots:', 'cybokron-consent-manager-translations-yootheme'); ?></label>
+				<label for="ytct-snapshot-select"><?php esc_html_e('Snapshots:', 'cybokron-consent-manager-translations-yootheme-main'); ?></label>
 				<select id="ytct-snapshot-select">
-					<option value=""><?php esc_html_e('Select a snapshot', 'cybokron-consent-manager-translations-yootheme'); ?></option>
+					<option value=""><?php esc_html_e('Select a snapshot', 'cybokron-consent-manager-translations-yootheme-main'); ?></option>
 					<?php foreach ($ytct_snapshots as $ytct_snapshot) : ?>
 						<option value="<?php echo esc_attr($ytct_snapshot['id']); ?>">
 							<?php
@@ -383,7 +383,7 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 					<?php endforeach; ?>
 				</select>
 				<button type="button" id="ytct-restore-btn" class="ytct-btn ytct-btn-secondary">
-					<?php esc_html_e('Restore Snapshot', 'cybokron-consent-manager-translations-yootheme'); ?>
+					<?php esc_html_e('Restore Snapshot', 'cybokron-consent-manager-translations-yootheme-main'); ?>
 				</button>
 			</div>
 
@@ -394,19 +394,19 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 
 <div id="ytct-import-modal" class="ytct-modal-overlay">
 	<div class="ytct-modal">
-		<h3><?php esc_html_e('Import Settings', 'cybokron-consent-manager-translations-yootheme'); ?></h3>
+		<h3><?php esc_html_e('Import Settings', 'cybokron-consent-manager-translations-yootheme-main'); ?></h3>
 		<form id="ytct-import-form" enctype="multipart/form-data">
 			<div class="ytct-file-input-wrapper">
 				<input type="file" id="ytct-import-file" accept=".json">
-				<p><?php esc_html_e('Click or drag a JSON file here', 'cybokron-consent-manager-translations-yootheme'); ?></p>
+				<p><?php esc_html_e('Click or drag a JSON file here', 'cybokron-consent-manager-translations-yootheme-main'); ?></p>
 				<p class="ytct-file-name" style="display: none;"></p>
 			</div>
 			<div class="ytct-modal-actions">
 				<button type="button" class="ytct-btn ytct-btn-secondary ytct-modal-close">
-					<?php esc_html_e('Cancel', 'cybokron-consent-manager-translations-yootheme'); ?>
+					<?php esc_html_e('Cancel', 'cybokron-consent-manager-translations-yootheme-main'); ?>
 				</button>
 				<button type="submit" id="ytct-import-submit" class="ytct-btn ytct-btn-primary">
-					<?php esc_html_e('Import', 'cybokron-consent-manager-translations-yootheme'); ?>
+					<?php esc_html_e('Import', 'cybokron-consent-manager-translations-yootheme-main'); ?>
 				</button>
 			</div>
 		</form>
@@ -415,13 +415,13 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 
 <div id="ytct-copy-locale-modal" class="ytct-modal-overlay">
 	<div class="ytct-modal">
-		<h3><?php esc_html_e('Copy Settings From Another Locale', 'cybokron-consent-manager-translations-yootheme'); ?></h3>
-		<p class="ytct-help-text"><?php esc_html_e('Select a source locale to copy all translation settings from. This will overwrite the current locale scope settings.', 'cybokron-consent-manager-translations-yootheme'); ?></p>
+		<h3><?php esc_html_e('Copy Settings From Another Locale', 'cybokron-consent-manager-translations-yootheme-main'); ?></h3>
+		<p class="ytct-help-text"><?php esc_html_e('Select a source locale to copy all translation settings from. This will overwrite the current locale scope settings.', 'cybokron-consent-manager-translations-yootheme-main'); ?></p>
 		<form id="ytct-copy-locale-form">
 			<div class="ytct-copy-locale-select">
-				<label for="ytct-copy-source-locale"><?php esc_html_e('Source Locale:', 'cybokron-consent-manager-translations-yootheme'); ?></label>
+				<label for="ytct-copy-source-locale"><?php esc_html_e('Source Locale:', 'cybokron-consent-manager-translations-yootheme-main'); ?></label>
 				<select id="ytct-copy-source-locale">
-					<option value=""><?php esc_html_e('Select a locale...', 'cybokron-consent-manager-translations-yootheme'); ?></option>
+					<option value=""><?php esc_html_e('Select a locale...', 'cybokron-consent-manager-translations-yootheme-main'); ?></option>
 					<?php foreach ($ytct_scope_locales as $ytct_locale_option) : ?>
 						<option value="<?php echo esc_attr($ytct_locale_option); ?>">
 							<?php echo esc_html(YTCT_Strings::get_locale_label($ytct_locale_option)); ?>
@@ -431,10 +431,10 @@ $ytct_updater_status_label = !empty($ytct_updater['statusLabel'])
 			</div>
 			<div class="ytct-modal-actions">
 				<button type="button" class="ytct-btn ytct-btn-secondary ytct-modal-close">
-					<?php esc_html_e('Cancel', 'cybokron-consent-manager-translations-yootheme'); ?>
+					<?php esc_html_e('Cancel', 'cybokron-consent-manager-translations-yootheme-main'); ?>
 				</button>
 				<button type="submit" id="ytct-copy-locale-submit" class="ytct-btn ytct-btn-primary">
-					<?php esc_html_e('Copy Settings', 'cybokron-consent-manager-translations-yootheme'); ?>
+					<?php esc_html_e('Copy Settings', 'cybokron-consent-manager-translations-yootheme-main'); ?>
 				</button>
 			</div>
 		</form>

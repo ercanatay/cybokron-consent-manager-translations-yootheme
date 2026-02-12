@@ -70,8 +70,8 @@ class YTCT_Admin {
 	 */
 	public function add_menu_page() {
 		add_options_page(
-			__('Cybokron Consent Manager Translations for YOOtheme Pro', 'cybokron-consent-manager-translations-yootheme'),
-			__('Cybokron Consent Manager Translations for YOOtheme Pro', 'cybokron-consent-manager-translations-yootheme'),
+			__('Cybokron Consent Manager Translations for YOOtheme Pro', 'cybokron-consent-manager-translations-yootheme-main'),
+			__('Cybokron Consent Manager Translations for YOOtheme Pro', 'cybokron-consent-manager-translations-yootheme-main'),
 			'manage_options',
 			'cybokron-consent-manager-translations-yootheme',
 			[$this, 'render_settings_page']
@@ -108,35 +108,35 @@ class YTCT_Admin {
 			'ajaxUrl' => admin_url('admin-ajax.php'),
 			'nonce' => wp_create_nonce('ytct_admin_nonce'),
 			'strings' => [
-				'saving' => __('Saving...', 'cybokron-consent-manager-translations-yootheme'),
-				'saved' => __('Settings saved successfully!', 'cybokron-consent-manager-translations-yootheme'),
-				'error' => __('An error occurred. Please try again.', 'cybokron-consent-manager-translations-yootheme'),
-				'confirmReset' => __('Are you sure you want to reset all settings for this locale scope to defaults?', 'cybokron-consent-manager-translations-yootheme'),
-				'resetting' => __('Resetting...', 'cybokron-consent-manager-translations-yootheme'),
-				'resetSuccess' => __('Settings reset successfully!', 'cybokron-consent-manager-translations-yootheme'),
-				'importing' => __('Importing...', 'cybokron-consent-manager-translations-yootheme'),
-				'importSuccess' => __('Settings imported successfully!', 'cybokron-consent-manager-translations-yootheme'),
-				'invalidFile' => __('Please select a valid JSON file.', 'cybokron-consent-manager-translations-yootheme'),
-				'languageLoaded' => __('Language preset loaded!', 'cybokron-consent-manager-translations-yootheme'),
-				'scopeLoaded' => __('Locale scope loaded.', 'cybokron-consent-manager-translations-yootheme'),
-				'qualityCheckRunning' => __('Running quality checks...', 'cybokron-consent-manager-translations-yootheme'),
-				'qualityCheckOk' => __('No blocking quality issues found.', 'cybokron-consent-manager-translations-yootheme'),
-				'healthCheckRunning' => __('Running compatibility health check...', 'cybokron-consent-manager-translations-yootheme'),
-				'healthCheckOk' => __('Compatibility check completed.', 'cybokron-consent-manager-translations-yootheme'),
-				'restored' => __('Snapshot restored successfully.', 'cybokron-consent-manager-translations-yootheme'),
-				'unsavedChanges' => __('You have unsaved changes. Leave without saving?', 'cybokron-consent-manager-translations-yootheme'),
-				'selectSnapshot' => __('Select a snapshot', 'cybokron-consent-manager-translations-yootheme'),
-				'selectSnapshotFirst' => __('Select a snapshot first.', 'cybokron-consent-manager-translations-yootheme'),
-				'qualityCheckFailed' => __('Quality check reported issues/warnings.', 'cybokron-consent-manager-translations-yootheme'),
-				'checkUpdateRunning' => __('Checking WordPress.org update metadata...', 'cybokron-consent-manager-translations-yootheme'),
-				'checkUpdateNoChange' => __('No new version found. Plugin is up to date.', 'cybokron-consent-manager-translations-yootheme'),
-				'checkUpdateFound' => __('A new version is available. Update it from the Plugins screen.', 'cybokron-consent-manager-translations-yootheme'),
-				'checkUpdateInstalled' => __('Plugin updates are managed by WordPress.', 'cybokron-consent-manager-translations-yootheme'),
-				'checkUpdateInstallFailed' => __('Update check completed with an error. Check updater status.', 'cybokron-consent-manager-translations-yootheme'),
-				'copyLocaleRunning' => __('Copying...', 'cybokron-consent-manager-translations-yootheme'),
-				'confirmCopyLocale' => __('Copy all settings from the selected locale? This will overwrite current settings for this scope.', 'cybokron-consent-manager-translations-yootheme'),
-				'selectSourceLocale' => __('Select a source locale first.', 'cybokron-consent-manager-translations-yootheme'),
-				'statsSummary' => __('{customized}/{total} customized ({percent}%)', 'cybokron-consent-manager-translations-yootheme')
+				'saving' => __('Saving...', 'cybokron-consent-manager-translations-yootheme-main'),
+				'saved' => __('Settings saved successfully!', 'cybokron-consent-manager-translations-yootheme-main'),
+				'error' => __('An error occurred. Please try again.', 'cybokron-consent-manager-translations-yootheme-main'),
+				'confirmReset' => __('Are you sure you want to reset all settings for this locale scope to defaults?', 'cybokron-consent-manager-translations-yootheme-main'),
+				'resetting' => __('Resetting...', 'cybokron-consent-manager-translations-yootheme-main'),
+				'resetSuccess' => __('Settings reset successfully!', 'cybokron-consent-manager-translations-yootheme-main'),
+				'importing' => __('Importing...', 'cybokron-consent-manager-translations-yootheme-main'),
+				'importSuccess' => __('Settings imported successfully!', 'cybokron-consent-manager-translations-yootheme-main'),
+				'invalidFile' => __('Please select a valid JSON file.', 'cybokron-consent-manager-translations-yootheme-main'),
+				'languageLoaded' => __('Language preset loaded!', 'cybokron-consent-manager-translations-yootheme-main'),
+				'scopeLoaded' => __('Locale scope loaded.', 'cybokron-consent-manager-translations-yootheme-main'),
+				'qualityCheckRunning' => __('Running quality checks...', 'cybokron-consent-manager-translations-yootheme-main'),
+				'qualityCheckOk' => __('No blocking quality issues found.', 'cybokron-consent-manager-translations-yootheme-main'),
+				'healthCheckRunning' => __('Running compatibility health check...', 'cybokron-consent-manager-translations-yootheme-main'),
+				'healthCheckOk' => __('Compatibility check completed.', 'cybokron-consent-manager-translations-yootheme-main'),
+				'restored' => __('Snapshot restored successfully.', 'cybokron-consent-manager-translations-yootheme-main'),
+				'unsavedChanges' => __('You have unsaved changes. Leave without saving?', 'cybokron-consent-manager-translations-yootheme-main'),
+				'selectSnapshot' => __('Select a snapshot', 'cybokron-consent-manager-translations-yootheme-main'),
+				'selectSnapshotFirst' => __('Select a snapshot first.', 'cybokron-consent-manager-translations-yootheme-main'),
+				'qualityCheckFailed' => __('Quality check reported issues/warnings.', 'cybokron-consent-manager-translations-yootheme-main'),
+				'checkUpdateRunning' => __('Checking WordPress.org update metadata...', 'cybokron-consent-manager-translations-yootheme-main'),
+				'checkUpdateNoChange' => __('No new version found. Plugin is up to date.', 'cybokron-consent-manager-translations-yootheme-main'),
+				'checkUpdateFound' => __('A new version is available. Update it from the Plugins screen.', 'cybokron-consent-manager-translations-yootheme-main'),
+				'checkUpdateInstalled' => __('Plugin updates are managed by WordPress.', 'cybokron-consent-manager-translations-yootheme-main'),
+				'checkUpdateInstallFailed' => __('Update check completed with an error. Check updater status.', 'cybokron-consent-manager-translations-yootheme-main'),
+				'copyLocaleRunning' => __('Copying...', 'cybokron-consent-manager-translations-yootheme-main'),
+				'confirmCopyLocale' => __('Copy all settings from the selected locale? This will overwrite current settings for this scope.', 'cybokron-consent-manager-translations-yootheme-main'),
+				'selectSourceLocale' => __('Select a source locale first.', 'cybokron-consent-manager-translations-yootheme-main'),
+				'statsSummary' => __('{customized}/{total} customized ({percent}%)', 'cybokron-consent-manager-translations-yootheme-main')
 			]
 		]);
 	}
@@ -180,11 +180,11 @@ class YTCT_Admin {
 
 		$nonce = $this->get_post_scalar('nonce');
 		if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
-			wp_send_json_error(['message' => __('Security check failed.', 'cybokron-consent-manager-translations-yootheme')]);
+			wp_send_json_error(['message' => __('Security check failed.', 'cybokron-consent-manager-translations-yootheme-main')]);
 		}
 
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(['message' => __('Permission denied.', 'cybokron-consent-manager-translations-yootheme')]);
+			wp_send_json_error(['message' => __('Permission denied.', 'cybokron-consent-manager-translations-yootheme-main')]);
 		}
 	}
 
@@ -398,7 +398,7 @@ class YTCT_Admin {
 		if (!empty($invalid_placeholder_fields)) {
 			$issues[] = sprintf(
 				/* translators: 1: %s placeholder, 2: %1$s placeholder, 3: field labels. */
-				__('The following fields must include %1$s or %2$s: %3$s', 'cybokron-consent-manager-translations-yootheme'),
+				__('The following fields must include %1$s or %2$s: %3$s', 'cybokron-consent-manager-translations-yootheme-main'),
 				'%s',
 				'%1$s',
 				implode(', ', $invalid_placeholder_fields)
@@ -412,7 +412,7 @@ class YTCT_Admin {
 			if ($value !== '' && substr_count($value, '<a ') !== substr_count($value, '</a>')) {
 				$warnings[] = sprintf(
 					/* translators: %s field label */
-					__('%s may contain malformed anchor HTML.', 'cybokron-consent-manager-translations-yootheme'),
+					__('%s may contain malformed anchor HTML.', 'cybokron-consent-manager-translations-yootheme-main'),
 					YTCT_Strings::get_key_label($key)
 				);
 			}
@@ -422,7 +422,7 @@ class YTCT_Admin {
 				if ($ratio > 1.8) {
 					$warnings[] = sprintf(
 						/* translators: %s field label */
-						__('%s is much longer than the preset and may overflow on small screens.', 'cybokron-consent-manager-translations-yootheme'),
+						__('%s is much longer than the preset and may overflow on small screens.', 'cybokron-consent-manager-translations-yootheme-main'),
 						YTCT_Strings::get_key_label($key)
 					);
 				}
@@ -443,7 +443,7 @@ class YTCT_Admin {
 			if ($left !== '' && $right !== '' && $left_cmp === $right_cmp) {
 				$warnings[] = sprintf(
 					/* translators: 1: first field label, 2: second field label */
-					__('Fields %1$s and %2$s are identical. Consider using distinct labels for clarity.', 'cybokron-consent-manager-translations-yootheme'),
+					__('Fields %1$s and %2$s are identical. Consider using distinct labels for clarity.', 'cybokron-consent-manager-translations-yootheme-main'),
 					YTCT_Strings::get_key_label($pair[0]),
 					YTCT_Strings::get_key_label($pair[1])
 				);
@@ -527,7 +527,7 @@ class YTCT_Admin {
 		if (!empty($invalid_placeholder_fields)) {
 			$message = sprintf(
 				/* translators: 1: %s placeholder, 2: %1$s placeholder, 3: field labels. */
-				__('The following fields must include %1$s or %2$s: %3$s', 'cybokron-consent-manager-translations-yootheme'),
+				__('The following fields must include %1$s or %2$s: %3$s', 'cybokron-consent-manager-translations-yootheme-main'),
 				'%s',
 				'%1$s',
 				implode(', ', $invalid_placeholder_fields)
@@ -554,7 +554,7 @@ class YTCT_Admin {
 		$scope_payload['options'] = $stored;
 
 		wp_send_json_success([
-			'message' => __('Settings saved successfully!', 'cybokron-consent-manager-translations-yootheme'),
+			'message' => __('Settings saved successfully!', 'cybokron-consent-manager-translations-yootheme-main'),
 			'scope' => $scope_payload
 		]);
 	}
@@ -575,7 +575,7 @@ class YTCT_Admin {
 		YTCT_Strings::clear_cache();
 
 		wp_send_json_success([
-			'message' => __('Settings reset successfully!', 'cybokron-consent-manager-translations-yootheme'),
+			'message' => __('Settings reset successfully!', 'cybokron-consent-manager-translations-yootheme-main'),
 			'scope' => $this->build_scope_payload($scope_locale),
 			'options' => $stored
 		]);
@@ -621,33 +621,33 @@ class YTCT_Admin {
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce already validated in verify_ajax_request().
 		if (!isset($_FILES['import_file'])) {
-			wp_send_json_error(['message' => __('No file uploaded.', 'cybokron-consent-manager-translations-yootheme')]);
+			wp_send_json_error(['message' => __('No file uploaded.', 'cybokron-consent-manager-translations-yootheme-main')]);
 		}
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce is validated and file payload is validated below.
 		$ytct_file = $_FILES['import_file'];
 
 		if (!isset($ytct_file['error']) || $ytct_file['error'] !== UPLOAD_ERR_OK) {
-			wp_send_json_error(['message' => __('File upload failed.', 'cybokron-consent-manager-translations-yootheme')]);
+			wp_send_json_error(['message' => __('File upload failed.', 'cybokron-consent-manager-translations-yootheme-main')]);
 		}
 
 		$max_size = 150 * 1024;
 		if (!isset($ytct_file['size']) || $ytct_file['size'] > $max_size) {
-			wp_send_json_error(['message' => __('File too large. Maximum size is 150KB.', 'cybokron-consent-manager-translations-yootheme')]);
+			wp_send_json_error(['message' => __('File too large. Maximum size is 150KB.', 'cybokron-consent-manager-translations-yootheme-main')]);
 		}
 
 		if (!isset($ytct_file['name'])) {
-			wp_send_json_error(['message' => __('Invalid file.', 'cybokron-consent-manager-translations-yootheme')]);
+			wp_send_json_error(['message' => __('Invalid file.', 'cybokron-consent-manager-translations-yootheme-main')]);
 		}
 
 		$file_info = wp_check_filetype(sanitize_file_name($ytct_file['name']));
 		static $allowed_extensions = ['json' => true];
 		if (!$file_info['ext'] || !isset($allowed_extensions[strtolower($file_info['ext'])])) {
-			wp_send_json_error(['message' => __('Invalid file type. Only JSON files are allowed.', 'cybokron-consent-manager-translations-yootheme')]);
+			wp_send_json_error(['message' => __('Invalid file type. Only JSON files are allowed.', 'cybokron-consent-manager-translations-yootheme-main')]);
 		}
 
 		if (!isset($ytct_file['tmp_name']) || !is_uploaded_file($ytct_file['tmp_name'])) {
-			wp_send_json_error(['message' => __('Invalid file upload.', 'cybokron-consent-manager-translations-yootheme')]);
+			wp_send_json_error(['message' => __('Invalid file upload.', 'cybokron-consent-manager-translations-yootheme-main')]);
 		}
 
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- reading uploaded temp file
@@ -655,7 +655,7 @@ class YTCT_Admin {
 		$data = json_decode($content, true);
 
 		if (json_last_error() !== JSON_ERROR_NONE || !is_array($data)) {
-			wp_send_json_error(['message' => __('Invalid JSON file.', 'cybokron-consent-manager-translations-yootheme')]);
+			wp_send_json_error(['message' => __('Invalid JSON file.', 'cybokron-consent-manager-translations-yootheme-main')]);
 		}
 
 		$import_payload = null;
@@ -695,7 +695,7 @@ class YTCT_Admin {
 		if (!empty($invalid_placeholder_fields)) {
 			$message = sprintf(
 				/* translators: 1: %s placeholder, 2: %1$s placeholder, 3: field labels. */
-				__('The following fields must include %1$s or %2$s: %3$s', 'cybokron-consent-manager-translations-yootheme'),
+				__('The following fields must include %1$s or %2$s: %3$s', 'cybokron-consent-manager-translations-yootheme-main'),
 				'%s',
 				'%1$s',
 				implode(', ', $invalid_placeholder_fields)
@@ -715,7 +715,7 @@ class YTCT_Admin {
 		YTCT_Strings::clear_cache();
 
 		wp_send_json_success([
-			'message' => __('Settings imported successfully!', 'cybokron-consent-manager-translations-yootheme'),
+			'message' => __('Settings imported successfully!', 'cybokron-consent-manager-translations-yootheme-main'),
 			'scope' => $this->build_scope_payload($scope_locale),
 			'options' => $stored
 		]);
@@ -790,19 +790,19 @@ class YTCT_Admin {
 		$scope_locale = $this->get_scope_locale();
 		$snapshot_id = $this->get_post_scalar('snapshot_id');
 		if ($snapshot_id === '') {
-			wp_send_json_error(['message' => __('Snapshot ID is required.', 'cybokron-consent-manager-translations-yootheme')]);
+			wp_send_json_error(['message' => __('Snapshot ID is required.', 'cybokron-consent-manager-translations-yootheme-main')]);
 		}
 
 		$restored = YTCT_Options::restore_snapshot($snapshot_id, $scope_locale);
 		if (!is_array($restored)) {
-			wp_send_json_error(['message' => __('Snapshot could not be restored.', 'cybokron-consent-manager-translations-yootheme')]);
+			wp_send_json_error(['message' => __('Snapshot could not be restored.', 'cybokron-consent-manager-translations-yootheme-main')]);
 		}
 
 		YTCT_Translator::get_instance()->clear_cache();
 		YTCT_Strings::clear_cache();
 
 		wp_send_json_success([
-			'message' => __('Snapshot restored successfully.', 'cybokron-consent-manager-translations-yootheme'),
+			'message' => __('Snapshot restored successfully.', 'cybokron-consent-manager-translations-yootheme-main'),
 			'scope' => $this->build_scope_payload($scope_locale),
 			'options' => $restored
 		]);
@@ -864,11 +864,11 @@ class YTCT_Admin {
 
 		$updater = YTCT_Updater::manual_check();
 
-		$message = __('No new version found. Plugin is up to date.', 'cybokron-consent-manager-translations-yootheme');
+		$message = __('No new version found. Plugin is up to date.', 'cybokron-consent-manager-translations-yootheme-main');
 		if (!empty($updater['status']) && $updater['status'] === 'error') {
-			$message = __('Update check completed with an error. Check updater status.', 'cybokron-consent-manager-translations-yootheme');
+			$message = __('Update check completed with an error. Check updater status.', 'cybokron-consent-manager-translations-yootheme-main');
 		} elseif (!empty($updater['updateAvailable'])) {
-			$message = __('A new version is available. Update it from the Plugins screen.', 'cybokron-consent-manager-translations-yootheme');
+			$message = __('A new version is available. Update it from the Plugins screen.', 'cybokron-consent-manager-translations-yootheme-main');
 		}
 
 		wp_send_json_success([
@@ -889,7 +889,7 @@ class YTCT_Admin {
 		$target_locale = $this->get_scope_locale();
 
 		if ($source_locale === $target_locale) {
-			wp_send_json_error(['message' => __('Source and target locales are the same.', 'cybokron-consent-manager-translations-yootheme')]);
+			wp_send_json_error(['message' => __('Source and target locales are the same.', 'cybokron-consent-manager-translations-yootheme-main')]);
 		}
 
 		$source_options = YTCT_Options::get_options($source_locale);
@@ -901,7 +901,7 @@ class YTCT_Admin {
 		wp_send_json_success([
 			'message' => sprintf(
 				/* translators: %s source locale code */
-				__('Settings copied from %s successfully!', 'cybokron-consent-manager-translations-yootheme'),
+				__('Settings copied from %s successfully!', 'cybokron-consent-manager-translations-yootheme-main'),
 				$source_locale
 			),
 			'scope' => $this->build_scope_payload($target_locale)

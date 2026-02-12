@@ -8,7 +8,7 @@
  * Author URI: https://www.ercanatay.com/en/
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: cybokron-consent-manager-translations-yootheme
+ * Text Domain: cybokron-consent-manager-translations-yootheme-main
  * Domain Path: /languages
  * Requires at least: 5.0
  * Requires PHP: 7.4
@@ -175,7 +175,7 @@ final class YT_Consent_Translations {
 		$settings_link = sprintf(
 			'<a href="%s">%s</a>',
 			admin_url('options-general.php?page=cybokron-consent-manager-translations-yootheme'),
-			__('Settings', 'cybokron-consent-manager-translations-yootheme')
+			__('Settings', 'cybokron-consent-manager-translations-yootheme-main')
 		);
 		array_unshift($links, $settings_link);
 		return $links;

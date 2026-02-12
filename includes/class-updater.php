@@ -350,13 +350,13 @@ class YTCT_Updater {
 	public static function get_status_label($status) {
 		$status = sanitize_key((string) $status);
 		$labels = [
-			'idle' => __('Idle', 'cybokron-consent-manager-translations-yootheme'),
-			'up_to_date' => __('Up to date', 'cybokron-consent-manager-translations-yootheme'),
-			'update_available' => __('Update available', 'cybokron-consent-manager-translations-yootheme'),
-			'error' => __('Error', 'cybokron-consent-manager-translations-yootheme'),
-			'installing' => __('Installing', 'cybokron-consent-manager-translations-yootheme'),
-			'updated' => __('Updated', 'cybokron-consent-manager-translations-yootheme'),
-			'update_failed' => __('Update failed', 'cybokron-consent-manager-translations-yootheme')
+			'idle' => __('Idle', 'cybokron-consent-manager-translations-yootheme-main'),
+			'up_to_date' => __('Up to date', 'cybokron-consent-manager-translations-yootheme-main'),
+			'update_available' => __('Update available', 'cybokron-consent-manager-translations-yootheme-main'),
+			'error' => __('Error', 'cybokron-consent-manager-translations-yootheme-main'),
+			'installing' => __('Installing', 'cybokron-consent-manager-translations-yootheme-main'),
+			'updated' => __('Updated', 'cybokron-consent-manager-translations-yootheme-main'),
+			'update_failed' => __('Update failed', 'cybokron-consent-manager-translations-yootheme-main')
 		];
 
 		return isset($labels[$status]) ? $labels[$status] : $labels['idle'];
