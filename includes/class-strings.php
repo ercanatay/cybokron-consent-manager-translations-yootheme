@@ -391,15 +391,15 @@ class CYBOCOMA_Strings {
 	public static function get_string_groups() {
 		return [
 			'banner' => [
-				'label' => __('Banner', 'cybokron-consent-manager-translations-yootheme'),
+				'label' => __('Banner', 'cybokron-consent-manager-translations-yootheme-main'),
 				'keys' => ['banner_text', 'banner_link', 'button_accept', 'button_reject', 'button_settings']
 			],
 			'modal' => [
-				'label' => __('Modal', 'cybokron-consent-manager-translations-yootheme'),
+				'label' => __('Modal', 'cybokron-consent-manager-translations-yootheme-main'),
 				'keys' => ['modal_title', 'modal_content', 'modal_content_link']
 			],
 			'categories' => [
-				'label' => __('Categories', 'cybokron-consent-manager-translations-yootheme'),
+				'label' => __('Categories', 'cybokron-consent-manager-translations-yootheme-main'),
 				'keys' => [
 					'functional_title', 'functional_content',
 					'preferences_title', 'preferences_content',
@@ -408,7 +408,7 @@ class CYBOCOMA_Strings {
 				]
 			],
 			'buttons' => [
-				'label' => __('Buttons', 'cybokron-consent-manager-translations-yootheme'),
+				'label' => __('Buttons', 'cybokron-consent-manager-translations-yootheme-main'),
 				'keys' => ['show_services', 'hide_services', 'modal_accept', 'modal_reject', 'modal_save']
 			]
 		];
@@ -422,27 +422,27 @@ class CYBOCOMA_Strings {
 	 */
 	public static function get_key_label($key) {
 		$labels = [
-			'banner_text' => __('Banner Text', 'cybokron-consent-manager-translations-yootheme'),
-			'banner_link' => __('Privacy Policy Link', 'cybokron-consent-manager-translations-yootheme'),
-			'button_accept' => __('Accept Button', 'cybokron-consent-manager-translations-yootheme'),
-			'button_reject' => __('Reject Button', 'cybokron-consent-manager-translations-yootheme'),
-			'button_settings' => __('Settings Button', 'cybokron-consent-manager-translations-yootheme'),
-			'modal_title' => __('Modal Title', 'cybokron-consent-manager-translations-yootheme'),
-			'modal_content' => __('Modal Content', 'cybokron-consent-manager-translations-yootheme'),
-			'modal_content_link' => __('Modal Privacy Link', 'cybokron-consent-manager-translations-yootheme'),
-			'functional_title' => __('Functional Title', 'cybokron-consent-manager-translations-yootheme'),
-			'preferences_title' => __('Preferences Title', 'cybokron-consent-manager-translations-yootheme'),
-			'statistics_title' => __('Statistics Title', 'cybokron-consent-manager-translations-yootheme'),
-			'marketing_title' => __('Marketing Title', 'cybokron-consent-manager-translations-yootheme'),
-			'functional_content' => __('Functional Description', 'cybokron-consent-manager-translations-yootheme'),
-			'preferences_content' => __('Preferences Description', 'cybokron-consent-manager-translations-yootheme'),
-			'statistics_content' => __('Statistics Description', 'cybokron-consent-manager-translations-yootheme'),
-			'marketing_content' => __('Marketing Description', 'cybokron-consent-manager-translations-yootheme'),
-			'show_services' => __('Show Services', 'cybokron-consent-manager-translations-yootheme'),
-			'hide_services' => __('Hide Services', 'cybokron-consent-manager-translations-yootheme'),
-			'modal_accept' => __('Accept All Button', 'cybokron-consent-manager-translations-yootheme'),
-			'modal_reject' => __('Reject All Button', 'cybokron-consent-manager-translations-yootheme'),
-			'modal_save' => __('Save Button', 'cybokron-consent-manager-translations-yootheme')
+			'banner_text' => __('Banner Text', 'cybokron-consent-manager-translations-yootheme-main'),
+			'banner_link' => __('Privacy Policy Link', 'cybokron-consent-manager-translations-yootheme-main'),
+			'button_accept' => __('Accept Button', 'cybokron-consent-manager-translations-yootheme-main'),
+			'button_reject' => __('Reject Button', 'cybokron-consent-manager-translations-yootheme-main'),
+			'button_settings' => __('Settings Button', 'cybokron-consent-manager-translations-yootheme-main'),
+			'modal_title' => __('Modal Title', 'cybokron-consent-manager-translations-yootheme-main'),
+			'modal_content' => __('Modal Content', 'cybokron-consent-manager-translations-yootheme-main'),
+			'modal_content_link' => __('Modal Privacy Link', 'cybokron-consent-manager-translations-yootheme-main'),
+			'functional_title' => __('Functional Title', 'cybokron-consent-manager-translations-yootheme-main'),
+			'preferences_title' => __('Preferences Title', 'cybokron-consent-manager-translations-yootheme-main'),
+			'statistics_title' => __('Statistics Title', 'cybokron-consent-manager-translations-yootheme-main'),
+			'marketing_title' => __('Marketing Title', 'cybokron-consent-manager-translations-yootheme-main'),
+			'functional_content' => __('Functional Description', 'cybokron-consent-manager-translations-yootheme-main'),
+			'preferences_content' => __('Preferences Description', 'cybokron-consent-manager-translations-yootheme-main'),
+			'statistics_content' => __('Statistics Description', 'cybokron-consent-manager-translations-yootheme-main'),
+			'marketing_content' => __('Marketing Description', 'cybokron-consent-manager-translations-yootheme-main'),
+			'show_services' => __('Show Services', 'cybokron-consent-manager-translations-yootheme-main'),
+			'hide_services' => __('Hide Services', 'cybokron-consent-manager-translations-yootheme-main'),
+			'modal_accept' => __('Accept All Button', 'cybokron-consent-manager-translations-yootheme-main'),
+			'modal_reject' => __('Reject All Button', 'cybokron-consent-manager-translations-yootheme-main'),
+			'modal_save' => __('Save Button', 'cybokron-consent-manager-translations-yootheme-main')
 		];
 
 		return isset($labels[$key]) ? $labels[$key] : $key;

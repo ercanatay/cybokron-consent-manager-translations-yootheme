@@ -1,6 +1,6 @@
 # Cybokron Consent Manager Translations for YOOtheme Pro
 
-[![WordPress Plugin Version](https://img.shields.io/badge/version-1.3.13-blue.svg)](https://github.com/ercanatay/cybokron-consent-manager-translations-yootheme)
+[![WordPress Plugin Version](https://img.shields.io/badge/version-1.3.14-blue.svg)](https://github.com/ercanatay/cybokron-consent-manager-translations-yootheme)
 [![WordPress Tested](https://img.shields.io/badge/WordPress-5.0--6.9-green.svg)](https://wordpress.org)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://php.net)
 [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -255,6 +255,11 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ```
 
 ## 📝 Changelog
+
+### 1.3.14 (2026-02-14)
+- **Plugin Check Compatibility**: Switched plugin header and gettext text-domain usage to `cybokron-consent-manager-translations-yootheme-main` for this package slug expectation
+- **Packaging Cleanup**: Removed root hidden/workflow entries (`.distignore`, `.github`) that triggered Plugin Check warnings
+- **Release Sync**: Updated plugin/readme/composer metadata to `1.3.14`
 
 ### 1.3.13 (2026-02-14)
 - **WordPress.org Review Compliance**: Aligned text domain usage with slug `cybokron-consent-manager-translations-yootheme` in all gettext calls
