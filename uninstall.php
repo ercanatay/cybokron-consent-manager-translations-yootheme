@@ -5,7 +5,7 @@
  * This file runs when the plugin is uninstalled from WordPress.
  * It removes all plugin data from the database.
  *
- * @package YT_Consent_Translations
+ * @package CYBOCOMA_Consent_Translations
  */
 
 // If uninstall not called from WordPress, exit
@@ -14,34 +14,34 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
 }
 
 // Clear scheduled cron events
-$ytct_cron_hook = 'ytct_updater_cron_check';
+$cybocoma_cron_hook = 'cybocoma_updater_cron_check';
 if (function_exists('wp_unschedule_hook')) {
-	wp_unschedule_hook($ytct_cron_hook);
+	wp_unschedule_hook($cybocoma_cron_hook);
 } else {
-	$ytct_cron_ts = wp_next_scheduled($ytct_cron_hook);
-	while ($ytct_cron_ts) {
-		wp_unschedule_event($ytct_cron_ts, $ytct_cron_hook);
-		$ytct_cron_ts = wp_next_scheduled($ytct_cron_hook);
+	$cybocoma_cron_ts = wp_next_scheduled($cybocoma_cron_hook);
+	while ($cybocoma_cron_ts) {
+		wp_unschedule_event($cybocoma_cron_ts, $cybocoma_cron_hook);
+		$cybocoma_cron_ts = wp_next_scheduled($cybocoma_cron_hook);
 	}
 }
 
 // Delete legacy plugin option
-delete_option('yt_consent_translations');
-delete_option('ytct_health_report');
-delete_option('ytct_updater_settings');
-delete_option('ytct_updater_state');
+delete_option('cybocoma_consent_translations');
+delete_option('cybocoma_health_report');
+delete_option('cybocoma_updater_settings');
+delete_option('cybocoma_updater_state');
 
 /**
  * Delete locale-scoped options and snapshot options.
  *
  * @return void
  */
-function ytct_delete_scoped_options() {
+function cybocoma_delete_scoped_options() {
 	global $wpdb;
 
 	$patterns = [
-		'yt_consent_translations__%',
-		'yt_consent_translations_snapshots__%'
+		'cybocoma_consent_translations__%',
+		'cybocoma_consent_translations_snapshots__%'
 	];
 
 	foreach ($patterns as $pattern) {
@@ -64,29 +64,29 @@ function ytct_delete_scoped_options() {
 	}
 }
 
-ytct_delete_scoped_options();
+cybocoma_delete_scoped_options();
 
 // For multisite, delete options from all sites
 if (is_multisite()) {
 	// Using get_sites() for better compatibility with modern WordPress
-	$ytct_sites = get_sites(['fields' => 'ids']);
+	$cybocoma_sites = get_sites(['fields' => 'ids']);
 
-	foreach ($ytct_sites as $ytct_blog_id) {
-		switch_to_blog($ytct_blog_id);
+	foreach ($cybocoma_sites as $cybocoma_blog_id) {
+		switch_to_blog($cybocoma_blog_id);
 		if (function_exists('wp_unschedule_hook')) {
-			wp_unschedule_hook($ytct_cron_hook);
+			wp_unschedule_hook($cybocoma_cron_hook);
 		} else {
-			$ytct_cron_ts = wp_next_scheduled($ytct_cron_hook);
-			while ($ytct_cron_ts) {
-				wp_unschedule_event($ytct_cron_ts, $ytct_cron_hook);
-				$ytct_cron_ts = wp_next_scheduled($ytct_cron_hook);
+			$cybocoma_cron_ts = wp_next_scheduled($cybocoma_cron_hook);
+			while ($cybocoma_cron_ts) {
+				wp_unschedule_event($cybocoma_cron_ts, $cybocoma_cron_hook);
+				$cybocoma_cron_ts = wp_next_scheduled($cybocoma_cron_hook);
 			}
 		}
-		delete_option('yt_consent_translations');
-		delete_option('ytct_health_report');
-		delete_option('ytct_updater_settings');
-		delete_option('ytct_updater_state');
-		ytct_delete_scoped_options();
+		delete_option('cybocoma_consent_translations');
+		delete_option('cybocoma_health_report');
+		delete_option('cybocoma_updater_settings');
+		delete_option('cybocoma_updater_state');
+		cybocoma_delete_scoped_options();
 		restore_current_blog();
 	}
 }

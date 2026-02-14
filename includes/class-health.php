@@ -2,7 +2,7 @@
 /**
  * Compatibility and quality health reporting.
  *
- * @package YT_Consent_Translations
+ * @package CYBOCOMA_Consent_Translations
  */
 
 if (!defined('ABSPATH')) {
@@ -10,14 +10,14 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class YTCT_Health
+ * Class CYBOCOMA_Health
  */
-class YTCT_Health {
+class CYBOCOMA_Health {
 
 	/**
 	 * Health report option key.
 	 */
-	const OPTION_NAME = 'ytct_health_report';
+	const OPTION_NAME = 'cybocoma_health_report';
 
 	/**
 	 * In-request mutable report.
@@ -54,7 +54,7 @@ class YTCT_Health {
 			'matched_count' => 0,
 			'unmatched_count' => 0,
 			'unmatched_strings' => [],
-			'plugin_version' => YTCT_VERSION
+			'plugin_version' => CYBOCOMA_VERSION
 		];
 	}
 
@@ -93,7 +93,7 @@ class YTCT_Health {
 		$report['matched_count'] = isset($report['matched_count']) ? (int) $report['matched_count'] + 1 : 1;
 		$report['last_match_at'] = gmdate('c');
 		$report['last_checked_at'] = gmdate('c');
-		$report['plugin_version'] = YTCT_VERSION;
+		$report['plugin_version'] = CYBOCOMA_VERSION;
 		self::$report = $report;
 		self::$dirty = true;
 	}
@@ -117,7 +117,7 @@ class YTCT_Health {
 		$report = self::get_report();
 		$report['unmatched_count'] = isset($report['unmatched_count']) ? (int) $report['unmatched_count'] + 1 : 1;
 		$report['last_checked_at'] = gmdate('c');
-		$report['plugin_version'] = YTCT_VERSION;
+		$report['plugin_version'] = CYBOCOMA_VERSION;
 
 		if (!isset($report['unmatched_strings'][$original])) {
 			if (count($report['unmatched_strings']) < 20) {
@@ -184,15 +184,15 @@ class YTCT_Health {
 		$is_yootheme = stripos($theme_name, 'yootheme') !== false || stripos($template, 'yootheme') !== false;
 
 		if (!$is_yootheme) {
-			$warnings[] = __('Active theme does not appear to be YOOtheme. Translation interception may stay inactive.', 'cybokron-consent-manager-translations-yootheme-main');
+			$warnings[] = __('Active theme does not appear to be YOOtheme. Translation interception may stay inactive.', 'cybokron-consent-manager-translations-yootheme');
 		}
 
 		if ($enabled && (int) $report['matched_count'] === 0) {
-			$warnings[] = __('No matching consent strings have been intercepted yet. Open a frontend page with the consent banner to verify compatibility.', 'cybokron-consent-manager-translations-yootheme-main');
+			$warnings[] = __('No matching consent strings have been intercepted yet. Open a frontend page with the consent banner to verify compatibility.', 'cybokron-consent-manager-translations-yootheme');
 		}
 
 		if (!empty($report['unmatched_strings'])) {
-			$issues[] = __('Potential consent-related YOOtheme source strings were detected but not matched by this plugin. YOOtheme may have changed wording.', 'cybokron-consent-manager-translations-yootheme-main');
+			$issues[] = __('Potential consent-related YOOtheme source strings were detected but not matched by this plugin. YOOtheme may have changed wording.', 'cybokron-consent-manager-translations-yootheme');
 		}
 
 		$status = 'healthy';

@@ -2,7 +2,7 @@
 /**
  * Admin class - handles admin panel functionality.
  *
- * @package YT_Consent_Translations
+ * @package CYBOCOMA_Consent_Translations
  */
 
 if (!defined('ABSPATH')) {
@@ -10,21 +10,21 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class YTCT_Admin
+ * Class CYBOCOMA_Admin
  */
-class YTCT_Admin {
+class CYBOCOMA_Admin {
 
 	/**
 	 * Single instance.
 	 *
-	 * @var YTCT_Admin|null
+	 * @var CYBOCOMA_Admin|null
 	 */
 	private static $instance = null;
 
 	/**
 	 * Get single instance.
 	 *
-	 * @return YTCT_Admin
+	 * @return CYBOCOMA_Admin
 	 */
 	public static function get_instance() {
 		if (null === self::$instance) {
@@ -49,18 +49,18 @@ class YTCT_Admin {
 		add_action('admin_menu', [$this, 'add_menu_page']);
 		add_action('admin_enqueue_scripts', [$this, 'enqueue_assets']);
 
-		add_action('wp_ajax_ytct_save_settings', [$this, 'ajax_save_settings']);
-		add_action('wp_ajax_ytct_reset_settings', [$this, 'ajax_reset_settings']);
-		add_action('wp_ajax_ytct_export_settings', [$this, 'ajax_export_settings']);
-		add_action('wp_ajax_ytct_import_settings', [$this, 'ajax_import_settings']);
-		add_action('wp_ajax_ytct_load_language', [$this, 'ajax_load_language']);
-		add_action('wp_ajax_ytct_load_scope', [$this, 'ajax_load_scope']);
-		add_action('wp_ajax_ytct_get_snapshots', [$this, 'ajax_get_snapshots']);
-		add_action('wp_ajax_ytct_restore_snapshot', [$this, 'ajax_restore_snapshot']);
-		add_action('wp_ajax_ytct_health_check', [$this, 'ajax_health_check']);
-		add_action('wp_ajax_ytct_quality_check', [$this, 'ajax_quality_check']);
-		add_action('wp_ajax_ytct_check_update_now', [$this, 'ajax_check_update_now']);
-		add_action('wp_ajax_ytct_copy_locale', [$this, 'ajax_copy_locale']);
+		add_action('wp_ajax_cybocoma_save_settings', [$this, 'ajax_save_settings']);
+		add_action('wp_ajax_cybocoma_reset_settings', [$this, 'ajax_reset_settings']);
+		add_action('wp_ajax_cybocoma_export_settings', [$this, 'ajax_export_settings']);
+		add_action('wp_ajax_cybocoma_import_settings', [$this, 'ajax_import_settings']);
+		add_action('wp_ajax_cybocoma_load_language', [$this, 'ajax_load_language']);
+		add_action('wp_ajax_cybocoma_load_scope', [$this, 'ajax_load_scope']);
+		add_action('wp_ajax_cybocoma_get_snapshots', [$this, 'ajax_get_snapshots']);
+		add_action('wp_ajax_cybocoma_restore_snapshot', [$this, 'ajax_restore_snapshot']);
+		add_action('wp_ajax_cybocoma_health_check', [$this, 'ajax_health_check']);
+		add_action('wp_ajax_cybocoma_quality_check', [$this, 'ajax_quality_check']);
+		add_action('wp_ajax_cybocoma_check_update_now', [$this, 'ajax_check_update_now']);
+		add_action('wp_ajax_cybocoma_copy_locale', [$this, 'ajax_copy_locale']);
 	}
 
 	/**
@@ -70,8 +70,8 @@ class YTCT_Admin {
 	 */
 	public function add_menu_page() {
 		add_options_page(
-			__('Cybokron Consent Manager Translations for YOOtheme Pro', 'cybokron-consent-manager-translations-yootheme-main'),
-			__('Cybokron Consent Manager Translations for YOOtheme Pro', 'cybokron-consent-manager-translations-yootheme-main'),
+			__('Cybokron Consent Manager Translations for YOOtheme Pro', 'cybokron-consent-manager-translations-yootheme'),
+			__('Cybokron Consent Manager Translations for YOOtheme Pro', 'cybokron-consent-manager-translations-yootheme'),
 			'manage_options',
 			'cybokron-consent-manager-translations-yootheme',
 			[$this, 'render_settings_page']
@@ -90,53 +90,53 @@ class YTCT_Admin {
 		}
 
 		wp_enqueue_style(
-			'ytct-admin-style',
-			YTCT_PLUGIN_URL . 'admin/css/admin-style.css',
+			'cybocoma-admin-style',
+			CYBOCOMA_PLUGIN_URL . 'admin/css/admin-style.css',
 			[],
-			YTCT_VERSION
+			CYBOCOMA_VERSION
 		);
 
 		wp_enqueue_script(
-			'ytct-admin-script',
-			YTCT_PLUGIN_URL . 'admin/js/admin-script.js',
+			'cybocoma-admin-script',
+			CYBOCOMA_PLUGIN_URL . 'admin/js/admin-script.js',
 			['jquery'],
-			YTCT_VERSION,
+			CYBOCOMA_VERSION,
 			true
 		);
 
-		wp_localize_script('ytct-admin-script', 'ytctAdmin', [
+		wp_localize_script('cybocoma-admin-script', 'cybocomaAdmin', [
 			'ajaxUrl' => admin_url('admin-ajax.php'),
-			'nonce' => wp_create_nonce('ytct_admin_nonce'),
+			'nonce' => wp_create_nonce('cybocoma_admin_nonce'),
 			'strings' => [
-				'saving' => __('Saving...', 'cybokron-consent-manager-translations-yootheme-main'),
-				'saved' => __('Settings saved successfully!', 'cybokron-consent-manager-translations-yootheme-main'),
-				'error' => __('An error occurred. Please try again.', 'cybokron-consent-manager-translations-yootheme-main'),
-				'confirmReset' => __('Are you sure you want to reset all settings for this locale scope to defaults?', 'cybokron-consent-manager-translations-yootheme-main'),
-				'resetting' => __('Resetting...', 'cybokron-consent-manager-translations-yootheme-main'),
-				'resetSuccess' => __('Settings reset successfully!', 'cybokron-consent-manager-translations-yootheme-main'),
-				'importing' => __('Importing...', 'cybokron-consent-manager-translations-yootheme-main'),
-				'importSuccess' => __('Settings imported successfully!', 'cybokron-consent-manager-translations-yootheme-main'),
-				'invalidFile' => __('Please select a valid JSON file.', 'cybokron-consent-manager-translations-yootheme-main'),
-				'languageLoaded' => __('Language preset loaded!', 'cybokron-consent-manager-translations-yootheme-main'),
-				'scopeLoaded' => __('Locale scope loaded.', 'cybokron-consent-manager-translations-yootheme-main'),
-				'qualityCheckRunning' => __('Running quality checks...', 'cybokron-consent-manager-translations-yootheme-main'),
-				'qualityCheckOk' => __('No blocking quality issues found.', 'cybokron-consent-manager-translations-yootheme-main'),
-				'healthCheckRunning' => __('Running compatibility health check...', 'cybokron-consent-manager-translations-yootheme-main'),
-				'healthCheckOk' => __('Compatibility check completed.', 'cybokron-consent-manager-translations-yootheme-main'),
-				'restored' => __('Snapshot restored successfully.', 'cybokron-consent-manager-translations-yootheme-main'),
-				'unsavedChanges' => __('You have unsaved changes. Leave without saving?', 'cybokron-consent-manager-translations-yootheme-main'),
-				'selectSnapshot' => __('Select a snapshot', 'cybokron-consent-manager-translations-yootheme-main'),
-				'selectSnapshotFirst' => __('Select a snapshot first.', 'cybokron-consent-manager-translations-yootheme-main'),
-				'qualityCheckFailed' => __('Quality check reported issues/warnings.', 'cybokron-consent-manager-translations-yootheme-main'),
-				'checkUpdateRunning' => __('Checking WordPress.org update metadata...', 'cybokron-consent-manager-translations-yootheme-main'),
-				'checkUpdateNoChange' => __('No new version found. Plugin is up to date.', 'cybokron-consent-manager-translations-yootheme-main'),
-				'checkUpdateFound' => __('A new version is available. Update it from the Plugins screen.', 'cybokron-consent-manager-translations-yootheme-main'),
-				'checkUpdateInstalled' => __('Plugin updates are managed by WordPress.', 'cybokron-consent-manager-translations-yootheme-main'),
-				'checkUpdateInstallFailed' => __('Update check completed with an error. Check updater status.', 'cybokron-consent-manager-translations-yootheme-main'),
-				'copyLocaleRunning' => __('Copying...', 'cybokron-consent-manager-translations-yootheme-main'),
-				'confirmCopyLocale' => __('Copy all settings from the selected locale? This will overwrite current settings for this scope.', 'cybokron-consent-manager-translations-yootheme-main'),
-				'selectSourceLocale' => __('Select a source locale first.', 'cybokron-consent-manager-translations-yootheme-main'),
-				'statsSummary' => __('{customized}/{total} customized ({percent}%)', 'cybokron-consent-manager-translations-yootheme-main')
+				'saving' => __('Saving...', 'cybokron-consent-manager-translations-yootheme'),
+				'saved' => __('Settings saved successfully!', 'cybokron-consent-manager-translations-yootheme'),
+				'error' => __('An error occurred. Please try again.', 'cybokron-consent-manager-translations-yootheme'),
+				'confirmReset' => __('Are you sure you want to reset all settings for this locale scope to defaults?', 'cybokron-consent-manager-translations-yootheme'),
+				'resetting' => __('Resetting...', 'cybokron-consent-manager-translations-yootheme'),
+				'resetSuccess' => __('Settings reset successfully!', 'cybokron-consent-manager-translations-yootheme'),
+				'importing' => __('Importing...', 'cybokron-consent-manager-translations-yootheme'),
+				'importSuccess' => __('Settings imported successfully!', 'cybokron-consent-manager-translations-yootheme'),
+				'invalidFile' => __('Please select a valid JSON file.', 'cybokron-consent-manager-translations-yootheme'),
+				'languageLoaded' => __('Language preset loaded!', 'cybokron-consent-manager-translations-yootheme'),
+				'scopeLoaded' => __('Locale scope loaded.', 'cybokron-consent-manager-translations-yootheme'),
+				'qualityCheckRunning' => __('Running quality checks...', 'cybokron-consent-manager-translations-yootheme'),
+				'qualityCheckOk' => __('No blocking quality issues found.', 'cybokron-consent-manager-translations-yootheme'),
+				'healthCheckRunning' => __('Running compatibility health check...', 'cybokron-consent-manager-translations-yootheme'),
+				'healthCheckOk' => __('Compatibility check completed.', 'cybokron-consent-manager-translations-yootheme'),
+				'restored' => __('Snapshot restored successfully.', 'cybokron-consent-manager-translations-yootheme'),
+				'unsavedChanges' => __('You have unsaved changes. Leave without saving?', 'cybokron-consent-manager-translations-yootheme'),
+				'selectSnapshot' => __('Select a snapshot', 'cybokron-consent-manager-translations-yootheme'),
+				'selectSnapshotFirst' => __('Select a snapshot first.', 'cybokron-consent-manager-translations-yootheme'),
+				'qualityCheckFailed' => __('Quality check reported issues/warnings.', 'cybokron-consent-manager-translations-yootheme'),
+				'checkUpdateRunning' => __('Checking WordPress.org update metadata...', 'cybokron-consent-manager-translations-yootheme'),
+				'checkUpdateNoChange' => __('No new version found. Plugin is up to date.', 'cybokron-consent-manager-translations-yootheme'),
+				'checkUpdateFound' => __('A new version is available. Update it from the Plugins screen.', 'cybokron-consent-manager-translations-yootheme'),
+				'checkUpdateInstalled' => __('Plugin updates are managed by WordPress.', 'cybokron-consent-manager-translations-yootheme'),
+				'checkUpdateInstallFailed' => __('Update check completed with an error. Check updater status.', 'cybokron-consent-manager-translations-yootheme'),
+				'copyLocaleRunning' => __('Copying...', 'cybokron-consent-manager-translations-yootheme'),
+				'confirmCopyLocale' => __('Copy all settings from the selected locale? This will overwrite current settings for this scope.', 'cybokron-consent-manager-translations-yootheme'),
+				'selectSourceLocale' => __('Select a source locale first.', 'cybokron-consent-manager-translations-yootheme'),
+				'statsSummary' => __('{customized}/{total} customized ({percent}%)', 'cybokron-consent-manager-translations-yootheme')
 			]
 		]);
 	}
@@ -151,7 +151,7 @@ class YTCT_Admin {
 			return;
 		}
 
-		include YTCT_PLUGIN_DIR . 'admin/views/settings-page.php';
+		include CYBOCOMA_PLUGIN_DIR . 'admin/views/settings-page.php';
 	}
 
 	/**
@@ -179,12 +179,12 @@ class YTCT_Admin {
 		$this->send_ajax_security_headers();
 
 		$nonce = $this->get_post_scalar('nonce');
-		if (empty($nonce) || !wp_verify_nonce($nonce, 'ytct_admin_nonce')) {
-			wp_send_json_error(['message' => __('Security check failed.', 'cybokron-consent-manager-translations-yootheme-main')]);
+		if (empty($nonce) || !wp_verify_nonce($nonce, 'cybocoma_admin_nonce')) {
+			wp_send_json_error(['message' => __('Security check failed.', 'cybokron-consent-manager-translations-yootheme')]);
 		}
 
 		if (!current_user_can('manage_options')) {
-			wp_send_json_error(['message' => __('Permission denied.', 'cybokron-consent-manager-translations-yootheme-main')]);
+			wp_send_json_error(['message' => __('Permission denied.', 'cybokron-consent-manager-translations-yootheme')]);
 		}
 	}
 
@@ -264,7 +264,7 @@ class YTCT_Admin {
 	 * @return string
 	 */
 	private function get_valid_language($language) {
-		return YTCT_Strings::is_valid_language($language) ? $language : 'en';
+		return CYBOCOMA_Strings::is_valid_language($language) ? $language : 'en';
 	}
 
 	/**
@@ -278,7 +278,7 @@ class YTCT_Admin {
 			$raw_locale = $this->get_post_scalar('settings_locale');
 		}
 
-		return YTCT_Options::normalize_locale((string) $raw_locale);
+		return CYBOCOMA_Options::normalize_locale((string) $raw_locale);
 	}
 
 	/**
@@ -290,10 +290,10 @@ class YTCT_Admin {
 	 */
 	private function resolve_language_for_scope($language, $scope_locale) {
 		if ($language === 'auto') {
-			return YTCT_Strings::detect_language_from_locale($scope_locale);
+			return CYBOCOMA_Strings::detect_language_from_locale($scope_locale);
 		}
 
-		return YTCT_Strings::resolve_language_code($language, false);
+		return CYBOCOMA_Strings::resolve_language_code($language, false);
 	}
 
 	/**
@@ -318,7 +318,7 @@ class YTCT_Admin {
 
 		foreach ($placeholder_keys as $key) {
 			if (isset($strings[$key]) && $strings[$key] !== '' && !$this->has_policy_url_placeholder($strings[$key])) {
-				$invalid_fields[] = YTCT_Strings::get_key_label($key);
+				$invalid_fields[] = CYBOCOMA_Strings::get_key_label($key);
 			}
 		}
 
@@ -334,7 +334,7 @@ class YTCT_Admin {
 	 */
 	private function build_custom_string_diff($strings, $preset_translations) {
 		$custom_strings = [];
-		$string_keys = array_keys(YTCT_Strings::get_string_keys());
+		$string_keys = array_keys(CYBOCOMA_Strings::get_string_keys());
 
 		foreach ($string_keys as $key) {
 			if (!isset($strings[$key])) {
@@ -359,7 +359,7 @@ class YTCT_Admin {
 	 */
 	private function parse_submitted_strings() {
 		$submitted_strings = [];
-		$string_keys = array_keys(YTCT_Strings::get_string_keys());
+		$string_keys = array_keys(CYBOCOMA_Strings::get_string_keys());
 		$raw_strings = filter_input(INPUT_POST, 'strings', FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
 
 		if (!is_array($raw_strings)) {
@@ -398,7 +398,7 @@ class YTCT_Admin {
 		if (!empty($invalid_placeholder_fields)) {
 			$issues[] = sprintf(
 				/* translators: 1: %s placeholder, 2: %1$s placeholder, 3: field labels. */
-				__('The following fields must include %1$s or %2$s: %3$s', 'cybokron-consent-manager-translations-yootheme-main'),
+				__('The following fields must include %1$s or %2$s: %3$s', 'cybokron-consent-manager-translations-yootheme'),
 				'%s',
 				'%1$s',
 				implode(', ', $invalid_placeholder_fields)
@@ -412,8 +412,8 @@ class YTCT_Admin {
 			if ($value !== '' && substr_count($value, '<a ') !== substr_count($value, '</a>')) {
 				$warnings[] = sprintf(
 					/* translators: %s field label */
-					__('%s may contain malformed anchor HTML.', 'cybokron-consent-manager-translations-yootheme-main'),
-					YTCT_Strings::get_key_label($key)
+					__('%s may contain malformed anchor HTML.', 'cybokron-consent-manager-translations-yootheme'),
+					CYBOCOMA_Strings::get_key_label($key)
 				);
 			}
 
@@ -422,8 +422,8 @@ class YTCT_Admin {
 				if ($ratio > 1.8) {
 					$warnings[] = sprintf(
 						/* translators: %s field label */
-						__('%s is much longer than the preset and may overflow on small screens.', 'cybokron-consent-manager-translations-yootheme-main'),
-						YTCT_Strings::get_key_label($key)
+						__('%s is much longer than the preset and may overflow on small screens.', 'cybokron-consent-manager-translations-yootheme'),
+						CYBOCOMA_Strings::get_key_label($key)
 					);
 				}
 			}
@@ -443,9 +443,9 @@ class YTCT_Admin {
 			if ($left !== '' && $right !== '' && $left_cmp === $right_cmp) {
 				$warnings[] = sprintf(
 					/* translators: 1: first field label, 2: second field label */
-					__('Fields %1$s and %2$s are identical. Consider using distinct labels for clarity.', 'cybokron-consent-manager-translations-yootheme-main'),
-					YTCT_Strings::get_key_label($pair[0]),
-					YTCT_Strings::get_key_label($pair[1])
+					__('Fields %1$s and %2$s are identical. Consider using distinct labels for clarity.', 'cybokron-consent-manager-translations-yootheme'),
+					CYBOCOMA_Strings::get_key_label($pair[0]),
+					CYBOCOMA_Strings::get_key_label($pair[1])
 				);
 			}
 		}
@@ -465,10 +465,10 @@ class YTCT_Admin {
 	 */
 	private function build_scope_payload($scope_locale) {
 		$scope_locale = $this->get_scope_locale($scope_locale);
-		$options = YTCT_Options::get_options($scope_locale);
+		$options = CYBOCOMA_Options::get_options($scope_locale);
 		$language = isset($options['language']) ? $this->get_valid_language($options['language']) : 'en';
 		$resolved_language = $this->resolve_language_for_scope($language, $scope_locale);
-		$preset_translations = YTCT_Strings::get_translations($resolved_language);
+		$preset_translations = CYBOCOMA_Strings::get_translations($resolved_language);
 		$custom_strings = isset($options['custom_strings']) && is_array($options['custom_strings']) ? $options['custom_strings'] : [];
 
 		$effective_strings = $preset_translations;
@@ -479,8 +479,8 @@ class YTCT_Admin {
 		}
 
 		$quality = $this->build_quality_report($effective_strings, $preset_translations);
-		$health = YTCT_Health::build_summary(isset($options['enabled']) ? (bool) $options['enabled'] : true);
-		$snapshots = YTCT_Options::get_snapshots($scope_locale);
+		$health = CYBOCOMA_Health::build_summary(isset($options['enabled']) ? (bool) $options['enabled'] : true);
+		$snapshots = CYBOCOMA_Options::get_snapshots($scope_locale);
 
 		$snapshot_summaries = [];
 		foreach ($snapshots as $snapshot) {
@@ -501,7 +501,7 @@ class YTCT_Admin {
 			'quality' => $quality,
 			'health' => $health,
 			'snapshots' => $snapshot_summaries,
-			'updater' => YTCT_Updater::get_admin_payload()
+			'updater' => CYBOCOMA_Updater::get_admin_payload()
 		];
 	}
 
@@ -520,14 +520,14 @@ class YTCT_Admin {
 		$language = $this->get_valid_language($language);
 
 		$resolved_language = $this->resolve_language_for_scope($language, $scope_locale);
-		$preset_translations = YTCT_Strings::get_translations($resolved_language);
+		$preset_translations = CYBOCOMA_Strings::get_translations($resolved_language);
 		$submitted_strings = $this->parse_submitted_strings();
 
 		$invalid_placeholder_fields = $this->get_invalid_placeholder_fields($submitted_strings);
 		if (!empty($invalid_placeholder_fields)) {
 			$message = sprintf(
 				/* translators: 1: %s placeholder, 2: %1$s placeholder, 3: field labels. */
-				__('The following fields must include %1$s or %2$s: %3$s', 'cybokron-consent-manager-translations-yootheme-main'),
+				__('The following fields must include %1$s or %2$s: %3$s', 'cybokron-consent-manager-translations-yootheme'),
 				'%s',
 				'%1$s',
 				implode(', ', $invalid_placeholder_fields)
@@ -542,19 +542,19 @@ class YTCT_Admin {
 			'custom_strings' => $custom_strings
 		];
 
-		$stored = YTCT_Options::update_options($options, $scope_locale, 'manual_save');
-		YTCT_Updater::update_settings([
+		$stored = CYBOCOMA_Options::update_options($options, $scope_locale, 'manual_save');
+		CYBOCOMA_Updater::update_settings([
 			'enabled' => $update_channel_enabled
 		]);
 
-		YTCT_Translator::get_instance()->clear_cache();
-		YTCT_Strings::clear_cache();
+		CYBOCOMA_Translator::get_instance()->clear_cache();
+		CYBOCOMA_Strings::clear_cache();
 
 		$scope_payload = $this->build_scope_payload($scope_locale);
 		$scope_payload['options'] = $stored;
 
 		wp_send_json_success([
-			'message' => __('Settings saved successfully!', 'cybokron-consent-manager-translations-yootheme-main'),
+			'message' => __('Settings saved successfully!', 'cybokron-consent-manager-translations-yootheme'),
 			'scope' => $scope_payload
 		]);
 	}
@@ -568,14 +568,14 @@ class YTCT_Admin {
 		$this->verify_ajax_request();
 
 		$scope_locale = $this->get_scope_locale();
-		$defaults = YTCT_Options::get_default_options();
-		$stored = YTCT_Options::update_options($defaults, $scope_locale, 'reset_default');
+		$defaults = CYBOCOMA_Options::get_default_options();
+		$stored = CYBOCOMA_Options::update_options($defaults, $scope_locale, 'reset_default');
 
-		YTCT_Translator::get_instance()->clear_cache();
-		YTCT_Strings::clear_cache();
+		CYBOCOMA_Translator::get_instance()->clear_cache();
+		CYBOCOMA_Strings::clear_cache();
 
 		wp_send_json_success([
-			'message' => __('Settings reset successfully!', 'cybokron-consent-manager-translations-yootheme-main'),
+			'message' => __('Settings reset successfully!', 'cybokron-consent-manager-translations-yootheme'),
 			'scope' => $this->build_scope_payload($scope_locale),
 			'options' => $stored
 		]);
@@ -590,11 +590,11 @@ class YTCT_Admin {
 		$this->verify_ajax_request();
 
 		$scope_locale = $this->get_scope_locale();
-		$options = YTCT_Options::get_options($scope_locale);
-		$all_locale_options = YTCT_Options::get_all_locale_options();
+		$options = CYBOCOMA_Options::get_options($scope_locale);
+		$all_locale_options = CYBOCOMA_Options::get_all_locale_options();
 
 		$data = [
-			'version' => YTCT_VERSION,
+			'version' => CYBOCOMA_VERSION,
 			'exported_at' => gmdate('c'),
 			'scope_locale' => $scope_locale,
 			'options' => $options,
@@ -621,41 +621,41 @@ class YTCT_Admin {
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce already validated in verify_ajax_request().
 		if (!isset($_FILES['import_file'])) {
-			wp_send_json_error(['message' => __('No file uploaded.', 'cybokron-consent-manager-translations-yootheme-main')]);
+			wp_send_json_error(['message' => __('No file uploaded.', 'cybokron-consent-manager-translations-yootheme')]);
 		}
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing,WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce is validated and file payload is validated below.
-		$ytct_file = $_FILES['import_file'];
+		$cybocoma_file = $_FILES['import_file'];
 
-		if (!isset($ytct_file['error']) || $ytct_file['error'] !== UPLOAD_ERR_OK) {
-			wp_send_json_error(['message' => __('File upload failed.', 'cybokron-consent-manager-translations-yootheme-main')]);
+		if (!isset($cybocoma_file['error']) || $cybocoma_file['error'] !== UPLOAD_ERR_OK) {
+			wp_send_json_error(['message' => __('File upload failed.', 'cybokron-consent-manager-translations-yootheme')]);
 		}
 
 		$max_size = 150 * 1024;
-		if (!isset($ytct_file['size']) || $ytct_file['size'] > $max_size) {
-			wp_send_json_error(['message' => __('File too large. Maximum size is 150KB.', 'cybokron-consent-manager-translations-yootheme-main')]);
+		if (!isset($cybocoma_file['size']) || $cybocoma_file['size'] > $max_size) {
+			wp_send_json_error(['message' => __('File too large. Maximum size is 150KB.', 'cybokron-consent-manager-translations-yootheme')]);
 		}
 
-		if (!isset($ytct_file['name'])) {
-			wp_send_json_error(['message' => __('Invalid file.', 'cybokron-consent-manager-translations-yootheme-main')]);
+		if (!isset($cybocoma_file['name'])) {
+			wp_send_json_error(['message' => __('Invalid file.', 'cybokron-consent-manager-translations-yootheme')]);
 		}
 
-		$file_info = wp_check_filetype(sanitize_file_name($ytct_file['name']));
+		$file_info = wp_check_filetype(sanitize_file_name($cybocoma_file['name']));
 		static $allowed_extensions = ['json' => true];
 		if (!$file_info['ext'] || !isset($allowed_extensions[strtolower($file_info['ext'])])) {
-			wp_send_json_error(['message' => __('Invalid file type. Only JSON files are allowed.', 'cybokron-consent-manager-translations-yootheme-main')]);
+			wp_send_json_error(['message' => __('Invalid file type. Only JSON files are allowed.', 'cybokron-consent-manager-translations-yootheme')]);
 		}
 
-		if (!isset($ytct_file['tmp_name']) || !is_uploaded_file($ytct_file['tmp_name'])) {
-			wp_send_json_error(['message' => __('Invalid file upload.', 'cybokron-consent-manager-translations-yootheme-main')]);
+		if (!isset($cybocoma_file['tmp_name']) || !is_uploaded_file($cybocoma_file['tmp_name'])) {
+			wp_send_json_error(['message' => __('Invalid file upload.', 'cybokron-consent-manager-translations-yootheme')]);
 		}
 
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- reading uploaded temp file
-		$content = file_get_contents($ytct_file['tmp_name']);
+		$content = file_get_contents($cybocoma_file['tmp_name']);
 		$data = json_decode($content, true);
 
 		if (json_last_error() !== JSON_ERROR_NONE || !is_array($data)) {
-			wp_send_json_error(['message' => __('Invalid JSON file.', 'cybokron-consent-manager-translations-yootheme-main')]);
+			wp_send_json_error(['message' => __('Invalid JSON file.', 'cybokron-consent-manager-translations-yootheme')]);
 		}
 
 		$import_payload = null;
@@ -679,11 +679,11 @@ class YTCT_Admin {
 		$language = $this->get_valid_language($language);
 
 		$resolved_language = $this->resolve_language_for_scope($language, $scope_locale);
-		$preset_translations = YTCT_Strings::get_translations($resolved_language);
+		$preset_translations = CYBOCOMA_Strings::get_translations($resolved_language);
 
 		$submitted_strings = [];
 		if (isset($import_payload['custom_strings']) && is_array($import_payload['custom_strings'])) {
-			$string_keys = YTCT_Strings::get_string_keys();
+			$string_keys = CYBOCOMA_Strings::get_string_keys();
 			foreach ($import_payload['custom_strings'] as $key => $value) {
 				if (isset($string_keys[$key]) && is_scalar($value)) {
 					$submitted_strings[$key] = $this->sanitize_consent_string((string) $value);
@@ -695,7 +695,7 @@ class YTCT_Admin {
 		if (!empty($invalid_placeholder_fields)) {
 			$message = sprintf(
 				/* translators: 1: %s placeholder, 2: %1$s placeholder, 3: field labels. */
-				__('The following fields must include %1$s or %2$s: %3$s', 'cybokron-consent-manager-translations-yootheme-main'),
+				__('The following fields must include %1$s or %2$s: %3$s', 'cybokron-consent-manager-translations-yootheme'),
 				'%s',
 				'%1$s',
 				implode(', ', $invalid_placeholder_fields)
@@ -709,13 +709,13 @@ class YTCT_Admin {
 			'custom_strings' => $this->build_custom_string_diff($submitted_strings, $preset_translations)
 		];
 
-		$stored = YTCT_Options::update_options($options, $scope_locale, 'import');
+		$stored = CYBOCOMA_Options::update_options($options, $scope_locale, 'import');
 
-		YTCT_Translator::get_instance()->clear_cache();
-		YTCT_Strings::clear_cache();
+		CYBOCOMA_Translator::get_instance()->clear_cache();
+		CYBOCOMA_Strings::clear_cache();
 
 		wp_send_json_success([
-			'message' => __('Settings imported successfully!', 'cybokron-consent-manager-translations-yootheme-main'),
+			'message' => __('Settings imported successfully!', 'cybokron-consent-manager-translations-yootheme'),
 			'scope' => $this->build_scope_payload($scope_locale),
 			'options' => $stored
 		]);
@@ -733,7 +733,7 @@ class YTCT_Admin {
 		$language = $this->get_post_scalar('language', 'en');
 		$language = $this->get_valid_language($language);
 		$resolved_language = $this->resolve_language_for_scope($language, $scope_locale);
-		$translations = YTCT_Strings::get_translations($resolved_language);
+		$translations = CYBOCOMA_Strings::get_translations($resolved_language);
 
 		wp_send_json_success([
 			'language' => $language,
@@ -766,7 +766,7 @@ class YTCT_Admin {
 		$this->verify_ajax_request();
 
 		$scope_locale = $this->get_scope_locale();
-		$snapshots = YTCT_Options::get_snapshots($scope_locale);
+		$snapshots = CYBOCOMA_Options::get_snapshots($scope_locale);
 		$summary = [];
 		foreach ($snapshots as $snapshot) {
 			$summary[] = [
@@ -790,19 +790,19 @@ class YTCT_Admin {
 		$scope_locale = $this->get_scope_locale();
 		$snapshot_id = $this->get_post_scalar('snapshot_id');
 		if ($snapshot_id === '') {
-			wp_send_json_error(['message' => __('Snapshot ID is required.', 'cybokron-consent-manager-translations-yootheme-main')]);
+			wp_send_json_error(['message' => __('Snapshot ID is required.', 'cybokron-consent-manager-translations-yootheme')]);
 		}
 
-		$restored = YTCT_Options::restore_snapshot($snapshot_id, $scope_locale);
+		$restored = CYBOCOMA_Options::restore_snapshot($snapshot_id, $scope_locale);
 		if (!is_array($restored)) {
-			wp_send_json_error(['message' => __('Snapshot could not be restored.', 'cybokron-consent-manager-translations-yootheme-main')]);
+			wp_send_json_error(['message' => __('Snapshot could not be restored.', 'cybokron-consent-manager-translations-yootheme')]);
 		}
 
-		YTCT_Translator::get_instance()->clear_cache();
-		YTCT_Strings::clear_cache();
+		CYBOCOMA_Translator::get_instance()->clear_cache();
+		CYBOCOMA_Strings::clear_cache();
 
 		wp_send_json_success([
-			'message' => __('Snapshot restored successfully.', 'cybokron-consent-manager-translations-yootheme-main'),
+			'message' => __('Snapshot restored successfully.', 'cybokron-consent-manager-translations-yootheme'),
 			'scope' => $this->build_scope_payload($scope_locale),
 			'options' => $restored
 		]);
@@ -817,8 +817,8 @@ class YTCT_Admin {
 		$this->verify_ajax_request();
 
 		$scope_locale = $this->get_scope_locale();
-		$options = YTCT_Options::get_options($scope_locale);
-		$summary = YTCT_Health::build_summary(isset($options['enabled']) ? (bool) $options['enabled'] : true);
+		$options = CYBOCOMA_Options::get_options($scope_locale);
+		$summary = CYBOCOMA_Health::build_summary(isset($options['enabled']) ? (bool) $options['enabled'] : true);
 
 		wp_send_json_success([
 			'health' => $summary
@@ -838,7 +838,7 @@ class YTCT_Admin {
 		$language = $this->get_valid_language($language);
 
 		$resolved_language = $this->resolve_language_for_scope($language, $scope_locale);
-		$preset_translations = YTCT_Strings::get_translations($resolved_language);
+		$preset_translations = CYBOCOMA_Strings::get_translations($resolved_language);
 		$submitted_strings = $this->parse_submitted_strings();
 
 		$effective_strings = $preset_translations;
@@ -862,18 +862,18 @@ class YTCT_Admin {
 	public function ajax_check_update_now() {
 		$this->verify_ajax_request();
 
-		$updater = YTCT_Updater::manual_check();
+		$updater = CYBOCOMA_Updater::manual_check();
 
-		$message = __('No new version found. Plugin is up to date.', 'cybokron-consent-manager-translations-yootheme-main');
+		$message = __('No new version found. Plugin is up to date.', 'cybokron-consent-manager-translations-yootheme');
 		if (!empty($updater['status']) && $updater['status'] === 'error') {
-			$message = __('Update check completed with an error. Check updater status.', 'cybokron-consent-manager-translations-yootheme-main');
+			$message = __('Update check completed with an error. Check updater status.', 'cybokron-consent-manager-translations-yootheme');
 		} elseif (!empty($updater['updateAvailable'])) {
-			$message = __('A new version is available. Update it from the Plugins screen.', 'cybokron-consent-manager-translations-yootheme-main');
+			$message = __('A new version is available. Update it from the Plugins screen.', 'cybokron-consent-manager-translations-yootheme');
 		}
 
 		wp_send_json_success([
 			'message' => $message,
-			'updater' => YTCT_Updater::get_admin_payload()
+			'updater' => CYBOCOMA_Updater::get_admin_payload()
 		]);
 	}
 
@@ -889,19 +889,19 @@ class YTCT_Admin {
 		$target_locale = $this->get_scope_locale();
 
 		if ($source_locale === $target_locale) {
-			wp_send_json_error(['message' => __('Source and target locales are the same.', 'cybokron-consent-manager-translations-yootheme-main')]);
+			wp_send_json_error(['message' => __('Source and target locales are the same.', 'cybokron-consent-manager-translations-yootheme')]);
 		}
 
-		$source_options = YTCT_Options::get_options($source_locale);
-		$stored = YTCT_Options::update_options($source_options, $target_locale, 'copy_locale');
+		$source_options = CYBOCOMA_Options::get_options($source_locale);
+		$stored = CYBOCOMA_Options::update_options($source_options, $target_locale, 'copy_locale');
 
-		YTCT_Translator::get_instance()->clear_cache();
-		YTCT_Strings::clear_cache();
+		CYBOCOMA_Translator::get_instance()->clear_cache();
+		CYBOCOMA_Strings::clear_cache();
 
 		wp_send_json_success([
 			'message' => sprintf(
 				/* translators: %s source locale code */
-				__('Settings copied from %s successfully!', 'cybokron-consent-manager-translations-yootheme-main'),
+				__('Settings copied from %s successfully!', 'cybokron-consent-manager-translations-yootheme'),
 				$source_locale
 			),
 			'scope' => $this->build_scope_payload($target_locale)

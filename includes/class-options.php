@@ -2,7 +2,7 @@
 /**
  * Options storage helper with locale scope and snapshots.
  *
- * @package YT_Consent_Translations
+ * @package CYBOCOMA_Consent_Translations
  */
 
 if (!defined('ABSPATH')) {
@@ -10,9 +10,9 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class YTCT_Options
+ * Class CYBOCOMA_Options
  */
-class YTCT_Options {
+class CYBOCOMA_Options {
 
 	/**
 	 * Maximum snapshot count retained per locale.
@@ -22,7 +22,7 @@ class YTCT_Options {
 	/**
 	 * Cache group used for expensive option scans.
 	 */
-	const CACHE_GROUP = 'ytct_options';
+	const CACHE_GROUP = 'cybocoma_options';
 
 	/**
 	 * Get normalized locale code.
@@ -68,7 +68,7 @@ class YTCT_Options {
 	public static function get_option_name($locale = '') {
 		$normalized = strtolower(self::normalize_locale($locale));
 		$normalized = str_replace('__', '_', $normalized);
-		return YTCT_OPTION_NAME . '__' . sanitize_key($normalized);
+		return CYBOCOMA_OPTION_NAME . '__' . sanitize_key($normalized);
 	}
 
 	/**
@@ -80,7 +80,7 @@ class YTCT_Options {
 	public static function get_snapshot_option_name($locale = '') {
 		$normalized = strtolower(self::normalize_locale($locale));
 		$normalized = str_replace('__', '_', $normalized);
-		return YTCT_OPTION_NAME . '_snapshots__' . sanitize_key($normalized);
+		return CYBOCOMA_OPTION_NAME . '_snapshots__' . sanitize_key($normalized);
 	}
 
 	/**
@@ -97,11 +97,11 @@ class YTCT_Options {
 
 		$enabled = isset($options['enabled']) ? (bool) $options['enabled'] : true;
 		$language = isset($options['language']) && is_scalar($options['language']) ? sanitize_text_field((string) $options['language']) : 'en';
-		$language = YTCT_Strings::is_valid_language($language) ? $language : 'en';
+		$language = CYBOCOMA_Strings::is_valid_language($language) ? $language : 'en';
 
 		$custom_strings = [];
 		if (isset($options['custom_strings']) && is_array($options['custom_strings'])) {
-			$valid_keys = YTCT_Strings::get_string_keys();
+			$valid_keys = CYBOCOMA_Strings::get_string_keys();
 			foreach ($options['custom_strings'] as $key => $value) {
 				if (!isset($valid_keys[$key]) || !is_scalar($value)) {
 					continue;
@@ -135,7 +135,7 @@ class YTCT_Options {
 		$options = get_option($option_name, null);
 
 		if (!is_array($options)) {
-			$legacy = get_option(YTCT_OPTION_NAME, null);
+			$legacy = get_option(CYBOCOMA_OPTION_NAME, null);
 			if (is_array($legacy)) {
 				$options = $legacy;
 			}
@@ -195,7 +195,7 @@ class YTCT_Options {
 		}
 
 		$entry = [
-			'id' => uniqid('ytct_', true),
+			'id' => uniqid('cybocoma_', true),
 			'created_at' => gmdate('c'),
 			'label' => sanitize_key((string) $label),
 			'options' => self::sanitize_options($options)
@@ -278,7 +278,7 @@ class YTCT_Options {
 		}
 
 		$results = [];
-		$base = YTCT_OPTION_NAME . '__';
+		$base = CYBOCOMA_OPTION_NAME . '__';
 		$escaped = $wpdb->esc_like($base) . '%';
 
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery -- Wildcard lookup across locale-scoped option names requires a direct query.

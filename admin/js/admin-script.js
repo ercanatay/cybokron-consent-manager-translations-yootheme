@@ -1,34 +1,34 @@
 /**
  * Cybokron Consent Manager Translations for YOOtheme Pro - Admin Script
  *
- * @package YT_Consent_Translations
+ * @package CYBOCOMA_Consent_Translations
  */
 
 (function($) {
     'use strict';
 
-    var $form = $('#ytct-settings-form');
-    var $saveBtn = $('#ytct-save-btn');
-    var $resetBtn = $('#ytct-reset-btn');
-    var $exportBtn = $('#ytct-export-btn');
-    var $importBtn = $('#ytct-import-btn');
-    var $qualityBtn = $('#ytct-quality-btn');
-    var $healthBtn = $('#ytct-health-btn');
-    var $restoreBtn = $('#ytct-restore-btn');
-    var $checkUpdateBtn = $('#ytct-check-update-btn');
-    var $languageSelect = $('#ytct-language');
-    var $scopeSelect = $('#ytct-scope-locale');
-    var $scopeHidden = $('#ytct-settings-locale');
-    var $message = $('#ytct-message');
-    var $tabs = $('.ytct-tab');
-    var $tabContents = $('.ytct-tab-content');
-    var $modal = $('#ytct-import-modal');
-    var $copyLocaleModal = $('#ytct-copy-locale-modal');
-    var $qualityReport = $('#ytct-quality-report');
-    var $searchInput = $('#ytct-search-strings');
-    var $searchClear = $('#ytct-search-clear');
-    var $noResults = $('#ytct-no-results');
-    var $copyLocaleBtn = $('#ytct-copy-locale-btn');
+    var $form = $('#cybocoma-settings-form');
+    var $saveBtn = $('#cybocoma-save-btn');
+    var $resetBtn = $('#cybocoma-reset-btn');
+    var $exportBtn = $('#cybocoma-export-btn');
+    var $importBtn = $('#cybocoma-import-btn');
+    var $qualityBtn = $('#cybocoma-quality-btn');
+    var $healthBtn = $('#cybocoma-health-btn');
+    var $restoreBtn = $('#cybocoma-restore-btn');
+    var $checkUpdateBtn = $('#cybocoma-check-update-btn');
+    var $languageSelect = $('#cybocoma-language');
+    var $scopeSelect = $('#cybocoma-scope-locale');
+    var $scopeHidden = $('#cybocoma-settings-locale');
+    var $message = $('#cybocoma-message');
+    var $tabs = $('.cybocoma-tab');
+    var $tabContents = $('.cybocoma-tab-content');
+    var $modal = $('#cybocoma-import-modal');
+    var $copyLocaleModal = $('#cybocoma-copy-locale-modal');
+    var $qualityReport = $('#cybocoma-quality-report');
+    var $searchInput = $('#cybocoma-search-strings');
+    var $searchClear = $('#cybocoma-search-clear');
+    var $noResults = $('#cybocoma-no-results');
+    var $copyLocaleBtn = $('#cybocoma-copy-locale-btn');
 
     var state = {
         initialHash: '',
@@ -52,7 +52,7 @@
 
         $resetBtn.on('click', function(e) {
             e.preventDefault();
-            if (window.confirm(ytctAdmin.strings.confirmReset)) {
+            if (window.confirm(cybocomaAdmin.strings.confirmReset)) {
                 resetSettings();
             }
         });
@@ -138,22 +138,22 @@
             $nextTab.focus();
         });
 
-        $('.ytct-modal-close, .ytct-modal-overlay').on('click', function(e) {
+        $('.cybocoma-modal-close, .cybocoma-modal-overlay').on('click', function(e) {
             if (e.target === this) {
                 hideImportModal();
                 hideCopyLocaleModal();
             }
         });
 
-        $('#ytct-import-form').on('submit', function(e) {
+        $('#cybocoma-import-form').on('submit', function(e) {
             e.preventDefault();
             importSettings();
         });
 
-        $('#ytct-import-file').on('change', function() {
+        $('#cybocoma-import-file').on('change', function() {
             var fileName = $(this).val().split('\\').pop();
             if (fileName) {
-                $(this).siblings('.ytct-file-name').text(fileName).show();
+                $(this).siblings('.cybocoma-file-name').text(fileName).show();
             }
         });
 
@@ -181,7 +181,7 @@
             showCopyLocaleModal();
         });
 
-        $('#ytct-copy-locale-form').on('submit', function(e) {
+        $('#cybocoma-copy-locale-form').on('submit', function(e) {
             e.preventDefault();
             copyLocale();
         });
@@ -196,14 +196,14 @@
             markDirtyIfNeeded();
         });
 
-        $form.on('click', '.ytct-reset-field', function(e) {
+        $form.on('click', '.cybocoma-reset-field', function(e) {
             e.preventDefault();
             var key = $(this).data('key');
             resetFieldToPreset(key);
             markDirtyIfNeeded();
         });
 
-        $form.on('change', '#ytct-enabled, #ytct-update-channel-enabled', function() {
+        $form.on('change', '#cybocoma-enabled, #cybocoma-update-channel-enabled', function() {
             markDirtyIfNeeded();
         });
 
@@ -213,8 +213,8 @@
             }
 
             e.preventDefault();
-            e.returnValue = ytctAdmin.strings.unsavedChanges;
-            return ytctAdmin.strings.unsavedChanges;
+            e.returnValue = cybocomaAdmin.strings.unsavedChanges;
+            return cybocomaAdmin.strings.unsavedChanges;
         });
     }
 
@@ -251,7 +251,7 @@
             .prop('hidden', true)
             .attr('aria-hidden', 'true');
 
-        $('#ytct-tab-' + tabId)
+        $('#cybocoma-tab-' + tabId)
             .addClass('active')
             .prop('hidden', false)
             .attr('aria-hidden', 'false');
@@ -263,8 +263,8 @@
 
     function serializeFormState() {
         var payload = {
-            enabled: $('#ytct-enabled').is(':checked'),
-            update_channel_enabled: $('#ytct-update-channel-enabled').is(':checked'),
+            enabled: $('#cybocoma-enabled').is(':checked'),
+            update_channel_enabled: $('#cybocoma-update-channel-enabled').is(':checked'),
             language: $languageSelect.val(),
             settings_locale: getScopeLocale(),
             strings: {}
@@ -389,16 +389,16 @@
             warnings.push('Value equals preset (no override needed).');
         }
 
-        var $feedback = $('.ytct-inline-feedback[data-key="' + key + '"]');
-        $feedback.removeClass('ytct-inline-error ytct-inline-warning').empty();
-        $input.removeClass('ytct-field-error ytct-field-warning');
+        var $feedback = $('.cybocoma-inline-feedback[data-key="' + key + '"]');
+        $feedback.removeClass('cybocoma-inline-error cybocoma-inline-warning').empty();
+        $input.removeClass('cybocoma-field-error cybocoma-field-warning');
 
         if (issues.length) {
-            $feedback.addClass('ytct-inline-error').text(issues[0]);
-            $input.addClass('ytct-field-error');
+            $feedback.addClass('cybocoma-inline-error').text(issues[0]);
+            $input.addClass('cybocoma-field-error');
         } else if (warnings.length) {
-            $feedback.addClass('ytct-inline-warning').text(warnings[0]);
-            $input.addClass('ytct-field-warning');
+            $feedback.addClass('cybocoma-inline-warning').text(warnings[0]);
+            $input.addClass('cybocoma-field-warning');
         }
     }
 
@@ -427,7 +427,7 @@
             parts.push('customized');
         }
 
-        $('.ytct-field-metrics[data-key="' + key + '"]').text(parts.join(' | '));
+        $('.cybocoma-field-metrics[data-key="' + key + '"]').text(parts.join(' | '));
     }
 
     function resetFieldToPreset(key) {
@@ -447,15 +447,15 @@
         var $btn = $saveBtn;
         var originalText = $btn.html();
 
-        $btn.prop('disabled', true).html('<span class="ytct-spinner"></span> ' + ytctAdmin.strings.saving);
+        $btn.prop('disabled', true).html('<span class="cybocoma-spinner"></span> ' + cybocomaAdmin.strings.saving);
 
         var formData = new FormData($form[0]);
-        formData.append('action', 'ytct_save_settings');
-        formData.append('nonce', ytctAdmin.nonce);
+        formData.append('action', 'cybocoma_save_settings');
+        formData.append('nonce', cybocomaAdmin.nonce);
         formData.set('settings_locale', getScopeLocale());
 
         $.ajax({
-            url: ytctAdmin.ajaxUrl,
+            url: cybocomaAdmin.ajaxUrl,
             type: 'POST',
             data: formData,
             processData: false,
@@ -463,14 +463,14 @@
             success: function(response) {
                 if (response.success && response.data && response.data.scope) {
                     applyScopePayload(response.data.scope, false);
-                    showMessage(response.data.message || ytctAdmin.strings.saved, 'success');
+                    showMessage(response.data.message || cybocomaAdmin.strings.saved, 'success');
                     captureInitialState();
                 } else {
-                    showMessage((response.data && response.data.message) || ytctAdmin.strings.error, 'error');
+                    showMessage((response.data && response.data.message) || cybocomaAdmin.strings.error, 'error');
                 }
             },
             error: function() {
-                showMessage(ytctAdmin.strings.error, 'error');
+                showMessage(cybocomaAdmin.strings.error, 'error');
             },
             complete: function() {
                 $btn.prop('disabled', false).html(originalText);
@@ -482,27 +482,27 @@
         var $btn = $resetBtn;
         var originalText = $btn.html();
 
-        $btn.prop('disabled', true).html(ytctAdmin.strings.resetting);
+        $btn.prop('disabled', true).html(cybocomaAdmin.strings.resetting);
 
         $.ajax({
-            url: ytctAdmin.ajaxUrl,
+            url: cybocomaAdmin.ajaxUrl,
             type: 'POST',
             data: {
-                action: 'ytct_reset_settings',
-                nonce: ytctAdmin.nonce,
+                action: 'cybocoma_reset_settings',
+                nonce: cybocomaAdmin.nonce,
                 settings_locale: getScopeLocale()
             },
             success: function(response) {
                 if (response.success && response.data && response.data.scope) {
                     applyScopePayload(response.data.scope, false);
-                    showMessage(response.data.message || ytctAdmin.strings.resetSuccess, 'success');
+                    showMessage(response.data.message || cybocomaAdmin.strings.resetSuccess, 'success');
                     captureInitialState();
                 } else {
-                    showMessage((response.data && response.data.message) || ytctAdmin.strings.error, 'error');
+                    showMessage((response.data && response.data.message) || cybocomaAdmin.strings.error, 'error');
                 }
             },
             error: function() {
-                showMessage(ytctAdmin.strings.error, 'error');
+                showMessage(cybocomaAdmin.strings.error, 'error');
             },
             complete: function() {
                 $btn.prop('disabled', false).html(originalText);
@@ -512,11 +512,11 @@
 
     function exportSettings() {
         $.ajax({
-            url: ytctAdmin.ajaxUrl,
+            url: cybocomaAdmin.ajaxUrl,
             type: 'POST',
             data: {
-                action: 'ytct_export_settings',
-                nonce: ytctAdmin.nonce,
+                action: 'cybocoma_export_settings',
+                nonce: cybocomaAdmin.nonce,
                 settings_locale: getScopeLocale()
             },
             success: function(response) {
@@ -532,11 +532,11 @@
                     document.body.removeChild(link);
                     URL.revokeObjectURL(url);
                 } else {
-                    showMessage((response.data && response.data.message) || ytctAdmin.strings.error, 'error');
+                    showMessage((response.data && response.data.message) || cybocomaAdmin.strings.error, 'error');
                 }
             },
             error: function() {
-                showMessage(ytctAdmin.strings.error, 'error');
+                showMessage(cybocomaAdmin.strings.error, 'error');
             }
         });
     }
@@ -549,37 +549,37 @@
     function hideImportModal() {
         $modal.removeClass('show');
         $('body').css('overflow', '');
-        $('#ytct-import-file').val('');
-        $('.ytct-file-name').hide();
+        $('#cybocoma-import-file').val('');
+        $('.cybocoma-file-name').hide();
     }
 
     function importSettings() {
-        var fileInput = $('#ytct-import-file')[0];
+        var fileInput = $('#cybocoma-import-file')[0];
 
         if (!fileInput.files || !fileInput.files[0]) {
-            showMessage(ytctAdmin.strings.invalidFile, 'error');
+            showMessage(cybocomaAdmin.strings.invalidFile, 'error');
             return;
         }
 
         var file = fileInput.files[0];
         if (!file.name.toLowerCase().endsWith('.json')) {
-            showMessage(ytctAdmin.strings.invalidFile, 'error');
+            showMessage(cybocomaAdmin.strings.invalidFile, 'error');
             return;
         }
 
-        var $btn = $('#ytct-import-submit');
+        var $btn = $('#cybocoma-import-submit');
         var originalText = $btn.html();
 
-        $btn.prop('disabled', true).html(ytctAdmin.strings.importing);
+        $btn.prop('disabled', true).html(cybocomaAdmin.strings.importing);
 
         var formData = new FormData();
-        formData.append('action', 'ytct_import_settings');
-        formData.append('nonce', ytctAdmin.nonce);
+        formData.append('action', 'cybocoma_import_settings');
+        formData.append('nonce', cybocomaAdmin.nonce);
         formData.append('settings_locale', getScopeLocale());
         formData.append('import_file', file);
 
         $.ajax({
-            url: ytctAdmin.ajaxUrl,
+            url: cybocomaAdmin.ajaxUrl,
             type: 'POST',
             data: formData,
             processData: false,
@@ -588,14 +588,14 @@
                 if (response.success && response.data && response.data.scope) {
                     hideImportModal();
                     applyScopePayload(response.data.scope, false);
-                    showMessage(response.data.message || ytctAdmin.strings.importSuccess, 'success');
+                    showMessage(response.data.message || cybocomaAdmin.strings.importSuccess, 'success');
                     captureInitialState();
                 } else {
-                    showMessage((response.data && response.data.message) || ytctAdmin.strings.error, 'error');
+                    showMessage((response.data && response.data.message) || cybocomaAdmin.strings.error, 'error');
                 }
             },
             error: function() {
-                showMessage(ytctAdmin.strings.error, 'error');
+                showMessage(cybocomaAdmin.strings.error, 'error');
             },
             complete: function() {
                 $btn.prop('disabled', false).html(originalText);
@@ -605,11 +605,11 @@
 
     function loadLanguagePreset(language) {
         $.ajax({
-            url: ytctAdmin.ajaxUrl,
+            url: cybocomaAdmin.ajaxUrl,
             type: 'POST',
             data: {
-                action: 'ytct_load_language',
-                nonce: ytctAdmin.nonce,
+                action: 'cybocoma_load_language',
+                nonce: cybocomaAdmin.nonce,
                 language: language,
                 settings_locale: getScopeLocale()
             },
@@ -625,35 +625,35 @@
 
                     refreshAllUiState();
                     markDirtyIfNeeded();
-                    showMessage(ytctAdmin.strings.languageLoaded, 'success');
+                    showMessage(cybocomaAdmin.strings.languageLoaded, 'success');
                 }
             },
             error: function() {
-                showMessage(ytctAdmin.strings.error, 'error');
+                showMessage(cybocomaAdmin.strings.error, 'error');
             }
         });
     }
 
     function loadScope(scopeLocale) {
         $.ajax({
-            url: ytctAdmin.ajaxUrl,
+            url: cybocomaAdmin.ajaxUrl,
             type: 'POST',
             data: {
-                action: 'ytct_load_scope',
-                nonce: ytctAdmin.nonce,
+                action: 'cybocoma_load_scope',
+                nonce: cybocomaAdmin.nonce,
                 settings_locale: scopeLocale
             },
             success: function(response) {
                 if (response.success && response.data && response.data.scope) {
                     applyScopePayload(response.data.scope, true);
-                    showMessage(ytctAdmin.strings.scopeLoaded, 'success');
+                    showMessage(cybocomaAdmin.strings.scopeLoaded, 'success');
                     captureInitialState();
                 } else {
-                    showMessage((response.data && response.data.message) || ytctAdmin.strings.error, 'error');
+                    showMessage((response.data && response.data.message) || cybocomaAdmin.strings.error, 'error');
                 }
             },
             error: function() {
-                showMessage(ytctAdmin.strings.error, 'error');
+                showMessage(cybocomaAdmin.strings.error, 'error');
             }
         });
     }
@@ -672,7 +672,7 @@
 
         if (scope.options) {
             if (scope.options.enabled !== undefined) {
-                $('#ytct-enabled').prop('checked', !!scope.options.enabled);
+                $('#cybocoma-enabled').prop('checked', !!scope.options.enabled);
             }
 
             if (scope.options.language) {
@@ -722,13 +722,13 @@
             return;
         }
 
-        $('#ytct-update-channel-enabled').prop('checked', !!updater.enabled);
-        $('#ytct-updater-current-version').text(updater.currentVersion || '');
-        $('#ytct-updater-latest-version').text(updater.latestVersion || 'Unknown');
-        $('#ytct-updater-last-check').text(formatIsoDate(updater.lastCheckedAt));
-        $('#ytct-updater-status').text(formatUpdaterStatus(updater.status, !!updater.updateAvailable, updater.statusLabel));
-        $('#ytct-updater-last-install').text(formatIsoDate(updater.lastInstallAt));
-        $('#ytct-updater-last-error').text(updater.lastError || 'None');
+        $('#cybocoma-update-channel-enabled').prop('checked', !!updater.enabled);
+        $('#cybocoma-updater-current-version').text(updater.currentVersion || '');
+        $('#cybocoma-updater-latest-version').text(updater.latestVersion || 'Unknown');
+        $('#cybocoma-updater-last-check').text(formatIsoDate(updater.lastCheckedAt));
+        $('#cybocoma-updater-status').text(formatUpdaterStatus(updater.status, !!updater.updateAvailable, updater.statusLabel));
+        $('#cybocoma-updater-last-install').text(formatIsoDate(updater.lastInstallAt));
+        $('#cybocoma-updater-last-error').text(updater.lastError || 'None');
     }
 
     function formatUpdaterStatus(status, updateAvailable, statusLabel) {
@@ -768,11 +768,11 @@
     }
 
     function updateSnapshotSelect(snapshots) {
-        var $select = $('#ytct-snapshot-select');
+        var $select = $('#cybocoma-snapshot-select');
         $select.empty();
         $select.append($('<option>', {
             value: '',
-            text: ytctAdmin.strings.selectSnapshot
+            text: cybocomaAdmin.strings.selectSnapshot
         }));
 
         if (!Array.isArray(snapshots)) {
@@ -793,46 +793,46 @@
     }
 
     function restoreSnapshot() {
-        var snapshotId = $('#ytct-snapshot-select').val();
+        var snapshotId = $('#cybocoma-snapshot-select').val();
         if (!snapshotId) {
-            showMessage(ytctAdmin.strings.selectSnapshotFirst, 'error');
+            showMessage(cybocomaAdmin.strings.selectSnapshotFirst, 'error');
             return;
         }
 
         $.ajax({
-            url: ytctAdmin.ajaxUrl,
+            url: cybocomaAdmin.ajaxUrl,
             type: 'POST',
             data: {
-                action: 'ytct_restore_snapshot',
-                nonce: ytctAdmin.nonce,
+                action: 'cybocoma_restore_snapshot',
+                nonce: cybocomaAdmin.nonce,
                 settings_locale: getScopeLocale(),
                 snapshot_id: snapshotId
             },
             success: function(response) {
                 if (response.success && response.data && response.data.scope) {
                     applyScopePayload(response.data.scope, false);
-                    showMessage(response.data.message || ytctAdmin.strings.restored, 'success');
+                    showMessage(response.data.message || cybocomaAdmin.strings.restored, 'success');
                     captureInitialState();
                 } else {
-                    showMessage((response.data && response.data.message) || ytctAdmin.strings.error, 'error');
+                    showMessage((response.data && response.data.message) || cybocomaAdmin.strings.error, 'error');
                 }
             },
             error: function() {
-                showMessage(ytctAdmin.strings.error, 'error');
+                showMessage(cybocomaAdmin.strings.error, 'error');
             }
         });
     }
 
     function checkUpdateNow() {
         var originalText = $checkUpdateBtn.html();
-        $checkUpdateBtn.prop('disabled', true).text(ytctAdmin.strings.checkUpdateRunning);
+        $checkUpdateBtn.prop('disabled', true).text(cybocomaAdmin.strings.checkUpdateRunning);
 
         $.ajax({
-            url: ytctAdmin.ajaxUrl,
+            url: cybocomaAdmin.ajaxUrl,
             type: 'POST',
             data: {
-                action: 'ytct_check_update_now',
-                nonce: ytctAdmin.nonce,
+                action: 'cybocoma_check_update_now',
+                nonce: cybocomaAdmin.nonce,
                 settings_locale: getScopeLocale()
             },
             success: function(response) {
@@ -845,13 +845,13 @@
                         type = 'error';
                     }
 
-                    showMessage(response.data.message || ytctAdmin.strings.checkUpdateNoChange, type);
+                    showMessage(response.data.message || cybocomaAdmin.strings.checkUpdateNoChange, type);
                 } else {
-                    showMessage((response.data && response.data.message) || ytctAdmin.strings.error, 'error');
+                    showMessage((response.data && response.data.message) || cybocomaAdmin.strings.error, 'error');
                 }
             },
             error: function() {
-                showMessage(ytctAdmin.strings.error, 'error');
+                showMessage(cybocomaAdmin.strings.error, 'error');
             },
             complete: function() {
                 $checkUpdateBtn.prop('disabled', false).html(originalText);
@@ -861,15 +861,15 @@
 
     function runQualityCheck() {
         var originalText = $qualityBtn.html();
-        $qualityBtn.prop('disabled', true).text(ytctAdmin.strings.qualityCheckRunning);
+        $qualityBtn.prop('disabled', true).text(cybocomaAdmin.strings.qualityCheckRunning);
 
         var formData = new FormData($form[0]);
-        formData.append('action', 'ytct_quality_check');
-        formData.append('nonce', ytctAdmin.nonce);
+        formData.append('action', 'cybocoma_quality_check');
+        formData.append('nonce', cybocomaAdmin.nonce);
         formData.set('settings_locale', getScopeLocale());
 
         $.ajax({
-            url: ytctAdmin.ajaxUrl,
+            url: cybocomaAdmin.ajaxUrl,
             type: 'POST',
             data: formData,
             processData: false,
@@ -878,16 +878,16 @@
                 if (response.success && response.data && response.data.quality) {
                     renderQuality(response.data.quality);
                     if (response.data.quality.status === 'ok') {
-                        showMessage(ytctAdmin.strings.qualityCheckOk, 'success');
+                        showMessage(cybocomaAdmin.strings.qualityCheckOk, 'success');
                     } else {
-                        showMessage(ytctAdmin.strings.qualityCheckFailed, 'error');
+                        showMessage(cybocomaAdmin.strings.qualityCheckFailed, 'error');
                     }
                 } else {
-                    showMessage((response.data && response.data.message) || ytctAdmin.strings.error, 'error');
+                    showMessage((response.data && response.data.message) || cybocomaAdmin.strings.error, 'error');
                 }
             },
             error: function() {
-                showMessage(ytctAdmin.strings.error, 'error');
+                showMessage(cybocomaAdmin.strings.error, 'error');
             },
             complete: function() {
                 $qualityBtn.prop('disabled', false).html(originalText);
@@ -923,33 +923,33 @@
         }
 
         $qualityReport
-            .removeClass('ytct-quality-ok ytct-quality-warning ytct-quality-error')
-            .addClass('show ytct-quality-' + (quality.status || 'ok'))
+            .removeClass('cybocoma-quality-ok cybocoma-quality-warning cybocoma-quality-error')
+            .addClass('show cybocoma-quality-' + (quality.status || 'ok'))
             .html(html.join(''));
     }
 
     function runHealthCheck() {
         var originalText = $healthBtn.html();
-        $healthBtn.prop('disabled', true).text(ytctAdmin.strings.healthCheckRunning);
+        $healthBtn.prop('disabled', true).text(cybocomaAdmin.strings.healthCheckRunning);
 
         $.ajax({
-            url: ytctAdmin.ajaxUrl,
+            url: cybocomaAdmin.ajaxUrl,
             type: 'POST',
             data: {
-                action: 'ytct_health_check',
-                nonce: ytctAdmin.nonce,
+                action: 'cybocoma_health_check',
+                nonce: cybocomaAdmin.nonce,
                 settings_locale: getScopeLocale()
             },
             success: function(response) {
                 if (response.success && response.data && response.data.health) {
                     renderHealth(response.data.health);
-                    showMessage(ytctAdmin.strings.healthCheckOk, 'success');
+                    showMessage(cybocomaAdmin.strings.healthCheckOk, 'success');
                 } else {
-                    showMessage((response.data && response.data.message) || ytctAdmin.strings.error, 'error');
+                    showMessage((response.data && response.data.message) || cybocomaAdmin.strings.error, 'error');
                 }
             },
             error: function() {
-                showMessage(ytctAdmin.strings.error, 'error');
+                showMessage(cybocomaAdmin.strings.error, 'error');
             },
             complete: function() {
                 $healthBtn.prop('disabled', false).html(originalText);
@@ -958,31 +958,31 @@
     }
 
     function renderHealth(health) {
-        var $panel = $('#ytct-health-panel');
-        var $list = $('#ytct-health-list');
+        var $panel = $('#cybocoma-health-panel');
+        var $list = $('#cybocoma-health-list');
         if (!$panel.length || !$list.length || !health) {
             return;
         }
 
         $panel
-            .removeClass('ytct-health-healthy ytct-health-notice ytct-health-warning')
-            .addClass('ytct-health-' + (health.status || 'healthy'));
+            .removeClass('cybocoma-health-healthy cybocoma-health-notice cybocoma-health-warning')
+            .addClass('cybocoma-health-' + (health.status || 'healthy'));
 
         var items = [];
         if (Array.isArray(health.issues) && health.issues.length) {
             health.issues.forEach(function(issue) {
-                items.push('<li class="ytct-health-issue">' + escapeHtml(issue) + '</li>');
+                items.push('<li class="cybocoma-health-issue">' + escapeHtml(issue) + '</li>');
             });
         }
 
         if (Array.isArray(health.warnings) && health.warnings.length) {
             health.warnings.forEach(function(warning) {
-                items.push('<li class="ytct-health-warning">' + escapeHtml(warning) + '</li>');
+                items.push('<li class="cybocoma-health-warning">' + escapeHtml(warning) + '</li>');
             });
         }
 
         if (!items.length) {
-            items.push('<li class="ytct-health-ok">No compatibility issues reported.</li>');
+            items.push('<li class="cybocoma-health-ok">No compatibility issues reported.</li>');
         }
 
         $list.html(items.join(''));
@@ -995,7 +995,7 @@
             state.isSearching = false;
             $searchClear.hide();
             $noResults.hide();
-            $tabContents.find('.ytct-string-group').show();
+            $tabContents.find('.cybocoma-string-group').show();
             var activeTab = $tabs.filter('.active').data('tab') || 'banner';
             switchTab(activeTab);
             return;
@@ -1010,11 +1010,11 @@
             .attr('aria-hidden', 'false');
 
         var visibleCount = 0;
-        $tabContents.find('.ytct-string-group').each(function() {
+        $tabContents.find('.cybocoma-string-group').each(function() {
             var $group = $(this);
-            var label = ($group.find('.ytct-string-label').text() || '').toLowerCase();
-            var original = ($group.find('.ytct-original').text() || '').toLowerCase();
-            var value = ($group.find('.ytct-input').val() || '').toLowerCase();
+            var label = ($group.find('.cybocoma-string-label').text() || '').toLowerCase();
+            var original = ($group.find('.cybocoma-original').text() || '').toLowerCase();
+            var value = ($group.find('.cybocoma-input').val() || '').toLowerCase();
 
             if (label.indexOf(query) !== -1 || original.indexOf(query) !== -1 || value.indexOf(query) !== -1) {
                 $group.show();
@@ -1039,31 +1039,31 @@
     function hideCopyLocaleModal() {
         $copyLocaleModal.removeClass('show');
         $('body').css('overflow', '');
-        $('#ytct-copy-source-locale').val('');
+        $('#cybocoma-copy-source-locale').val('');
     }
 
     function copyLocale() {
-        var sourceLocale = $('#ytct-copy-source-locale').val();
+        var sourceLocale = $('#cybocoma-copy-source-locale').val();
         if (!sourceLocale) {
-            showMessage(ytctAdmin.strings.selectSourceLocale, 'error');
+            showMessage(cybocomaAdmin.strings.selectSourceLocale, 'error');
             return;
         }
 
-        if (!window.confirm(ytctAdmin.strings.confirmCopyLocale)) {
+        if (!window.confirm(cybocomaAdmin.strings.confirmCopyLocale)) {
             return;
         }
 
-        var $btn = $('#ytct-copy-locale-submit');
+        var $btn = $('#cybocoma-copy-locale-submit');
         var originalText = $btn.html();
 
-        $btn.prop('disabled', true).html('<span class="ytct-spinner"></span> ' + ytctAdmin.strings.copyLocaleRunning);
+        $btn.prop('disabled', true).html('<span class="cybocoma-spinner"></span> ' + cybocomaAdmin.strings.copyLocaleRunning);
 
         $.ajax({
-            url: ytctAdmin.ajaxUrl,
+            url: cybocomaAdmin.ajaxUrl,
             type: 'POST',
             data: {
-                action: 'ytct_copy_locale',
-                nonce: ytctAdmin.nonce,
+                action: 'cybocoma_copy_locale',
+                nonce: cybocomaAdmin.nonce,
                 settings_locale: getScopeLocale(),
                 source_locale: sourceLocale
             },
@@ -1074,11 +1074,11 @@
                     showMessage(response.data.message, 'success');
                     captureInitialState();
                 } else {
-                    showMessage((response.data && response.data.message) || ytctAdmin.strings.error, 'error');
+                    showMessage((response.data && response.data.message) || cybocomaAdmin.strings.error, 'error');
                 }
             },
             error: function() {
-                showMessage(ytctAdmin.strings.error, 'error');
+                showMessage(cybocomaAdmin.strings.error, 'error');
             },
             complete: function() {
                 $btn.prop('disabled', false).html(originalText);
@@ -1100,14 +1100,14 @@
         });
 
         var percent = total > 0 ? Math.round((customized / total) * 100) : 0;
-        var summaryTemplate = (ytctAdmin.strings && ytctAdmin.strings.statsSummary) ? ytctAdmin.strings.statsSummary : '{customized}/{total} customized ({percent}%)';
+        var summaryTemplate = (cybocomaAdmin.strings && cybocomaAdmin.strings.statsSummary) ? cybocomaAdmin.strings.statsSummary : '{customized}/{total} customized ({percent}%)';
         var summaryText = summaryTemplate
             .replace('{customized}', String(customized))
             .replace('{total}', String(total))
             .replace('{percent}', String(percent));
 
-        $('#ytct-stats-bar-fill').css('width', percent + '%');
-        $('#ytct-stats-text').text(summaryText);
+        $('#cybocoma-stats-bar-fill').css('width', percent + '%');
+        $('#cybocoma-stats-text').text(summaryText);
     }
 
     function escapeHtml(text) {
@@ -1116,8 +1116,8 @@
 
     function showMessage(text, type) {
         $message
-            .removeClass('ytct-message-success ytct-message-error')
-            .addClass('ytct-message-' + type)
+            .removeClass('cybocoma-message-success cybocoma-message-error')
+            .addClass('cybocoma-message-' + type)
             .text(text)
             .addClass('show');
 

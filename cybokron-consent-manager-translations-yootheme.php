@@ -3,12 +3,12 @@
  * Plugin Name: Cybokron Consent Manager Translations for YOOtheme Pro
  * Plugin URI: https://github.com/ercanatay/cybokron-consent-manager-translations-yootheme
  * Description: Easily translate YOOtheme Pro 5 Consent Manager texts from the WordPress admin panel. Supports multiple languages including English, Turkish, Hindi, Korean, Arabic, and German.
- * Version: 1.3.12
+ * Version: 1.3.13
  * Author: Ercan ATAY
  * Author URI: https://www.ercanatay.com/en/
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: cybokron-consent-manager-translations-yootheme-main
+ * Text Domain: cybokron-consent-manager-translations-yootheme
  * Domain Path: /languages
  * Requires at least: 5.0
  * Requires PHP: 7.4
@@ -20,16 +20,16 @@ if (!defined('ABSPATH')) {
 }
 
 // Plugin constants
-define('YTCT_VERSION', '1.3.12');
-define('YTCT_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('YTCT_PLUGIN_URL', plugin_dir_url(__FILE__));
-define('YTCT_PLUGIN_BASENAME', plugin_basename(__FILE__));
-define('YTCT_OPTION_NAME', 'yt_consent_translations');
+define('CYBOCOMA_VERSION', '1.3.13');
+define('CYBOCOMA_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('CYBOCOMA_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('CYBOCOMA_PLUGIN_BASENAME', plugin_basename(__FILE__));
+define('CYBOCOMA_OPTION_NAME', 'cybocoma_consent_translations');
 
 /**
  * Main plugin class
  */
-final class YT_Consent_Translations {
+final class CYBOCOMA_Consent_Translations {
 
 	/**
 	 * Single instance
@@ -58,12 +58,12 @@ final class YT_Consent_Translations {
 	 * Load required files
 	 */
 	private function load_dependencies() {
-		require_once YTCT_PLUGIN_DIR . 'includes/class-strings.php';
-		require_once YTCT_PLUGIN_DIR . 'includes/class-options.php';
-		require_once YTCT_PLUGIN_DIR . 'includes/class-health.php';
-		require_once YTCT_PLUGIN_DIR . 'includes/class-translator.php';
-		require_once YTCT_PLUGIN_DIR . 'includes/class-updater.php';
-		require_once YTCT_PLUGIN_DIR . 'includes/class-admin.php';
+		require_once CYBOCOMA_PLUGIN_DIR . 'includes/class-strings.php';
+		require_once CYBOCOMA_PLUGIN_DIR . 'includes/class-options.php';
+		require_once CYBOCOMA_PLUGIN_DIR . 'includes/class-health.php';
+		require_once CYBOCOMA_PLUGIN_DIR . 'includes/class-translator.php';
+		require_once CYBOCOMA_PLUGIN_DIR . 'includes/class-updater.php';
+		require_once CYBOCOMA_PLUGIN_DIR . 'includes/class-admin.php';
 	}
 
 	/**
@@ -90,7 +90,7 @@ final class YT_Consent_Translations {
 		register_deactivation_hook(__FILE__, [$this, 'deactivate']);
 
 		// Add settings link on plugins page
-		add_filter('plugin_action_links_' . YTCT_PLUGIN_BASENAME, [$this, 'add_settings_link']);
+		add_filter('plugin_action_links_' . CYBOCOMA_PLUGIN_BASENAME, [$this, 'add_settings_link']);
 	}
 
 	/**
@@ -99,7 +99,7 @@ final class YT_Consent_Translations {
 	 * @return void
 	 */
 	public function init_updater() {
-		YTCT_Updater::boot();
+		CYBOCOMA_Updater::boot();
 	}
 
 	/**
@@ -116,17 +116,17 @@ final class YT_Consent_Translations {
 	 * Initialize translator (only if enabled)
 	 */
 	public function init_translator() {
-		if (defined('YTCT_DISABLED') && YTCT_DISABLED) {
+		if (defined('CYBOCOMA_DISABLED') && CYBOCOMA_DISABLED) {
 			return;
 		}
 
 		// Skip translator initialization if disabled (performance optimization)
-		$options = YTCT_Options::get_options();
+		$options = CYBOCOMA_Options::get_options();
 		if (empty($options['enabled'])) {
 			return;
 		}
 		
-		YTCT_Translator::get_instance();
+		CYBOCOMA_Translator::get_instance();
 	}
 
 	/**
@@ -135,26 +135,26 @@ final class YT_Consent_Translations {
 	 * @return void
 	 */
 	public function init_health_monitor() {
-		YTCT_Health::boot();
+		CYBOCOMA_Health::boot();
 	}
 
 	/**
 	 * Initialize admin
 	 */
 	public function init_admin() {
-		YTCT_Admin::get_instance();
+		CYBOCOMA_Admin::get_instance();
 	}
 
 	/**
 	 * Plugin activation
 	 */
 	public function activate() {
-		$locale_option_name = YTCT_Options::get_option_name();
+		$locale_option_name = CYBOCOMA_Options::get_option_name();
 		if (false === get_option($locale_option_name)) {
-			YTCT_Options::update_options(YTCT_Options::get_default_options(), '', 'activation');
+			CYBOCOMA_Options::update_options(CYBOCOMA_Options::get_default_options(), '', 'activation');
 		}
 
-		YTCT_Updater::on_activation();
+		CYBOCOMA_Updater::on_activation();
 
 		// Flush rewrite rules
 		flush_rewrite_rules();
@@ -164,7 +164,7 @@ final class YT_Consent_Translations {
 	 * Plugin deactivation
 	 */
 	public function deactivate() {
-		YTCT_Updater::on_deactivation();
+		CYBOCOMA_Updater::on_deactivation();
 		flush_rewrite_rules();
 	}
 
@@ -175,7 +175,7 @@ final class YT_Consent_Translations {
 		$settings_link = sprintf(
 			'<a href="%s">%s</a>',
 			admin_url('options-general.php?page=cybokron-consent-manager-translations-yootheme'),
-			__('Settings', 'cybokron-consent-manager-translations-yootheme-main')
+			__('Settings', 'cybokron-consent-manager-translations-yootheme')
 		);
 		array_unshift($links, $settings_link);
 		return $links;
@@ -185,9 +185,9 @@ final class YT_Consent_Translations {
 /**
  * Initialize plugin
  */
-function ytct_init() {
-	return YT_Consent_Translations::get_instance();
+function cybocoma_init() {
+	return CYBOCOMA_Consent_Translations::get_instance();
 }
 
 // Start the plugin
-ytct_init();
+cybocoma_init();

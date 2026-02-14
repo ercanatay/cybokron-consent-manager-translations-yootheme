@@ -23,7 +23,7 @@ $input = [
 	]
 ];
 
-$stored = YTCT_Options::update_options($input, 'tr_TR', 'test_save');
+$stored = CYBOCOMA_Options::update_options($input, 'tr_TR', 'test_save');
 
 if ($stored['language'] !== 'tr') {
 	$failures[] = 'Language should remain tr.';
@@ -37,12 +37,12 @@ if (isset($stored['custom_strings']['unknown_key'])) {
 	$failures[] = 'Unknown keys must be stripped from custom_strings.';
 }
 
-$readBack = YTCT_Options::get_options('tr_TR');
+$readBack = CYBOCOMA_Options::get_options('tr_TR');
 if ($readBack['enabled'] !== false) {
 	$failures[] = 'Enabled should be false after update.';
 }
 
-$snapshots = YTCT_Options::get_snapshots('tr_TR');
+$snapshots = CYBOCOMA_Options::get_snapshots('tr_TR');
 if (count($snapshots) < 1) {
 	$failures[] = 'At least one snapshot should be created after update.';
 }
@@ -54,14 +54,14 @@ $restoreSource = [
 		'button_accept' => 'Allow'
 	]
 ];
-YTCT_Options::update_options($restoreSource, 'tr_TR', 'second_save');
-$snapshots = YTCT_Options::get_snapshots('tr_TR');
+CYBOCOMA_Options::update_options($restoreSource, 'tr_TR', 'second_save');
+$snapshots = CYBOCOMA_Options::get_snapshots('tr_TR');
 $oldSnapshotId = isset($snapshots[1]['id']) ? $snapshots[1]['id'] : '';
 
 if ($oldSnapshotId === '') {
 	$failures[] = 'Expected at least two snapshots to test restore.';
 } else {
-	$restored = YTCT_Options::restore_snapshot($oldSnapshotId, 'tr_TR');
+	$restored = CYBOCOMA_Options::restore_snapshot($oldSnapshotId, 'tr_TR');
 	if (!is_array($restored) || $restored['language'] !== 'tr') {
 		$failures[] = 'Snapshot restore should restore older state.';
 	}

@@ -2,7 +2,7 @@
 /**
  * WordPress core update status integration for admin UI.
  *
- * @package YT_Consent_Translations
+ * @package CYBOCOMA_Consent_Translations
  */
 
 if (!defined('ABSPATH')) {
@@ -10,24 +10,24 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class YTCT_Updater
+ * Class CYBOCOMA_Updater
  */
-class YTCT_Updater {
+class CYBOCOMA_Updater {
 
 	/**
 	 * Option key for updater settings.
 	 */
-	const SETTINGS_OPTION = 'ytct_updater_settings';
+	const SETTINGS_OPTION = 'cybocoma_updater_settings';
 
 	/**
 	 * Option key for updater state.
 	 */
-	const STATE_OPTION = 'ytct_updater_state';
+	const STATE_OPTION = 'cybocoma_updater_state';
 
 	/**
 	 * Cron hook name.
 	 */
-	const CRON_HOOK = 'ytct_updater_cron_check';
+	const CRON_HOOK = 'cybocoma_updater_cron_check';
 
 	/**
 	 * Boot guard.
@@ -266,7 +266,7 @@ class YTCT_Updater {
 			return false;
 		}
 
-		return version_compare($remote_version, YTCT_VERSION, '>');
+		return version_compare($remote_version, CYBOCOMA_VERSION, '>');
 	}
 
 	/**
@@ -285,8 +285,8 @@ class YTCT_Updater {
 		$item = self::get_core_update_item($force);
 		$version = self::extract_item_version($item);
 		if ($version === '') {
-			$changes['latest_version'] = YTCT_VERSION;
-			$changes['latest_tag'] = YTCT_VERSION;
+			$changes['latest_version'] = CYBOCOMA_VERSION;
+			$changes['latest_tag'] = CYBOCOMA_VERSION;
 			$changes['update_available'] = false;
 			$changes['status'] = 'up_to_date';
 			self::update_state($changes);
@@ -327,9 +327,9 @@ class YTCT_Updater {
 			'enabled' => !empty($settings['enabled']),
 			'channel' => 'wordpress',
 			'checkInterval' => 'twicedaily',
-			'currentVersion' => YTCT_VERSION,
-			'latestVersion' => $state['latest_version'] !== '' ? $state['latest_version'] : YTCT_VERSION,
-			'latestTag' => $state['latest_tag'] !== '' ? $state['latest_tag'] : YTCT_VERSION,
+			'currentVersion' => CYBOCOMA_VERSION,
+			'latestVersion' => $state['latest_version'] !== '' ? $state['latest_version'] : CYBOCOMA_VERSION,
+			'latestTag' => $state['latest_tag'] !== '' ? $state['latest_tag'] : CYBOCOMA_VERSION,
 			'updateAvailable' => !empty($state['update_available']),
 			'status' => $state['status'],
 			'statusLabel' => self::get_status_label($state['status']),
@@ -350,13 +350,13 @@ class YTCT_Updater {
 	public static function get_status_label($status) {
 		$status = sanitize_key((string) $status);
 		$labels = [
-			'idle' => __('Idle', 'cybokron-consent-manager-translations-yootheme-main'),
-			'up_to_date' => __('Up to date', 'cybokron-consent-manager-translations-yootheme-main'),
-			'update_available' => __('Update available', 'cybokron-consent-manager-translations-yootheme-main'),
-			'error' => __('Error', 'cybokron-consent-manager-translations-yootheme-main'),
-			'installing' => __('Installing', 'cybokron-consent-manager-translations-yootheme-main'),
-			'updated' => __('Updated', 'cybokron-consent-manager-translations-yootheme-main'),
-			'update_failed' => __('Update failed', 'cybokron-consent-manager-translations-yootheme-main')
+			'idle' => __('Idle', 'cybokron-consent-manager-translations-yootheme'),
+			'up_to_date' => __('Up to date', 'cybokron-consent-manager-translations-yootheme'),
+			'update_available' => __('Update available', 'cybokron-consent-manager-translations-yootheme'),
+			'error' => __('Error', 'cybokron-consent-manager-translations-yootheme'),
+			'installing' => __('Installing', 'cybokron-consent-manager-translations-yootheme'),
+			'updated' => __('Updated', 'cybokron-consent-manager-translations-yootheme'),
+			'update_failed' => __('Update failed', 'cybokron-consent-manager-translations-yootheme')
 		];
 
 		return isset($labels[$status]) ? $labels[$status] : $labels['idle'];
@@ -432,12 +432,12 @@ class YTCT_Updater {
 			return null;
 		}
 
-		if (isset($transient->response) && is_array($transient->response) && isset($transient->response[YTCT_PLUGIN_BASENAME])) {
-			return $transient->response[YTCT_PLUGIN_BASENAME];
+		if (isset($transient->response) && is_array($transient->response) && isset($transient->response[CYBOCOMA_PLUGIN_BASENAME])) {
+			return $transient->response[CYBOCOMA_PLUGIN_BASENAME];
 		}
 
-		if (isset($transient->no_update) && is_array($transient->no_update) && isset($transient->no_update[YTCT_PLUGIN_BASENAME])) {
-			return $transient->no_update[YTCT_PLUGIN_BASENAME];
+		if (isset($transient->no_update) && is_array($transient->no_update) && isset($transient->no_update[CYBOCOMA_PLUGIN_BASENAME])) {
+			return $transient->no_update[CYBOCOMA_PLUGIN_BASENAME];
 		}
 
 		return null;

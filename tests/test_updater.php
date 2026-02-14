@@ -13,7 +13,7 @@ require_once dirname(__DIR__) . '/includes/class-updater.php';
 
 $failures = [];
 
-$settings = YTCT_Updater::sanitize_settings([
+$settings = CYBOCOMA_Updater::sanitize_settings([
 	'enabled' => false,
 	'channel' => 'beta',
 	'check_interval' => 'hourly'
@@ -31,24 +31,24 @@ if ($settings['check_interval'] !== 'twicedaily') {
 	$failures[] = 'sanitize_settings should force twicedaily interval.';
 }
 
-if (YTCT_Updater::normalize_tag_version('v1.2.3') !== '1.2.3') {
+if (CYBOCOMA_Updater::normalize_tag_version('v1.2.3') !== '1.2.3') {
 	$failures[] = 'normalize_tag_version should strip v prefix.';
 }
 
-if (YTCT_Updater::normalize_tag_version('release-1.2.3') !== '') {
+if (CYBOCOMA_Updater::normalize_tag_version('release-1.2.3') !== '') {
 	$failures[] = 'normalize_tag_version should reject non-semver tags.';
 }
 
-if (!YTCT_Updater::is_newer_version('9.9.9')) {
+if (!CYBOCOMA_Updater::is_newer_version('9.9.9')) {
 	$failures[] = 'is_newer_version should return true for higher versions.';
 }
 
-if (YTCT_Updater::is_newer_version(YTCT_VERSION)) {
+if (CYBOCOMA_Updater::is_newer_version(CYBOCOMA_VERSION)) {
 	$failures[] = 'is_newer_version should return false for equal version.';
 }
 
-$GLOBALS['ytct_site_transient_store']['update_plugins'] = (object) [];
-$checked = YTCT_Updater::check_for_updates(false);
+$GLOBALS['cybocoma_site_transient_store']['update_plugins'] = (object) [];
+$checked = CYBOCOMA_Updater::check_for_updates(false);
 if (!empty($checked['updateAvailable'])) {
 	$failures[] = 'check_for_updates should not mark update available when metadata is missing.';
 }
@@ -59,13 +59,13 @@ if ($checked['status'] !== 'up_to_date') {
 
 $update_transient = new stdClass();
 $update_transient->response = [
-	YTCT_PLUGIN_BASENAME => (object) [
+	CYBOCOMA_PLUGIN_BASENAME => (object) [
 		'new_version' => '9.9.9'
 	]
 ];
-$GLOBALS['ytct_site_transient_store']['update_plugins'] = $update_transient;
+$GLOBALS['cybocoma_site_transient_store']['update_plugins'] = $update_transient;
 
-$checked = YTCT_Updater::check_for_updates(false);
+$checked = CYBOCOMA_Updater::check_for_updates(false);
 if (empty($checked['updateAvailable'])) {
 	$failures[] = 'check_for_updates should mark updateAvailable when metadata version is newer.';
 }
@@ -80,25 +80,25 @@ if ($checked['status'] !== 'update_available') {
 
 $up_to_date_transient = new stdClass();
 $up_to_date_transient->no_update = [
-	YTCT_PLUGIN_BASENAME => (object) [
-		'new_version' => YTCT_VERSION
+	CYBOCOMA_PLUGIN_BASENAME => (object) [
+		'new_version' => CYBOCOMA_VERSION
 	]
 ];
-$GLOBALS['ytct_site_transient_store']['update_plugins'] = $up_to_date_transient;
+$GLOBALS['cybocoma_site_transient_store']['update_plugins'] = $up_to_date_transient;
 
-$checked = YTCT_Updater::check_for_updates(false);
+$checked = CYBOCOMA_Updater::check_for_updates(false);
 if ($checked['status'] !== 'up_to_date') {
 	$failures[] = 'check_for_updates should set status up_to_date when no update is available.';
 }
 
-$GLOBALS['ytct_scheduled_events'] = [];
-YTCT_Updater::update_settings(['enabled' => true]);
-if (wp_next_scheduled(YTCT_Updater::CRON_HOOK) === false) {
+$GLOBALS['cybocoma_scheduled_events'] = [];
+CYBOCOMA_Updater::update_settings(['enabled' => true]);
+if (wp_next_scheduled(CYBOCOMA_Updater::CRON_HOOK) === false) {
 	$failures[] = 'sync_schedule should schedule cron event when updater is enabled.';
 }
 
-YTCT_Updater::update_settings(['enabled' => false]);
-if (wp_next_scheduled(YTCT_Updater::CRON_HOOK) !== false) {
+CYBOCOMA_Updater::update_settings(['enabled' => false]);
+if (wp_next_scheduled(CYBOCOMA_Updater::CRON_HOOK) !== false) {
 	$failures[] = 'sync_schedule should clear cron event when updater is disabled.';
 }
 

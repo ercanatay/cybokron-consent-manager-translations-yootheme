@@ -12,28 +12,28 @@ if (!defined('ABSPATH')) {
 	define('ABSPATH', __DIR__ . '/');
 }
 
-if (!defined('YTCT_PLUGIN_DIR')) {
-	define('YTCT_PLUGIN_DIR', dirname(__DIR__) . '/');
+if (!defined('CYBOCOMA_PLUGIN_DIR')) {
+	define('CYBOCOMA_PLUGIN_DIR', dirname(__DIR__) . '/');
 }
 
-if (!defined('YTCT_VERSION')) {
-	define('YTCT_VERSION', 'test');
+if (!defined('CYBOCOMA_VERSION')) {
+	define('CYBOCOMA_VERSION', 'test');
 }
 
-if (!defined('YTCT_OPTION_NAME')) {
-	define('YTCT_OPTION_NAME', 'yt_consent_translations');
+if (!defined('CYBOCOMA_OPTION_NAME')) {
+	define('CYBOCOMA_OPTION_NAME', 'cybocoma_consent_translations');
 }
 
-if (!defined('YTCT_PLUGIN_BASENAME')) {
-	define('YTCT_PLUGIN_BASENAME', 'cybokron-consent-manager-translations-yootheme/cybokron-consent-manager-translations-yootheme.php');
+if (!defined('CYBOCOMA_PLUGIN_BASENAME')) {
+	define('CYBOCOMA_PLUGIN_BASENAME', 'cybokron-consent-manager-translations-yootheme/cybokron-consent-manager-translations-yootheme.php');
 }
 
-$GLOBALS['ytct_option_store'] = [];
-$GLOBALS['ytct_transient_store'] = [];
-$GLOBALS['ytct_site_transient_store'] = [];
-$GLOBALS['ytct_scheduled_events'] = [];
-$GLOBALS['ytct_send_nosniff_calls'] = 0;
-$GLOBALS['ytct_send_frame_options_calls'] = 0;
+$GLOBALS['cybocoma_option_store'] = [];
+$GLOBALS['cybocoma_transient_store'] = [];
+$GLOBALS['cybocoma_site_transient_store'] = [];
+$GLOBALS['cybocoma_scheduled_events'] = [];
+$GLOBALS['cybocoma_send_nosniff_calls'] = 0;
+$GLOBALS['cybocoma_send_frame_options_calls'] = 0;
 
 if (!function_exists('__')) {
 	function __($text, $domain = null) {
@@ -94,8 +94,8 @@ if (!function_exists('add_filter')) {
 
 if (!function_exists('get_option')) {
 	function get_option($option, $default = false) {
-		if (array_key_exists($option, $GLOBALS['ytct_option_store'])) {
-			return $GLOBALS['ytct_option_store'][$option];
+		if (array_key_exists($option, $GLOBALS['cybocoma_option_store'])) {
+			return $GLOBALS['cybocoma_option_store'][$option];
 		}
 
 		return $default;
@@ -104,14 +104,14 @@ if (!function_exists('get_option')) {
 
 if (!function_exists('update_option')) {
 	function update_option($option, $value, $autoload = null) {
-		$GLOBALS['ytct_option_store'][$option] = $value;
+		$GLOBALS['cybocoma_option_store'][$option] = $value;
 		return true;
 	}
 }
 
 if (!function_exists('delete_option')) {
 	function delete_option($option) {
-		unset($GLOBALS['ytct_option_store'][$option]);
+		unset($GLOBALS['cybocoma_option_store'][$option]);
 		return true;
 	}
 }
@@ -119,14 +119,14 @@ if (!function_exists('delete_option')) {
 if (!function_exists('wp_cache_get')) {
 	function wp_cache_get($key, $group = '') {
 		$cache_key = $group . '::' . $key;
-		return array_key_exists($cache_key, $GLOBALS['ytct_option_store']) ? $GLOBALS['ytct_option_store'][$cache_key] : false;
+		return array_key_exists($cache_key, $GLOBALS['cybocoma_option_store']) ? $GLOBALS['cybocoma_option_store'][$cache_key] : false;
 	}
 }
 
 if (!function_exists('wp_cache_set')) {
 	function wp_cache_set($key, $value, $group = '', $expire = 0) {
 		$cache_key = $group . '::' . $key;
-		$GLOBALS['ytct_option_store'][$cache_key] = $value;
+		$GLOBALS['cybocoma_option_store'][$cache_key] = $value;
 		return true;
 	}
 }
@@ -134,15 +134,15 @@ if (!function_exists('wp_cache_set')) {
 if (!function_exists('wp_cache_delete')) {
 	function wp_cache_delete($key, $group = '') {
 		$cache_key = $group . '::' . $key;
-		unset($GLOBALS['ytct_option_store'][$cache_key]);
+		unset($GLOBALS['cybocoma_option_store'][$cache_key]);
 		return true;
 	}
 }
 
 if (!function_exists('get_transient')) {
 	function get_transient($transient) {
-		if (array_key_exists($transient, $GLOBALS['ytct_transient_store'])) {
-			return $GLOBALS['ytct_transient_store'][$transient];
+		if (array_key_exists($transient, $GLOBALS['cybocoma_transient_store'])) {
+			return $GLOBALS['cybocoma_transient_store'][$transient];
 		}
 		return false;
 	}
@@ -150,22 +150,22 @@ if (!function_exists('get_transient')) {
 
 if (!function_exists('set_transient')) {
 	function set_transient($transient, $value, $expiration = 0) {
-		$GLOBALS['ytct_transient_store'][$transient] = $value;
+		$GLOBALS['cybocoma_transient_store'][$transient] = $value;
 		return true;
 	}
 }
 
 if (!function_exists('delete_transient')) {
 	function delete_transient($transient) {
-		unset($GLOBALS['ytct_transient_store'][$transient]);
+		unset($GLOBALS['cybocoma_transient_store'][$transient]);
 		return true;
 	}
 }
 
 if (!function_exists('get_site_transient')) {
 	function get_site_transient($transient) {
-		if (array_key_exists($transient, $GLOBALS['ytct_site_transient_store'])) {
-			return $GLOBALS['ytct_site_transient_store'][$transient];
+		if (array_key_exists($transient, $GLOBALS['cybocoma_site_transient_store'])) {
+			return $GLOBALS['cybocoma_site_transient_store'][$transient];
 		}
 		return false;
 	}
@@ -173,7 +173,7 @@ if (!function_exists('get_site_transient')) {
 
 if (!function_exists('set_site_transient')) {
 	function set_site_transient($transient, $value, $expiration = 0) {
-		$GLOBALS['ytct_site_transient_store'][$transient] = $value;
+		$GLOBALS['cybocoma_site_transient_store'][$transient] = $value;
 		return true;
 	}
 }
@@ -202,16 +202,16 @@ if (!function_exists('is_wp_error')) {
 
 if (!function_exists('wp_remote_get')) {
 	function wp_remote_get($url, $args = []) {
-		if (isset($GLOBALS['ytct_remote_get_mock_callback']) && is_callable($GLOBALS['ytct_remote_get_mock_callback'])) {
-			return call_user_func($GLOBALS['ytct_remote_get_mock_callback'], $url, $args);
+		if (isset($GLOBALS['cybocoma_remote_get_mock_callback']) && is_callable($GLOBALS['cybocoma_remote_get_mock_callback'])) {
+			return call_user_func($GLOBALS['cybocoma_remote_get_mock_callback'], $url, $args);
 		}
 
-		if (isset($GLOBALS['ytct_remote_get_mock_queue']) && is_array($GLOBALS['ytct_remote_get_mock_queue']) && !empty($GLOBALS['ytct_remote_get_mock_queue'])) {
-			return array_shift($GLOBALS['ytct_remote_get_mock_queue']);
+		if (isset($GLOBALS['cybocoma_remote_get_mock_queue']) && is_array($GLOBALS['cybocoma_remote_get_mock_queue']) && !empty($GLOBALS['cybocoma_remote_get_mock_queue'])) {
+			return array_shift($GLOBALS['cybocoma_remote_get_mock_queue']);
 		}
 
-		if (array_key_exists('ytct_remote_get_mock', $GLOBALS)) {
-			return $GLOBALS['ytct_remote_get_mock'];
+		if (array_key_exists('cybocoma_remote_get_mock', $GLOBALS)) {
+			return $GLOBALS['cybocoma_remote_get_mock'];
 		}
 
 		return [
@@ -241,7 +241,7 @@ if (!function_exists('wp_remote_retrieve_body')) {
 
 if (!function_exists('wp_next_scheduled')) {
 	function wp_next_scheduled($hook) {
-		$events = isset($GLOBALS['ytct_scheduled_events']) && is_array($GLOBALS['ytct_scheduled_events']) ? $GLOBALS['ytct_scheduled_events'] : [];
+		$events = isset($GLOBALS['cybocoma_scheduled_events']) && is_array($GLOBALS['cybocoma_scheduled_events']) ? $GLOBALS['cybocoma_scheduled_events'] : [];
 		$timestamps = [];
 		foreach ($events as $event) {
 			if (isset($event['hook']) && $event['hook'] === $hook && isset($event['timestamp'])) {
@@ -259,7 +259,7 @@ if (!function_exists('wp_next_scheduled')) {
 if (!function_exists('wp_schedule_event')) {
 	function wp_schedule_event($timestamp, $recurrence, $hook, $args = []) {
 		$key = $hook . ':' . (int) $timestamp;
-		$GLOBALS['ytct_scheduled_events'][$key] = [
+		$GLOBALS['cybocoma_scheduled_events'][$key] = [
 			'timestamp' => (int) $timestamp,
 			'recurrence' => (string) $recurrence,
 			'hook' => (string) $hook,
@@ -272,7 +272,7 @@ if (!function_exists('wp_schedule_event')) {
 if (!function_exists('wp_unschedule_event')) {
 	function wp_unschedule_event($timestamp, $hook, $args = []) {
 		$key = $hook . ':' . (int) $timestamp;
-		unset($GLOBALS['ytct_scheduled_events'][$key]);
+		unset($GLOBALS['cybocoma_scheduled_events'][$key]);
 		return true;
 	}
 }
@@ -339,12 +339,12 @@ if (!function_exists('wp_get_theme')) {
 
 if (!function_exists('send_nosniff_header')) {
 	function send_nosniff_header() {
-		$GLOBALS['ytct_send_nosniff_calls'] = isset($GLOBALS['ytct_send_nosniff_calls']) ? (int) $GLOBALS['ytct_send_nosniff_calls'] + 1 : 1;
+		$GLOBALS['cybocoma_send_nosniff_calls'] = isset($GLOBALS['cybocoma_send_nosniff_calls']) ? (int) $GLOBALS['cybocoma_send_nosniff_calls'] + 1 : 1;
 	}
 }
 
 if (!function_exists('send_frame_options_header')) {
 	function send_frame_options_header() {
-		$GLOBALS['ytct_send_frame_options_calls'] = isset($GLOBALS['ytct_send_frame_options_calls']) ? (int) $GLOBALS['ytct_send_frame_options_calls'] + 1 : 1;
+		$GLOBALS['cybocoma_send_frame_options_calls'] = isset($GLOBALS['cybocoma_send_frame_options_calls']) ? (int) $GLOBALS['cybocoma_send_frame_options_calls'] + 1 : 1;
 	}
 }

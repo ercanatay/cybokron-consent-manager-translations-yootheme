@@ -1,6 +1,6 @@
 # Cybokron Consent Manager Translations for YOOtheme Pro
 
-[![WordPress Plugin Version](https://img.shields.io/badge/version-1.3.12-blue.svg)](https://github.com/ercanatay/cybokron-consent-manager-translations-yootheme)
+[![WordPress Plugin Version](https://img.shields.io/badge/version-1.3.13-blue.svg)](https://github.com/ercanatay/cybokron-consent-manager-translations-yootheme)
 [![WordPress Tested](https://img.shields.io/badge/WordPress-5.0--6.9-green.svg)](https://wordpress.org)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://php.net)
 [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -180,7 +180,7 @@ add_filter('gettext', function($translated, $original, $domain) {
 
 ```php
 // Modify translations programmatically
-add_filter('ytct_translations', function($translations, $language) {
+add_filter('cybocoma_translations', function($translations, $language) {
     $translations['button_accept'] = 'I Agree';
     return $translations;
 }, 10, 2);
@@ -190,7 +190,7 @@ add_filter('ytct_translations', function($translations, $language) {
 
 ```php
 // Disable the plugin programmatically
-define('YTCT_DISABLED', true);
+define('CYBOCOMA_DISABLED', true);
 ```
 
 ### Locale-aware Storage
@@ -256,9 +256,15 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📝 Changelog
 
+### 1.3.13 (2026-02-14)
+- **WordPress.org Review Compliance**: Aligned text domain usage with slug `cybokron-consent-manager-translations-yootheme` in all gettext calls
+- **Unique Prefix Refactor**: Replaced generic identifiers with `cybocoma_` / `CYBOCOMA_` across classes, constants, hooks, options, and AJAX endpoints
+- **Packaging**: Added `.distignore` release rules to exclude non-production paths (`tests/`, `scripts/`, and development metadata) from distribution archives
+- **Release Sync**: Updated plugin/readme/composer metadata to `1.3.13`
+
 ### 1.3.12 (2026-02-12)
-- **i18n Fix**: Restored the expected text domain `cybokron-consent-manager-translations-yootheme-main` across plugin/admin/health/strings/updater modules
-- **Plugin Check Compatibility**: Updated plugin header `Text Domain` to the expected `-main` suffix
+- **i18n Fix**: Restored the expected text domain `cybokron-consent-manager-translations-yootheme` across plugin/admin/health/strings/updater modules
+- **Plugin Check Compatibility**: Updated plugin header `Text Domain` to `cybokron-consent-manager-translations-yootheme`
 - **Release Sync**: Updated plugin/readme/composer metadata to `1.3.12`
 - **Release**: Published package/tag `v1.3.12` on GitHub Releases
 
@@ -280,7 +286,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - **Security**: Sanitized admin live-preview link HTML to allow only safe anchor output (text + `<a href title>`) with enforced `rel="noopener noreferrer"`
 - **SQL Safety**: Removed redundant `esc_sql()` wrappers around `$wpdb->esc_like()` wildcard lookups in scoped option scans and uninstall cleanup queries
 - **Performance**: Persisted internal snapshot/health/updater options with `autoload=false` to reduce unnecessary front-end option autoload pressure
-- **Uninstall Hygiene**: Added updater cron unscheduling (`ytct_updater_cron_check`) for both single-site and multisite uninstall flows, including pre-6.1 fallback handling
+- **Uninstall Hygiene**: Added updater cron unscheduling (`cybocoma_updater_cron_check`) for both single-site and multisite uninstall flows, including pre-6.1 fallback handling
 - **Cache Consistency**: Reset translator `original_to_key` map when clearing runtime caches and aligned test bootstrap `update_option()` signature with core usage
 - **Release Sync**: Updated plugin/readme/composer metadata to `1.3.9`
 
@@ -334,14 +340,14 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ### 1.3.0 (2026-02-08)
 - **Per-Locale Overrides**: Added locale-scoped settings storage to support different translation overrides by WordPress locale
 - **Compatibility Monitoring**: Added runtime health reporting to detect potential YOOtheme consent source string drift
-- **Developer API**: Implemented documented `ytct_translations` filter and `YTCT_DISABLED` runtime constant behavior
+- **Developer API**: Implemented documented `cybocoma_translations` filter and `CYBOCOMA_DISABLED` runtime constant behavior
 - **Admin UX**: Added live preview, inline validation feedback, unsaved-change guard, field reset actions, and quality check tooling
 - **Recovery**: Added snapshot history and one-click rollback for settings
 - **Release Gate**: Added lightweight PHP tests and CI workflow (`release-gate.yml`) with syntax/JSON/security checks
 
 ### 1.2.7 (2026-02-08)
 - **Performance**: Replaced repeated `in_array()` scans with constant-time lookup maps (`isset`) in import/language/placeholder validation paths
-- **Validation**: Added and adopted `YTCT_Strings::is_valid_language()` to centralize language whitelist checks
+- **Validation**: Added and adopted `CYBOCOMA_Strings::is_valid_language()` to centralize language whitelist checks
 - **Code Quality**: Cleaned up internal iteration logic in translation loading and normalized admin/settings indentation consistency
 - **Tooling**: Added security policy, daily review GitHub Action, and maintenance scripts (`scan_code.py`, `daily_report.py`, `fix_indentation.py`)
 - **Docs**: Updated contributing workflow and compatibility/readme details
@@ -367,7 +373,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ### 1.2.2 (2026-01-21)
 - **Code Quality**: Full WordPress Plugin Check compliance
-- Added `ytct_` prefix to all template variables
+- Added `cybocoma_` prefix to all template variables
 - Improved input sanitization with `wp_unslash()`
 - Enhanced `$_FILES` validation with proper `isset` checks
 - Reduced readme tags from 6 to 5

@@ -1,9 +1,9 @@
 === Cybokron Consent Manager Translations for YOOtheme Pro ===
-Contributors: ercanatay
+Contributors: cybokron, ercanatay
 Tags: yootheme, consent-manager, gdpr, cookie-consent, translation
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.3.12
+Stable tag: 1.3.13
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -85,9 +85,15 @@ Enable periodic checks from plugin settings. The plugin reads WordPress core upd
 
 == Changelog ==
 
+= 1.3.13 =
+* WordPress.org review compliance: aligned all gettext text domains with plugin slug `cybokron-consent-manager-translations-yootheme`.
+* Refactor: replaced generic identifiers with a unique plugin prefix (`cybocoma_` / `CYBOCOMA_`) across classes, constants, hooks, options, and AJAX actions.
+* Packaging: added `.distignore` guidance and prepared release distribution to exclude non-production paths such as `tests/` and `scripts/`.
+* Metadata: updated contributors list and synchronized plugin/readme/composer versions to `1.3.13`.
+
 = 1.3.12 =
-* i18n fix: restored plugin text domain usage to `cybokron-consent-manager-translations-yootheme-main` across plugin/admin/health/strings/updater modules for Plugin Check compatibility.
-* Updated plugin header `Text Domain` to `cybokron-consent-manager-translations-yootheme-main`.
+* i18n fix: restored plugin text domain usage to `cybokron-consent-manager-translations-yootheme` across plugin/admin/health/strings/updater modules for Plugin Check compatibility.
+* Updated plugin header `Text Domain` to `cybokron-consent-manager-translations-yootheme`.
 * Synced plugin metadata/versioning to `1.3.12`.
 
 = 1.3.11 =
@@ -105,7 +111,7 @@ Enable periodic checks from plugin settings. The plugin reads WordPress core upd
 * Security: Sanitized admin live-preview link HTML to only preserve safe anchor output (`<a href title>`) and forced `rel="noopener noreferrer"`.
 * SQL safety: Removed redundant `esc_sql()` wrappers around `$wpdb->esc_like()` wildcard queries in scoped option scans and uninstall cleanup.
 * Performance: Persisted snapshot/health/updater internal options with `autoload=false` to reduce autoload pressure.
-* Uninstall hygiene: Added updater cron hook cleanup (`ytct_updater_cron_check`) for single-site and multisite uninstall paths, including WordPress pre-6.1 fallback logic.
+* Uninstall hygiene: Added updater cron hook cleanup (`cybocoma_updater_cron_check`) for single-site and multisite uninstall paths, including WordPress pre-6.1 fallback logic.
 * Cache consistency: Reset translator original-string map during cache clear and aligned test bootstrap `update_option()` signature with current core usage.
 * Synced plugin metadata/versioning to `1.3.9`.
 
@@ -161,14 +167,14 @@ Enable periodic checks from plugin settings. The plugin reads WordPress core upd
 = 1.3.0 =
 * Added locale-scoped settings storage for multilingual workflows (WPML/Polylang friendly)
 * Added compatibility health reporting for potential YOOtheme source string drift
-* Implemented documented extension APIs: `ytct_translations` filter and `YTCT_DISABLED` constant behavior
+* Implemented documented extension APIs: `cybocoma_translations` filter and `CYBOCOMA_DISABLED` constant behavior
 * Added live preview panel, inline field validation, field-level reset actions, and unsaved-change protection
 * Added settings snapshots with one-click rollback
 * Added release-gate workflow and lightweight PHP tests
 
 = 1.2.7 =
 * Performance: Replaced repeated array scans with constant-time lookup maps (`isset`) in language/placeholder validation paths
-* Improved: Added `YTCT_Strings::is_valid_language()` helper and reused it in admin validation flow
+* Improved: Added `CYBOCOMA_Strings::is_valid_language()` helper and reused it in admin validation flow
 * Quality: Minor internal cleanups and formatting consistency updates for admin/settings rendering
 * Tooling: Added security policy, daily review workflow, and maintenance scripts for code scanning/reporting
 * Docs: Updated contributor workflow and compatibility notes in repository documentation
@@ -193,7 +199,7 @@ Enable periodic checks from plugin settings. The plugin reads WordPress core upd
 
 = 1.2.2 =
 * Fixed: WordPress Plugin Check compliance - all warnings resolved
-* Added ytct_ prefix to all template variables
+* Added cybocoma_ prefix to all template variables
 * Improved input sanitization with wp_unslash()
 * Enhanced $_FILES validation
 
@@ -227,8 +233,11 @@ Enable periodic checks from plugin settings. The plugin reads WordPress core upd
 
 == Upgrade Notice ==
 
+= 1.3.13 =
+WordPress.org review compliance release: fixes text-domain/slug alignment, hardens global naming with unique `cybocoma` prefixes, and excludes development-only files from distribution packages.
+
 = 1.3.12 =
-i18n hotfix release that restores the expected text domain suffix (`-main`) required by Plugin Check.
+i18n hotfix release that standardized text domain usage in plugin modules.
 
 = 1.3.11 =
 Naming-compliance release that updates plugin display name/slug and synchronizes metadata to the new unique identifier.

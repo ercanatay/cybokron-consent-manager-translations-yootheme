@@ -2,7 +2,7 @@
 /**
  * Translator class - handles gettext filtering
  *
- * @package YT_Consent_Translations
+ * @package CYBOCOMA_Consent_Translations
  */
 
 // Prevent direct access
@@ -11,10 +11,10 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class YTCT_Translator
+ * Class CYBOCOMA_Translator
  * Filters YOOtheme consent manager strings
  */
-class YTCT_Translator {
+class CYBOCOMA_Translator {
 
 	/**
 	 * Single instance
@@ -84,7 +84,7 @@ class YTCT_Translator {
 	 */
 	private function get_options() {
 		if (null === $this->options) {
-			$this->options = YTCT_Options::get_options();
+			$this->options = CYBOCOMA_Options::get_options();
 		}
 		return $this->options;
 	}
@@ -102,11 +102,11 @@ class YTCT_Translator {
 
 			// Auto-detect WordPress language if set to 'auto'
 			if ($language === 'auto') {
-				$language = YTCT_Strings::detect_wp_language();
+				$language = CYBOCOMA_Strings::detect_wp_language();
 			}
 
 			// Start with preset translations for selected language
-			$this->translations = YTCT_Strings::get_translations($language);
+			$this->translations = CYBOCOMA_Strings::get_translations($language);
 
 			// Override with any custom strings
 			if (!empty($custom_strings) && is_array($custom_strings)) {
@@ -124,7 +124,7 @@ class YTCT_Translator {
 			 * @param string $language Active language code.
 			 * @param array  $options Plugin options for current locale.
 			 */
-			$this->translations = apply_filters('ytct_translations', $this->translations, $language, $options);
+			$this->translations = apply_filters('cybocoma_translations', $this->translations, $language, $options);
 		}
 		return $this->translations;
 	}
@@ -137,7 +137,7 @@ class YTCT_Translator {
 	private function get_original_to_key_map() {
 		if (null === $this->original_to_key) {
 			$this->original_to_key = [];
-			$string_keys = YTCT_Strings::get_string_keys();
+			$string_keys = CYBOCOMA_Strings::get_string_keys();
 			
 			foreach ($string_keys as $key => $original) {
 				$this->original_to_key[$original] = $key;
@@ -164,13 +164,13 @@ class YTCT_Translator {
 		$map = $this->get_original_to_key_map();
 		
 		if (!isset($map[$original])) {
-			YTCT_Health::record_unmatched($original);
+			CYBOCOMA_Health::record_unmatched($original);
 			return $translated;
 		}
 
 		$key = $map[$original];
 		$translations = $this->get_translations();
-		YTCT_Health::record_match();
+		CYBOCOMA_Health::record_match();
 
 		// Return custom translation if exists
 		if (isset($translations[$key]) && !empty($translations[$key])) {
