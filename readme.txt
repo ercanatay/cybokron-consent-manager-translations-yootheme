@@ -3,7 +3,7 @@ Contributors: cybokron
 Tags: yootheme, consent-manager, gdpr, cookie-consent, translation
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.4.3
+Stable tag: 1.4.4
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -82,6 +82,9 @@ Enable periodic checks from plugin settings. The plugin reads WordPress core upd
 3. Live preview, action buttons, and snapshot rollback panel
 
 == Changelog ==
+
+= 1.4.4 =
+* Fixed: Language fallback in sanitize_options now correctly defaults to 'auto' instead of 'en', consistent with the default introduced in 1.4.3.
 
 = 1.4.3 =
 * Fixed: WPML/Polylang compatibility — translations now auto-detect from WordPress locale when no locale-specific settings exist, fixing missing translations on multilingual sites.
@@ -274,6 +277,9 @@ Enable periodic checks from plugin settings. The plugin reads WordPress core upd
 * Tabbed admin interface
 
 == Upgrade Notice ==
+
+= 1.4.4 =
+Maintenance fix: language fallback defaults to 'auto' for correct multilingual behavior on misconfigured installations.
 
 = 1.4.3 =
 WPML/Polylang bugfix: translations now auto-detect language from WordPress locale for seamless multilingual support.

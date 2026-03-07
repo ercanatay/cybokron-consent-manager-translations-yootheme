@@ -96,8 +96,8 @@ class CYBOCOMA_Options {
 		}
 
 		$enabled = isset($options['enabled']) ? (bool) $options['enabled'] : true;
-		$language = isset($options['language']) && is_scalar($options['language']) ? sanitize_text_field((string) $options['language']) : 'en';
-		$language = CYBOCOMA_Strings::is_valid_language($language) ? $language : 'en';
+		$language = isset($options['language']) && is_scalar($options['language']) ? sanitize_text_field((string) $options['language']) : 'auto';
+		$language = CYBOCOMA_Strings::is_valid_language($language) ? $language : 'auto';
 
 		static $allowed_html = [
 			'a' => [
