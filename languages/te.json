@@ -19,5 +19,9 @@
     "hide_services": "సేవలను దాచు",
     "modal_accept": "అన్నీ అంగీకరించు",
     "modal_reject": "అన్నీ తిరస్కరించు",
-    "modal_save": "సేవ్ చేయి"
+    "modal_save": "సేవ్ చేయి",
+    "service_text_openstreetmap": "OpenStreetMap నుండి బాహ్య కంటెంట్‌ను ప్రదర్శించండి.",
+    "service_text_google_maps": "Google Maps నుండి బాహ్య కంటెంట్‌ను ప్రదర్శించండి.",
+    "service_text_vimeo": "Vimeo నుండి బాహ్య కంటెంట్‌ను ప్రదర్శించండి.",
+    "service_text_youtube": "YouTube నుండి బాహ్య కంటెంట్‌ను ప్రదర్శించండి."
 }

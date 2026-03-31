@@ -19,5 +19,9 @@
     "hide_services": "Szolgáltatások elrejtése",
     "modal_accept": "Összes elfogadása",
     "modal_reject": "Összes elutasítása",
-    "modal_save": "Mentés"
+    "modal_save": "Mentés",
+    "service_text_openstreetmap": "Külső tartalom megjelenítése az OpenStreetMap-ből.",
+    "service_text_google_maps": "Külső tartalom megjelenítése a Google Maps-ből.",
+    "service_text_vimeo": "Külső tartalom megjelenítése a Vimeo-ból.",
+    "service_text_youtube": "Külső tartalom megjelenítése a YouTube-ból."
 }

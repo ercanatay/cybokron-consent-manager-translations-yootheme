@@ -3,7 +3,7 @@ Contributors: cybokron
 Tags: yootheme, consent-manager, gdpr, cookie-consent, translation
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 1.4.4
+Stable tag: 1.5.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,7 +16,7 @@ Cybokron Consent Manager Translations for YOOtheme Pro allows you to customize a
 
 **Features:**
 
-* Translate all 21 Consent Manager strings
+* Translate all 25 Consent Manager strings
 * 36 pre-configured language presets
 * Locale-scoped overrides for multilingual setups
 * Easy-to-use tabbed interface
@@ -35,6 +35,7 @@ Cybokron Consent Manager Translations for YOOtheme Pro allows you to customize a
 * Category descriptions
 * Modal buttons (Accept all, Reject all, Save)
 * Show/Hide Services toggles
+* Service consent text (OpenStreetMap, Google Maps, Vimeo, YouTube)
 
 **Pre-configured Languages (36):**
 
@@ -82,6 +83,10 @@ Enable periodic checks from plugin settings. The plugin reads WordPress core upd
 3. Live preview, action buttons, and snapshot rollback panel
 
 == Changelog ==
+
+= 1.5.0 =
+* New: Added 4 missing service consent text strings — OpenStreetMap, Google Maps, Vimeo, and YouTube service descriptions are now translatable (fixes #34).
+* New: New "Services" tab group in admin settings exposes these strings for all 36 language presets.
 
 = 1.4.4 =
 * Fixed: Language fallback in sanitize_options now correctly defaults to 'auto' instead of 'en', consistent with the default introduced in 1.4.3.
@@ -267,7 +272,7 @@ Enable periodic checks from plugin settings. The plugin reads WordPress core upd
 * Danish, Finnish, Norwegian, Hebrew, Malay, Bengali
 * Persian, Tamil, Telugu, Marathi, Swahili, Filipino
 * Extended WordPress locale mapping for auto-detection
-* Total translations: 756 (36 languages × 21 strings)
+* Total translations: 900 (36 languages × 25 strings)
 
 = 1.0.0 =
 * Initial release
@@ -277,6 +282,9 @@ Enable periodic checks from plugin settings. The plugin reads WordPress core upd
 * Tabbed admin interface
 
 == Upgrade Notice ==
+
+= 1.5.0 =
+New: 4 missing service consent strings added (OpenStreetMap, Google Maps, Vimeo, YouTube) — now fully translatable for all 36 language presets.
 
 = 1.4.4 =
 Maintenance fix: language fallback defaults to 'auto' for correct multilingual behavior on misconfigured installations.

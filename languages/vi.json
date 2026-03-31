@@ -19,5 +19,9 @@
     "hide_services": "Ẩn dịch vụ",
     "modal_accept": "Chấp nhận tất cả",
     "modal_reject": "Từ chối tất cả",
-    "modal_save": "Lưu"
+    "modal_save": "Lưu",
+    "service_text_openstreetmap": "Hiển thị nội dung bên ngoài từ OpenStreetMap.",
+    "service_text_google_maps": "Hiển thị nội dung bên ngoài từ Google Maps.",
+    "service_text_vimeo": "Hiển thị nội dung bên ngoài từ Vimeo.",
+    "service_text_youtube": "Hiển thị nội dung bên ngoài từ YouTube."
 }

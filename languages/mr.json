@@ -19,5 +19,9 @@
     "hide_services": "सेवा लपवा",
     "modal_accept": "सर्व स्वीकारा",
     "modal_reject": "सर्व नाकारा",
-    "modal_save": "जतन करा"
+    "modal_save": "जतन करा",
+    "service_text_openstreetmap": "OpenStreetMap कडून बाह्य सामग्री प्रदर्शित करा.",
+    "service_text_google_maps": "Google Maps कडून बाह्य सामग्री प्रदर्शित करा.",
+    "service_text_vimeo": "Vimeo कडून बाह्य सामग्री प्रदर्शित करा.",
+    "service_text_youtube": "YouTube कडून बाह्य सामग्री प्रदर्शित करा."
 }

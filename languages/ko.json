@@ -19,5 +19,9 @@
     "hide_services": "서비스 숨기기",
     "modal_accept": "모두 수락",
     "modal_reject": "모두 거부",
-    "modal_save": "저장"
+    "modal_save": "저장",
+    "service_text_openstreetmap": "OpenStreetMap의 외부 콘텐츠를 표시합니다.",
+    "service_text_google_maps": "Google Maps의 외부 콘텐츠를 표시합니다.",
+    "service_text_vimeo": "Vimeo의 외부 콘텐츠를 표시합니다.",
+    "service_text_youtube": "YouTube의 외부 콘텐츠를 표시합니다."
 }

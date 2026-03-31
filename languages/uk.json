@@ -19,5 +19,9 @@
     "hide_services": "Приховати сервіси",
     "modal_accept": "Прийняти все",
     "modal_reject": "Відхилити все",
-    "modal_save": "Зберегти"
+    "modal_save": "Зберегти",
+    "service_text_openstreetmap": "Відображати зовнішній вміст з OpenStreetMap.",
+    "service_text_google_maps": "Відображати зовнішній вміст з Google Maps.",
+    "service_text_vimeo": "Відображати зовнішній вміст з Vimeo.",
+    "service_text_youtube": "Відображати зовнішній вміст з YouTube."
 }

@@ -19,5 +19,9 @@
     "hide_services": "Diensten verbergen",
     "modal_accept": "Alles accepteren",
     "modal_reject": "Alles weigeren",
-    "modal_save": "Opslaan"
+    "modal_save": "Opslaan",
+    "service_text_openstreetmap": "Externe inhoud weergeven van OpenStreetMap.",
+    "service_text_google_maps": "Externe inhoud weergeven van Google Maps.",
+    "service_text_vimeo": "Externe inhoud weergeven van Vimeo.",
+    "service_text_youtube": "Externe inhoud weergeven van YouTube."
 }

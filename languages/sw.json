@@ -19,5 +19,9 @@
     "hide_services": "Ficha Huduma",
     "modal_accept": "Kubali Zote",
     "modal_reject": "Kataa Zote",
-    "modal_save": "Hifadhi"
+    "modal_save": "Hifadhi",
+    "service_text_openstreetmap": "Onyesha maudhui ya nje kutoka OpenStreetMap.",
+    "service_text_google_maps": "Onyesha maudhui ya nje kutoka Google Maps.",
+    "service_text_vimeo": "Onyesha maudhui ya nje kutoka Vimeo.",
+    "service_text_youtube": "Onyesha maudhui ya nje kutoka YouTube."
 }

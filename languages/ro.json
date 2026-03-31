@@ -19,5 +19,9 @@
     "hide_services": "Ascundere servicii",
     "modal_accept": "Accept toate",
     "modal_reject": "Refuz toate",
-    "modal_save": "Salvare"
+    "modal_save": "Salvare",
+    "service_text_openstreetmap": "Afișați conținut extern din OpenStreetMap.",
+    "service_text_google_maps": "Afișați conținut extern din Google Maps.",
+    "service_text_vimeo": "Afișați conținut extern din Vimeo.",
+    "service_text_youtube": "Afișați conținut extern din YouTube."
 }

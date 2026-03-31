@@ -19,5 +19,9 @@
     "hide_services": "Dienste ausblenden",
     "modal_accept": "Alle akzeptieren",
     "modal_reject": "Alle ablehnen",
-    "modal_save": "Speichern"
+    "modal_save": "Speichern",
+    "service_text_openstreetmap": "Externe Inhalte von OpenStreetMap anzeigen.",
+    "service_text_google_maps": "Externe Inhalte von Google Maps anzeigen.",
+    "service_text_vimeo": "Externe Inhalte von Vimeo anzeigen.",
+    "service_text_youtube": "Externe Inhalte von YouTube anzeigen."
 }

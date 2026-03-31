@@ -19,5 +19,9 @@
     "hide_services": "הסתר שירותים",
     "modal_accept": "אשר הכל",
     "modal_reject": "דחה הכל",
-    "modal_save": "שמור"
+    "modal_save": "שמור",
+    "service_text_openstreetmap": "הצג תוכן חיצוני מ-OpenStreetMap.",
+    "service_text_google_maps": "הצג תוכן חיצוני מ-Google Maps.",
+    "service_text_vimeo": "הצג תוכן חיצוני מ-Vimeo.",
+    "service_text_youtube": "הצג תוכן חיצוני מ-YouTube."
 }

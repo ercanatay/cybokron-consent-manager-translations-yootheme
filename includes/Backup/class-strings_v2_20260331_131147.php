@@ -425,15 +425,6 @@ class CYBOCOMA_Strings {
 			'buttons' => [
 				'label' => __('Buttons', 'cybokron-consent-manager-translations-yootheme'),
 				'keys' => ['show_services', 'hide_services', 'modal_accept', 'modal_reject', 'modal_save']
-			],
-			'services' => [
-				'label' => __('Services', 'cybokron-consent-manager-translations-yootheme'),
-				'keys' => [
-					'service_text_openstreetmap',
-					'service_text_google_maps',
-					'service_text_vimeo',
-					'service_text_youtube'
-				]
 			]
 		];
 	}
@@ -466,11 +457,7 @@ class CYBOCOMA_Strings {
 			'hide_services' => __('Hide Services', 'cybokron-consent-manager-translations-yootheme'),
 			'modal_accept' => __('Accept All Button', 'cybokron-consent-manager-translations-yootheme'),
 			'modal_reject' => __('Reject All Button', 'cybokron-consent-manager-translations-yootheme'),
-			'modal_save' => __('Save Button', 'cybokron-consent-manager-translations-yootheme'),
-			'service_text_openstreetmap' => __('OpenStreetMap Service Text', 'cybokron-consent-manager-translations-yootheme'),
-			'service_text_google_maps' => __('Google Maps Service Text', 'cybokron-consent-manager-translations-yootheme'),
-			'service_text_vimeo' => __('Vimeo Service Text', 'cybokron-consent-manager-translations-yootheme'),
-			'service_text_youtube' => __('YouTube Service Text', 'cybokron-consent-manager-translations-yootheme')
+			'modal_save' => __('Save Button', 'cybokron-consent-manager-translations-yootheme')
 		];
 
 		return isset($labels[$key]) ? $labels[$key] : $key;

@@ -19,5 +19,9 @@
     "hide_services": "Skrýt služby",
     "modal_accept": "Přijmout vše",
     "modal_reject": "Odmítnout vše",
-    "modal_save": "Uložit"
+    "modal_save": "Uložit",
+    "service_text_openstreetmap": "Zobrazit externí obsah z OpenStreetMap.",
+    "service_text_google_maps": "Zobrazit externí obsah z Google Maps.",
+    "service_text_vimeo": "Zobrazit externí obsah z Vimeo.",
+    "service_text_youtube": "Zobrazit externí obsah z YouTube."
 }

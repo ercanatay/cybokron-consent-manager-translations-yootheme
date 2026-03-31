@@ -19,5 +19,9 @@
     "hide_services": "சேவைகளை மறை",
     "modal_accept": "அனைத்தையும் ஏற்றுக்கொள்",
     "modal_reject": "அனைத்தையும் நிராகரி",
-    "modal_save": "சேமி"
+    "modal_save": "சேமி",
+    "service_text_openstreetmap": "OpenStreetMap இலிருந்து வெளிப்புற உள்ளடக்கத்தை காட்டு.",
+    "service_text_google_maps": "Google Maps இலிருந்து வெளிப்புற உள்ளடக்கத்தை காட்டு.",
+    "service_text_vimeo": "Vimeo இலிருந்து வெளிப்புற உள்ளடக்கத்தை காட்டு.",
+    "service_text_youtube": "YouTube இலிருந்து வெளிப்புற உள்ளடக்கத்தை காட்டு."
 }

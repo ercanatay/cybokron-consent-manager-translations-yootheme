@@ -19,5 +19,9 @@
     "hide_services": "Itago ang mga Serbisyo",
     "modal_accept": "Tanggapin Lahat",
     "modal_reject": "Tanggihan Lahat",
-    "modal_save": "I-save"
+    "modal_save": "I-save",
+    "service_text_openstreetmap": "Ipakita ang panlabas na nilalaman mula sa OpenStreetMap.",
+    "service_text_google_maps": "Ipakita ang panlabas na nilalaman mula sa Google Maps.",
+    "service_text_vimeo": "Ipakita ang panlabas na nilalaman mula sa Vimeo.",
+    "service_text_youtube": "Ipakita ang panlabas na nilalaman mula sa YouTube."
 }

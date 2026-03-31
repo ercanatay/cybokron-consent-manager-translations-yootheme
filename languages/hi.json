@@ -19,5 +19,9 @@
     "hide_services": "सेवाएं छिपाएं",
     "modal_accept": "सभी स्वीकार करें",
     "modal_reject": "सभी अस्वीकार करें",
-    "modal_save": "सहेजें"
+    "modal_save": "सहेजें",
+    "service_text_openstreetmap": "OpenStreetMap से बाहरी सामग्री प्रदर्शित करें।",
+    "service_text_google_maps": "Google Maps से बाहरी सामग्री प्रदर्शित करें।",
+    "service_text_vimeo": "Vimeo से बाहरी सामग्री प्रदर्शित करें।",
+    "service_text_youtube": "YouTube से बाहरी सामग्री प्रदर्शित करें।"
 }

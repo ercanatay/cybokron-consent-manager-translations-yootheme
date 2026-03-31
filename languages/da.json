@@ -19,5 +19,9 @@
     "hide_services": "Skjul tjenester",
     "modal_accept": "Accepter alle",
     "modal_reject": "Afvis alle",
-    "modal_save": "Gem"
+    "modal_save": "Gem",
+    "service_text_openstreetmap": "Vis eksternt indhold fra OpenStreetMap.",
+    "service_text_google_maps": "Vis eksternt indhold fra Google Maps.",
+    "service_text_vimeo": "Vis eksternt indhold fra Vimeo.",
+    "service_text_youtube": "Vis eksternt indhold fra YouTube."
 }

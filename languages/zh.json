@@ -19,5 +19,9 @@
     "hide_services": "隐藏服务",
     "modal_accept": "全部接受",
     "modal_reject": "全部拒绝",
-    "modal_save": "保存"
+    "modal_save": "保存",
+    "service_text_openstreetmap": "显示来自OpenStreetMap的外部内容。",
+    "service_text_google_maps": "显示来自Google Maps的外部内容。",
+    "service_text_vimeo": "显示来自Vimeo的外部内容。",
+    "service_text_youtube": "显示来自YouTube的外部内容。"
 }

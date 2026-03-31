@@ -19,5 +19,9 @@
     "hide_services": "Sembunyikan Perkhidmatan",
     "modal_accept": "Terima Semua",
     "modal_reject": "Tolak Semua",
-    "modal_save": "Simpan"
+    "modal_save": "Simpan",
+    "service_text_openstreetmap": "Paparkan kandungan luar dari OpenStreetMap.",
+    "service_text_google_maps": "Paparkan kandungan luar dari Google Maps.",
+    "service_text_vimeo": "Paparkan kandungan luar dari Vimeo.",
+    "service_text_youtube": "Paparkan kandungan luar dari YouTube."
 }

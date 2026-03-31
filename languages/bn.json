@@ -19,5 +19,9 @@
     "hide_services": "সেবা লুকান",
     "modal_accept": "সব গ্রহণ করুন",
     "modal_reject": "সব প্রত্যাখ্যান করুন",
-    "modal_save": "সংরক্ষণ করুন"
+    "modal_save": "সংরক্ষণ করুন",
+    "service_text_openstreetmap": "OpenStreetMap থেকে বাহ্যিক বিষয়বস্তু প্রদর্শন করুন।",
+    "service_text_google_maps": "Google Maps থেকে বাহ্যিক বিষয়বস্তু প্রদর্শন করুন।",
+    "service_text_vimeo": "Vimeo থেকে বাহ্যিক বিষয়বস্তু প্রদর্শন করুন।",
+    "service_text_youtube": "YouTube থেকে বাহ্যিক বিষয়বস্তু প্রদর্শন করুন।"
 }

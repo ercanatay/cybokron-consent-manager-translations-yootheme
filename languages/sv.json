@@ -19,5 +19,9 @@
     "hide_services": "Dölj tjänster",
     "modal_accept": "Acceptera alla",
     "modal_reject": "Avvisa alla",
-    "modal_save": "Spara"
+    "modal_save": "Spara",
+    "service_text_openstreetmap": "Visa externt innehåll från OpenStreetMap.",
+    "service_text_google_maps": "Visa externt innehåll från Google Maps.",
+    "service_text_vimeo": "Visa externt innehåll från Vimeo.",
+    "service_text_youtube": "Visa externt innehåll från YouTube."
 }

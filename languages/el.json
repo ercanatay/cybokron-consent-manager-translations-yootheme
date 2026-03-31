@@ -19,5 +19,9 @@
     "hide_services": "Απόκρυψη υπηρεσιών",
     "modal_accept": "Αποδοχή όλων",
     "modal_reject": "Απόρριψη όλων",
-    "modal_save": "Αποθήκευση"
+    "modal_save": "Αποθήκευση",
+    "service_text_openstreetmap": "Εμφάνιση εξωτερικού περιεχομένου από το OpenStreetMap.",
+    "service_text_google_maps": "Εμφάνιση εξωτερικού περιεχομένου από το Google Maps.",
+    "service_text_vimeo": "Εμφάνιση εξωτερικού περιεχομένου από το Vimeo.",
+    "service_text_youtube": "Εμφάνιση εξωτερικού περιεχομένου από το YouTube."
 }

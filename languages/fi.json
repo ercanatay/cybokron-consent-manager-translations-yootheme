@@ -19,5 +19,9 @@
     "hide_services": "Piilota palvelut",
     "modal_accept": "Hyväksy kaikki",
     "modal_reject": "Hylkää kaikki",
-    "modal_save": "Tallenna"
+    "modal_save": "Tallenna",
+    "service_text_openstreetmap": "Näytä ulkoinen sisältö kohteesta OpenStreetMap.",
+    "service_text_google_maps": "Näytä ulkoinen sisältö kohteesta Google Maps.",
+    "service_text_vimeo": "Näytä ulkoinen sisältö kohteesta Vimeo.",
+    "service_text_youtube": "Näytä ulkoinen sisältö kohteesta YouTube."
 }

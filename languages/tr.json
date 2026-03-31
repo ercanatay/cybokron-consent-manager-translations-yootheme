@@ -19,5 +19,9 @@
     "hide_services": "Servisleri Gizle",
     "modal_accept": "Tümünü Kabul Et",
     "modal_reject": "Tümünü Reddet",
-    "modal_save": "Kaydet"
+    "modal_save": "Kaydet",
+    "service_text_openstreetmap": "OpenStreetMap'ten harici içerik görüntüle.",
+    "service_text_google_maps": "Google Maps'ten harici içerik görüntüle.",
+    "service_text_vimeo": "Vimeo'dan harici içerik görüntüle.",
+    "service_text_youtube": "YouTube'dan harici içerik görüntüle."
 }
