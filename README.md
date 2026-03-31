@@ -1,6 +1,6 @@
 # Cybokron Consent Manager Translations for YOOtheme Pro
 
-[![WordPress Plugin Version](https://img.shields.io/badge/version-1.4.0-blue.svg)](https://github.com/ercanatay/cybokron-consent-manager-translations-yootheme)
+[![WordPress Plugin Version](https://img.shields.io/badge/version-1.5.0-blue.svg)](https://github.com/ercanatay/cybokron-consent-manager-translations-yootheme)
 [![WordPress Tested](https://img.shields.io/badge/WordPress-5.0--6.9-green.svg)](https://wordpress.org)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://php.net)
 [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
@@ -255,6 +255,26 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ```
 
 ## 📝 Changelog
+
+### 1.5.0 (2026-03-31)
+- **New**: Added 4 missing service consent text strings — OpenStreetMap, Google Maps, Vimeo, and YouTube service descriptions are now translatable (fixes [#34](https://github.com/ercanatay/cybokron-consent-manager-translations-yootheme/issues/34))
+- **New**: New "Services" tab group in admin settings exposes these strings for all 36 language presets
+- **Updated**: Total translatable strings increased from 21 to 25; total translations 756 → 900 (36 languages × 25 strings)
+
+### 1.4.4 (2026-03-07)
+- **Fixed**: Language fallback in sanitize_options now correctly defaults to `auto` instead of `en`, consistent with the default introduced in 1.4.3
+
+### 1.4.3 (2026-02-27)
+- **Fixed**: WPML/Polylang compatibility — translations now auto-detect from WordPress locale when no locale-specific settings exist, fixing missing translations on multilingual sites
+- **Changed**: Default language setting changed from `en` to `auto` for better out-of-the-box multilingual support
+- **Packaging**: Removed `.distignore` and `.github` from distribution to resolve Plugin Check errors
+- **Tested**: up to WordPress 6.9
+
+### 1.4.2 (2026-02-17)
+- **Changed**: Admin sidebar and settings page header now use white plugin icon for better visibility on dark admin backgrounds
+
+### 1.4.1 (2026-02-17)
+- **CI**: Fixed ABSPATH guard validation to accept `WP_UNINSTALL_PLUGIN` as valid guard for `uninstall.php`
 
 ### 1.4.0 (2026-02-17)
 - **New**: Plugin icon displayed in WordPress admin sidebar menu
