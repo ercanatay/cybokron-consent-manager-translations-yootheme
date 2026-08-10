@@ -2,8 +2,8 @@
 Contributors: cybokron
 Tags: yootheme, consent-manager, gdpr, cookie-consent, translation
 Requires at least: 5.0
-Tested up to: 6.9
-Stable tag: 1.5.0
+Tested up to: 7.0
+Stable tag: 1.5.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -83,6 +83,11 @@ Enable periodic checks from plugin settings. The plugin reads WordPress core upd
 3. Live preview, action buttons, and snapshot rollback panel
 
 == Changelog ==
+
+= 1.5.1 =
+* Compatibility: Verified against WordPress 7.0 on PHP 8.4. Bumped "Tested up to" from 6.9 to 7.0.
+* Housekeeping: LICENSE now carries the full GPL-2.0 text so automated license detection reports GPL-2.0 correctly.
+* No functional changes to the plugin.
 
 = 1.5.0 =
 * New: Added 4 missing service consent text strings — OpenStreetMap, Google Maps, Vimeo, and YouTube service descriptions are now translatable (fixes #34).

@@ -1,7 +1,7 @@
 # Cybokron Consent Manager Translations for YOOtheme Pro
 
-[![WordPress Plugin Version](https://img.shields.io/badge/version-1.5.0-blue.svg)](https://github.com/ercanatay/cybokron-consent-manager-translations-yootheme)
-[![WordPress Tested](https://img.shields.io/badge/WordPress-5.0--6.9-green.svg)](https://wordpress.org)
+[![WordPress Plugin Version](https://img.shields.io/badge/version-1.5.1-blue.svg)](https://github.com/ercanatay/cybokron-consent-manager-translations-yootheme)
+[![WordPress Tested](https://img.shields.io/badge/WordPress-5.0--7.0-green.svg)](https://wordpress.org)
 [![PHP Version](https://img.shields.io/badge/PHP-7.4%2B-purple.svg)](https://php.net)
 [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://www.gnu.org/licenses/gpl-2.0.html)
 
