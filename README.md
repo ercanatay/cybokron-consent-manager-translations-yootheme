@@ -256,6 +256,12 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📝 Changelog
 
+### 1.5.1 (2026-08-10)
+- **Compatibility**: Verified against WordPress 7.0.3 on PHP 8.4.19 with YOOtheme Pro 5.0.37 active and `WP_DEBUG` enabled — clean activation, settings screen and front end render, all AJAX endpoints (save, health check, quality check, export, snapshots) return success, and zero PHP warnings, notices, deprecations or fatal errors were produced
+- **Tested**: up to WordPress 7.0 (raised from 6.9); PHP support range extended to 8.4
+- **Housekeeping**: `LICENSE` now carries the full GPL-2.0 text, so automated license detection reports GPL-2.0 correctly (previously only the copyright notice and a link were present)
+- **Note**: No functional changes to the plugin
+
 ### 1.5.0 (2026-03-31)
 - **New**: Added 4 missing service consent text strings — OpenStreetMap, Google Maps, Vimeo, and YouTube service descriptions are now translatable (fixes [#34](https://github.com/ercanatay/cybokron-consent-manager-translations-yootheme/issues/34))
 - **New**: New "Services" tab group in admin settings exposes these strings for all 36 language presets
@@ -476,8 +482,8 @@ This plugin works by matching the **exact original English strings** from YOOthe
 
 ### Tested With
 - YOOtheme Pro 5.x
-- WordPress 5.0 - 6.9
-- PHP 7.4 - 8.3
+- WordPress 5.0 - 7.0
+- PHP 7.4 - 8.4
 
 ## 🐛 Known Issues
 
